@@ -1,0 +1,5560 @@
+<html lang="en">
+  <head>
+    <title>MyBeats Music</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.15/dist/tailwind.min.css" rel="stylesheet">
+
+    <!------ M E T A D A T A   /  S E R V I C E  WORKER ------>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e0e0e0" />
+    <meta name="robots" content="index, follow" />
+    <meta content="MyBeats" name="generator" />
+    <link rel="manifest" href="./manifestFiles/manifest.json" />
+    <link rel="icon" href="./manifestFiles/web/MyBeatsLogo20.ico" sizes="20x20" />
+    <link rel="apple-touch-icon" href="/manifestFiles/res/drawable/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Search Engines -->
+    <meta name="description" content="Stream your favorite music from your most loved Artists!" />
+    <meta name="image" content="siteImageHere.webp" />
+    <!-- Schema.org for Google -->
+    <meta itemprop="name" content="MyBeats Music" />
+    <meta itemprop="description" content="Stream your favorite music from your most loved Artists!" />
+    <meta itemprop="image" content="siteImageHere.webp" />
+    <!-- Open Graph general (Facebook, Pinterest & LinkedIn) -->
+    <meta property="og:title" content="MyBeats Music" />
+    <meta property="og:description" content="Stream your favorite music for free!" />
+    <meta property="og:image" content="1200x628previewImage.png" />
+    <meta property="og:url" content="www.mybeats.cloud" />
+    <meta property="og:site_name" content="MyBeats Music" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="MyBeats Music" />
+    <meta property="twitter:description" content="Stream your favorite music from your most loved Artists!" />
+    <meta property="twitter:image:src" content="siteImageHere.png" />
+
+    <link rel="icon" type="image/png" href="/manifestFiles/icons/logoSizes/favicon-48x48.png" sizes="48x48" />
+
+    <link rel="icon" type="image/svg+xml" href="/manifestFiles/icons/logoSizes/favicon.svg" />
+
+    <link rel="shortcut icon" href="/manifestFiles/icons/logoSizes/favicon.ico" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/manifestFiles/icons/logoSizes/apple-touch-icon.png" />
+
+    <meta name="apple-mobile-web-app-title" content="MyBeats" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P0KCT8TSPW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-P0KCT8TSPW");
+    </script>
+
+    <!--- Site Icons ----- Site Fonts ----- User Site Themes --------->
+
+    <!--- BootStrap --->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+    <!--- Google M A T E R I A L Icons --->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,1,0&text=arrow_circle_updownload_for_offlineshareplaylist_add_check_circleplaylist_add_circleexplicitplaylist_remove"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.8">
+      /**
+       *  F L O A T I N G - U I . C O M
+       */
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.12">
+      /**
+       *  F L O A T I N G - U I . C O M
+       */
+    </script>
+
+    <link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+
+    <script src="https://mybeats.cloud/javaScripts/theme.js">
+      /**
+       *   Responsible for Site Theme (1 of 2)
+       *       D O   N O T   D E L E T E
+       */
+    </script>
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous" />
+
+    <script type="text/javascript">
+      WebFont.load({ google: { families: ["Inconsolata:400,700"] } });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+
+    <script>
+      /**
+       *  Responsible for Site Theme (2 of 2)
+       *       D O   N O T   D E L E T E
+       */
+      (function () {
+        // Function to get the theme from Cookies or Local Storage
+        // Runs right away to avoid a flash in styling
+        function getInitialTheme() {
+          let theme = null;
+          try {
+            theme = Cookies.get("wfu-theme"); // Try to get from cookies
+          } catch (e) {
+            theme = localStorage.getItem("theme"); // Fallback to local storage
+          }
+          return theme || "light"; // Default to 'dark' mode if not set
+        }
+
+        // Set the theme immediately
+        let initialTheme = getInitialTheme();
+        document.documentElement.setAttribute("data-theme", initialTheme);
+      })();
+    </script>
+    <script>
+      /**
+       *   Sidebar State
+       */
+      const sidebarState = localStorage.getItem("sidebarState");
+      document.documentElement.style.visibility = "hidden";
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+      /**
+       * Responsible for Music Player (the newer one)
+       */
+    </script>
+
+
+
+
+
+
+
+
+
+
+  <!---
+/**
+*     — — — — — — — — — — — — — — — — — — —
+*     Misc. Additions, Priority Styles, OR
+*        Bug Fixes, and related snippets
+*     — — — — — — — — — — — — — — — — — — —
+**/
+--->
+  <style>
+@-webkit-keyframes fade-in-bottom {
+  0% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-bottom {
+  0% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in-bottom,
+.photo
+{
+	-webkit-animation: fade-in-bottom 0.95s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.5s both;
+	        animation: fade-in-bottom 0.95s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.85s both;
+}
+   body {
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+   }
+
+/**
+   input,
+   textarea,
+   select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+    background-image: none;
+   }
+   **/
+  </style>
+<style>
+.custom-img {
+  border-radius: 50%;
+  border: 1.5px solid var(--theme--t_text-primary); /* Fixed 'SOLID' to 'solid' */
+  object-fit: cover;
+  transition: border 0.65s ease;
+  vertical-align: unset;
+  width: 100px; /* Ensure width and height are explicitly set */
+  height: 100px;
+  flex: 1 1 calc(33.33% - 15px);
+  box-sizing: border-box;
+  display: unset;
+}
+
+.classFix {
+  border-radius: 50%;
+  border: 1.5px solid var(--theme--t_text-primary); /* Fixed 'SOLID' to 'solid' */
+  object-fit: cover;
+  transition: border 0.65s ease;
+  vertical-align: unset;
+  width: 30px; /* Ensure width and height are explicitly set */
+  height: 30px;
+  flex: 1 1 calc(33.33% - 15px);
+  box-sizing: border-box;
+  display: unset;
+}
+</style>
+
+  <!--- Place always at the bottom of Head Tag --->
+  <link href="https://mybeats.cloud/styleSheets/myStyles.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://mybeats.cloud/styleSheets/globalStyles.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://mybeats.cloud/styleSheets/stylesNew.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://mybeats.cloud/styleSheets/stylesToo.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://mybeats.cloud/styleSheets/stylingSheets/responsiveNess.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://mybeats.cloud/styleSheets/stylingSheets/fineTuning.css" rel="stylesheet" type="text/css" />
+  
+  <link href="https://mybeats.cloud/styleSheets/stylingSheets/tabletStyles.css" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" media="screen and (min-width: 900px)" href="./styleSheets/stylingSheets/desktopStyles.css">
+  <!---
+    <link href="https://mybeats.cloud//tailwind.css" rel="stylesheet" type="text/css" />
+--->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+::selection {
+   background-color: transparent;
+}
+::-moz-selection {
+   background: transparent;
+}
+
+* {
+   -webkit-user-select: none; /* Safari, Chrome, Edge */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* IE10+ */
+   user-select: none; /* Standard */
+}
+html {
+   scroll-behavior: smooth;
+   text-rendering: optimizeLegibility;
+   -webkit-font-smoothing: antialiased;
+}
+
+#loadingBar {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 0;
+   max-width: 100vw;
+   height: 2.25px;
+   background-color: #df0000;
+   z-index: 555;
+}
+
+.containerSongs {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+}
+.sectionSongs {
+   position: absolute;
+   top: 100%;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: var(--theme--t_bg-primary);
+   transition: all 0.5s ease-in-out, opacity 0.5s ease-in-out;
+   opacity: 0;
+   visibility: hidden;
+}
+.sectionSongs.active {
+   top: 0;
+   opacity: 1;
+   visibility: visible;
+}
+
+#nowPlaying {
+   background: transparent;
+}
+#favorites {
+   background-color: var(--theme--t_bg-primary);
+}
+#queue {
+   background-color: var(--theme--t_bg-primary);
+}
+
+
+#favoritesBtn:hover {
+   color: #dc4c64;
+   transition: all 0.45s ease-in-out;
+}
+#btnQueue:hover {
+   color: #1d8747;
+   transition: all 0.45s ease-in-out;
+}
+
+/**
+#navBarr {
+   width: 95vw;
+   position: fixed;
+   z-index: 9;
+   bottom: 25px;
+   right: 0;
+   left: 0;
+   margin: auto;
+}
+#navBarrInner {
+   border-radius: 0.55rem;
+   background-color: rgba(47, 47, 47, 0.855);
+   backdrop-filter: blur(8px);
+   -webkit-backdrop-filter: blur(8px);
+   transition: all 0.65s ease;
+   border: 2px solid #1c1c1c;
+   color: var(--theme--t_text-primary);
+   overflow: visible;
+}
+#navBarrInner:hover {
+   border: 1px solid rgba(59, 113, 202, 0.755);
+   transition: all 5s ease;
+}
+**/
+
+
+#navBarr {
+  position: fixed;
+  bottom: 10px;
+  z-index: 10;
+  max-width: 95vw;
+  max-height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  
+    margin: auto;
+  
+  left: 0;
+  right: 0;
+  transition: all 5s ease;
+}
+#navBarrInner {
+  padding: 3px 5px 3px 3px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #2d2d2d;
+  border-radius: 10px;
+  border: 1px solid rgb(63, 63, 63);
+
+  transition: all 5s ease;
+}
+#navBarrInner:hover {
+  border: 1px solid rgba(59, 113, 202, 0.455);
+  transition: all 5s ease-in-out;
+}
+
+/*$
+.messageBox {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  background-color: #2d2d2d;
+  padding: 0 15px;
+  border-radius: 10px;
+  border: 1px solid rgb(63, 63, 63);
+}
+.messageBox:focus-within {
+  border: 1px solid rgb(110, 110, 110);
+}
+.fileUploadWrapper {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#file {
+  display: none;
+}
+.fileUploadWrapper label {
+  cursor: pointer;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+}
+.fileUploadWrapper label svg {
+  height: 18px;
+}
+.fileUploadWrapper label svg path {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.fileUploadWrapper label svg circle {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.fileUploadWrapper label:hover svg path {
+  stroke: #fff;
+}
+.fileUploadWrapper label:hover svg circle {
+  stroke: #fff;
+  fill: #3c3c3c;
+}
+.fileUploadWrapper label:hover .tooltip {
+  display: block;
+  opacity: 1;
+}
+.tooltip {
+  position: absolute;
+  top: -40px;
+  display: none;
+  opacity: 0;
+  color: white;
+  font-size: 10px;
+  text-wrap: nowrap;
+  background-color: #000;
+  padding: 6px 10px;
+  border: 1px solid #3c3c3c;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.596);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#messageInput {
+  width: 200px;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding-left: 10px;
+  color: white;
+}
+#messageInput:focus ~ #sendButton svg path,
+#messageInput:valid ~ #sendButton svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}
+
+#sendButton {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#sendButton svg {
+  height: 18px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#sendButton svg path {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+#sendButton:hover svg path {
+  fill: #3c3c3c;
+  stroke: white;
+}
+
+
+**/
+
+
+
+
+.group {
+   margin: auto;
+}
+.iconsAreaNAV {
+   flex: 1;
+}
+.iconsAreaNAV span {
+   background-color: var(--theme--t_bg-tertiary);
+   border-color: var(--theme--t_border-primary);
+   transition: all 0.55s ease;
+}
+.iconItemNAV {
+   position: relative;
+   z-index: 9;
+   gap: 0;
+   white-space: nowrap;
+}
+
+#playerOpen {
+   height: 35px;
+   width: 25px;
+   margin-right: 5px;
+   align-content: center;
+   text-align: center;
+}
+.dropdown-icon i {
+   transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+   font-size: 30px;
+}
+.dropdown-icon i.visiblee {
+   opacity: 1;
+   visibility: visible;
+   transition: opacity 0.45s ease, visibility 0.65s ease;
+}
+.dropdown-icon i.hiddenn {
+   opacity: 0;
+   visibility: hidden;
+   transition: opacity 0.45s ease, visibility 0.65s ease;
+}
+.ph-arrow-circle-up {
+   opacity: 0.35 !important;
+}
+
+#controlsContainer {
+   position: sticky;
+   bottom: 8%;
+}
+#sliderContainer {
+   position: sticky;
+   bottom: 3%;
+}
+
+#pageLoader {
+   height: 100%;
+}
+#dynamicAreaLoader {
+   height: auto;
+}
+
+.icon-actions .icon {
+   border-radius: 50%;
+   margin: auto;
+   text-align: center;
+   background-color: #3b71ca;
+   border: 1px solid #3f51b5;
+   pointer-events: auto;
+   padding: 3px;
+}
+.icon-actions .icon i {
+   left: 0;
+   right: 0;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+   font-size: 20px;
+   font-weight: 500;
+   color: #cacaca;
+}
+.icon-actions .icon:hover {
+   transform: scale(1.05);
+}
+.icon-actions.visible {
+   opacity: 1;
+   visibility: visible;
+   pointer-events: auto;
+}
+.icon-actions {
+   display: flex;
+   opacity: 0;
+   visibility: hidden;
+   transition: opacity 0.65s ease, visibility 0.2s ease;
+   right: 0;
+   position: absolute;
+   gap: 5px;
+}
+
+.popover-content {
+   position: absolute;
+   z-index: 1050;
+   padding: 0;
+   padding: 5px;
+   margin-top: 10px;
+   background-color: #2d3748;
+   border: 1px solid #2d3748;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+.popover-content h5 {
+   background-color: transparent;
+   font-size: 15px;
+}
+#confirmAddToPlaylist {
+   margin: 4px;
+   padding: 4px 8px;
+   font-size: 0.675rem;
+   font-weight: 500;
+   text-transform: uppercase;
+   border-radius: 9999px;
+   transition: all 0.45s ease-in-out;
+   background-color: #68d391;
+   border: 1px solid #9ae6b4;
+   color: white;
+}
+#confirmAddToPlaylist:hover {
+   background-color: #2d3748;
+   border-color: #48bb78;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#myFavorites .favoriteSong {
+   position: relative;
+   display: flex;
+   align-items: center;
+   /**  background: #1a1a1a;**/
+   background-color: var(--theme--t_bg-secondary);
+   padding: 10px;
+   border-radius: 15px;
+   border: 1px solid var(--theme--t_border-primary);
+   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+   margin: 20px auto;
+   width: 95%;
+   transition: border 0.65s ease, box-shadow 0.3s ease, height 0.45s ease;
+   overflow: hidden;
+   height: 60px;
+}
+#myFavorites .favoriteSong:hover {
+   border: 2px SOLID #dc4c64;
+   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+#myFavorites .favoriteSong:hover .albumCover img {
+   border-radius: 40%;
+   transition: all 0.65s ease;
+}
+#myFavorites .favoriteSong.expanded .songAlbum,
+#myFavorites .favoriteSong.expanded .song-duration {
+   opacity: 1;
+   transition: all 0.65s ease;
+}
+#myFavorites .favoriteSong.expanded {
+   height: 90px;
+   transition: height 0.45s ease;
+}
+#myFavorites .favoriteSong.expanded .FAVsRemove {
+   opacity: 1;
+}
+
+.favoriteSong.song {
+   opacity: 1;
+}
+.albumCoverContainer {
+   display: flex;
+
+   align-items: center;
+   position: relative;
+}
+.albumCover img {
+   position: relative;
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   border: 1px solid #9e9e9e;
+   margin-right: 20px;
+   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+.songTitle {
+   color: #fff;
+   margin: 0;
+   font-size: 14px;
+   font-weight: 600;
+   white-space: nowrap;
+}
+.songTitle,
+.songArtist {
+   opacity: 1;
+}
+.songArtist {
+   padding-bottom: 8px;
+   font-size: 12px;
+}
+.songArtist,
+.songAlbum {
+   color: #9e9e9e;
+   margin: 0;
+   letter-spacing: 1px;
+   line-height: 1.1;
+}
+.songAlbum {
+   font-size: 10px;
+}
+.songAlbum,
+.song-duration {
+   opacity: 0;
+   transition: opacity 0.65s ease;
+}
+.song-duration {
+   position: absolute;
+   top: 50px;
+   left: 10px;
+   text-align: center;
+   font-size: 8px;
+   font-weight: thin;
+   font-weight: 100;
+   padding-top: 3px;
+   color: rgba(255, 255, 255, 0.65);
+}
+.song-controls {
+   margin-left: auto;
+   display: flex;
+   align-items: center;
+}
+.infoButtonFAVs {
+   color: #ff4081;
+   background: none;
+   border: none;
+   font-size: 24px;
+   margin-left: 15px;
+   cursor: pointer;
+   transition: transform 0.3s ease;
+   pointer-events: none;
+}
+.infoButtonFAVs:hover {
+   transform: scale(1.2);
+}
+.FAVsRemove {
+   color: crimson;
+   font-size: 20px;
+   margin-left: 20px;
+   cursor: pointer;
+   opacity: 0.25;
+   transition: transform 0.5s ease;
+}
+.FAVsRemove:hover {
+   transform: scale(1.2);
+}
+.FAVsRemove button {
+   border: none;
+}
+.albumCover img {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   transition: all 0.65s ease;
+}
+
+.maximized-view-title {
+   margin: 15px;
+}
+
+#similarArtistsContainer {
+   width: 100vw;
+   height: auto;
+  
+}
+#similarArtistsContainer.visible {
+   visibility: visible;
+}
+#similarArtistsContainer.hidden {
+   visibility: hidden;
+}
+
+
+.progress-container {
+   position: relative;
+   width: 100%;
+   height: 4px;
+   margin-bottom: 5px;
+}
+.progress {
+   width: 100%;
+   appearance: none;
+   background: rgba(233, 120, 140, 0.5);
+   height: 4px;
+   border-radius: 2px;
+   outline: none;
+}
+.progress-slider {
+   width: 100%;
+   height: 3px;
+   position: relative;
+   cursor: pointer;
+   border-radius: 10px;
+   overflow: visible;
+}
+.progress-bar {
+   width: 100%;
+   height: 100%;
+   background-color: #bdbdbd;
+   border-radius: 10px;
+   position: relative;
+}
+.progress-elapsed {
+   height: 100%;
+   background-color: #dc4c64;
+   width: 0%;
+   position: relative;
+}
+.slider-thumb {
+   width: 10px;
+   height: 10px;
+   background-color: #dc4c64;
+   border: 1px solid #efefef;
+   border-radius: 50%;
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   left: 0%;
+}
+.timeToolTip {
+   position: absolute;
+   bottom: 20px;
+   background-color: #333;
+   color: #fff;
+   padding: 4px 8px;
+   font-size: 12px;
+   border-radius: 4px;
+   display: none;
+   transform: translateX(-50%);
+   white-space: nowrap;
+}
+.timeToolTip {
+   position: absolute;
+   top: -33px;
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: rgba(51, 51, 51, 0.85);
+   color: #ededed;
+   padding: 5px 10px;
+   border-radius: 5px;
+   font-size: 12px;
+   font-weight: 400;
+   opacity: 0;
+   transition: opacity 0.45s;
+}
+.timeToolTip.show {
+   opacity: 1;
+   transition: opacity 0.45s;
+}
+
+.updateSongTitle.NAV {
+   /**   flex-grow: 1;**/
+   margin-left: 1em;
+   font-size: 1rem;
+   font-weight: 700;
+   color: #d8d8d8;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.logoNAV-Area {
+   display: flex;
+   align-items: center;
+}
+.logoNAV {
+   width: 45vw;
+   font-weight: thin;
+   color: #252535;
+   font-size: 15px;
+   overflow: hidden;
+}
+
+.albumNowPlayingTINY {
+   width: 35px;
+   height: 35px;
+   border-radius: 50%;
+   object-fit: cover;
+   margin-right: 3px;
+   margin-left: 3px;
+   border: 1px solid #737a8d;
+
+   transition: all 0.3s ease;
+}
+.albumNowPlayingTINY:hover {
+   transform: scale(1.1);
+   box-shadow: 0 0 10px rgba(128, 123, 167, 0.8);
+}
+
+.iconsAreaNAV {
+   display: flex;
+   gap: 15px;
+}
+.iconItemNAV {
+   font-size: 20px;
+   font-weight: 800;
+   color: #919191;
+   margin: auto;
+   border-radius: 50%;
+   padding: 0;
+   transition: all 0.65s ease;
+}
+.iconItemNAV:hover {
+   transform: scale(1.2);
+}
+
+
+.hover {
+   transition: all 0.5s ease;
+}
+.hover:hover {
+   color: #687cce;
+   font-weight: 600;
+   font-weight: bolder;
+   transition: all 0.5s ease;
+}
+
+.updateSongTitle.CARD {
+   font-size: 50px;
+   font-weight: 500;
+   color: #333;
+   transition: all 0.45s ease;
+   position: absolute;
+   z-index: 21;
+   opacity: 1;
+   bottom: 0;
+}
+
+.updateArtistName {
+   font-size: 14px;
+   font-weight: 300;
+   color: #777;
+   transition: all 0.45s ease;
+}
+.updateArtistName:hover {
+   color: #6b7fd7;
+   font-weight: 600;
+   transition: all 0.45s ease;
+}
+
+#nowPlayingControls {
+   display: flex;
+   gap: 10px;
+   margin: auto;
+}
+#dashboard {
+   width: 100%;
+   margin: auto;
+   background-color: transparent;
+}
+#songControls {
+   position: relative;
+   transform: translate(0px, -5px);
+}
+.control {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+#btnRepeat,
+#btnBackward,
+#btnPlayPause,
+#btnForward,
+#btnShuffle {
+   color: rgba(154, 167, 197, 0.75);
+   border: 1px solid rgba(154, 167, 197, 0.25);
+   filter: drop-shadow(0px 5px 10px rgba(255, 255, 255, 0.85));
+   align-content: center;
+   padding: 7px;
+   font-size: 15px;
+   font-weight: 400;
+   background-color: transparent;
+   border-radius: 50%;
+   margin: 0 5px;
+   transition: all 0.45s ease;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#btnPlayPause {
+   padding: 10px;
+   font-size: 25px;
+   color: rgba(154, 167, 197, 0.75);
+   border: 1px solid rgba(154, 167, 197, 0.25);
+   background-color: transparent;
+   transition: all 0.45s ease;
+}
+
+.btnPlay {
+   display: block;
+}
+
+.btnPause {
+   display: none;
+}
+
+.control .bttn {
+   /** The actual Buttons **/
+   font-size: 0.5rem;
+   border-radius: 50%;
+   padding: 2px;
+   display: grid;
+   grid-template-columns: 1fr;
+   place-items: center;
+   cursor: pointer;
+   width: 1.5rem;
+   height: auto;
+   transition: color 0.75s ease, width 0.75s ease-out;
+   position: relative;
+   background-color: var(--color-background-secondary);
+   border: 1px solid var(--color-border);
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, var(--shadow-alpha));
+   /**      outline: 1px solid var(--color-border);
+      outline-offset: 2px;**/
+   color: var(--text-color);
+}
+
+.control .bttn-toggle-play {
+   /** Play Pause Toggle **/
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   font-size: 24px;
+   color: #fff;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background-color: var(--active-button-text);
+   opacity: 0.8;
+}
+
+#btnRepeat:hover,
+#btnBackward:hover,
+#btnPlayPause:hover,
+#btnForward:hover,
+#btnShuffle:hover {
+   align-content: center;
+   padding: 7px;
+   font-size: 15px;
+   font-weight: 400;
+   border-radius: 50%;
+   margin: 0 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: #f2eef5;
+   border: 1px solid rgba(154, 167, 197, 0.55);
+   background-color: rgba(154, 167, 197, 0.75);
+   transition: all 0.45s ease;
+}
+
+#btnPlayPause:hover {
+   padding: 10px;
+   font-size: 25px;
+   color: #f2eef5;
+   border: 1px solid rgba(154, 167, 197, 0.55);
+   background-color: rgba(154, 167, 197, 0.75);
+   transition: all 0.45s ease;
+}
+
+.volume-control {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+}
+.volume-slider {
+   width: 100px;
+   height: 3px;
+   border-radius: 2px;
+   accent-color: #c75969;
+}
+
+.mute-icon {
+   color: #a7adbb;
+   transition: all 0.45s ease;
+}
+.mute-icon:hover {
+   color: #e63244;
+   transform: scale(1.05);
+   transition: all 0.45s ease;
+}
+
+@keyframes pulse {
+   0% {
+      transform: scale(1);
+   }
+
+   50% {
+      transform: scale(1.1);
+   }
+
+   100% {
+      transform: scale(1);
+   }
+}
+.pulse {
+   animation: pulse 1.5s infinite;
+}
+
+#sidebar {
+   display: none !important;
+   appearance: none !important;
+   opacity: 0 !important;
+   pointer-events: none !important;
+}
+
+.music-card {
+   outline: 4px solid transparent; /**#B4BDBE;**/
+   outline-offset: 2px;
+   width: 65vw;
+   border-radius: 15px;
+   overflow: hidden;
+   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+   background-color: #000000;
+   position: fixed;
+   bottom: 50px;
+   height: 0;
+   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+   margin: auto;
+   overflow: hidden;
+   transition: height 0.65s ease, opacity 0.45s ease;
+   opacity: 0;
+   left: 0;
+   right: 0;
+   margin: auto;
+   z-index: 20;
+   pointer-events: none;
+}
+.music-card.active {
+   bottom: 70px;
+   height: 60vh;
+   opacity: 1;
+   transition: height 0.65s ease, opacity 0.45s ease;
+   pointer-events: auto;
+   margin: auto;
+}
+
+.nowPlayingArtArea {
+   position: relative;
+   margin: auto;
+}
+.nowPlayingArt {
+   width: 100%;
+   height: 65%;
+   object-fit: cover;
+}
+.nowPlayingArtArea::after {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 60%, var(--dominant-color, #000) 100%);
+   pointer-events: none;
+}
+
+#nowPlayingMusicCard {
+   height: 55vh;
+   overflow: hidden;
+}
+
+#nowPlayingMusicCard h4,
+#nowPlayingMusicCard .updateArtistName,
+#nowPlayingMusicCard .updateAlbumName {
+   display: block;
+   text-align: center;
+   margin: auto;
+}
+
+#nowPlayingMusicCard .updateAlbumName {
+   font-size: 8px;
+   letter-spacing: 1.25;
+}
+
+#nowPlayingMusicCard .updateArtistName {
+   font-family: "Pacifico", serif;
+   font-weight: 400;
+   font-style: normal;
+   opacity: 0.65;
+   text-align: right;
+}
+
+.controls {
+   margin-top: 40px;
+   padding: 15px;
+   display: flex;
+   justify-content: space-around;
+   background-color: var(--dominant-color, #000);
+   transition: background-color 0.3s ease;
+}
+.progress-slider {
+   width: 90%;
+   margin: auto;
+}
+
+#currentTime,
+#totalTime {
+   font-size: 10px;
+   margin-top: 3px;
+   color: var(--theme--t_text-primary);
+}
+#currentTime {
+   margin-left: 3px;
+}
+#totalTime {
+   margin-right: 3px;
+}
+
+.song {
+   position: relative;
+}
+.song .dropdown-menu {
+   z-index: 1000;
+   position: absolute;
+}
+.dropdown-menu {
+   background-color: rgba(245, 245, 245, 0.975);
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+   padding: 0;
+   margin: 0;
+   list-style: none;
+   animation: dropDownFadeIN 0.45s ease-in-out;
+   overflow: hidden;
+}
+.dropdown-menu li {
+   display: block;
+}
+.dropdown-menu {
+   display: none;
+   position: absolute;
+   right: 4rem;
+   background-color: #fff;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+.dropdown-menu.show {
+   display: block;
+}
+ul.dropdown-menu {
+   position: absolute;
+   z-index: 9999;
+   pointer-events: auto;
+}
+.dropdown-item {
+   padding: 10px 16px;
+   color: #333;
+   text-decoration: none;
+   font-size: 14px;
+
+   transition: background-color 0.2s ease, color 0.2s ease;
+}
+.dropdown-item:hover {
+   background-color: #ffffff;
+   color: #3b83d1;
+   cursor: pointer;
+}
+.dropdown-item:first-child:hover {
+   border-top-left-radius: 8px;
+   border-top-right-radius: 8px;
+}
+.dropdown-item:last-child:hover {
+   border-bottom-left-radius: 8px;
+   border-bottom-right-radius: 8px;
+}
+@keyframes dropDownFadeIN {
+   from {
+      opacity: 0;
+      transform: translateY(-10px);
+      height: 0;
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+      height: auto;
+      border: 2px solid crimson;
+   }
+}
+
+.bubbles {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 0;
+   /* Place bubbles behind navbar */
+   overflow: hidden;
+}
+.bubble {
+   position: absolute;
+   background: rgba(255, 255, 255, 0.2);
+   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+   backdrop-filter: blur(4px);
+   border-radius: 50%;
+   animation: bubbleFLOAT 20s infinite;
+   opacity: 0.8;
+   pointer-events: none;
+   /* Prevent bubbles from intercepting clicks */
+   animation: bubbleFadeOUT 1.5s forwards;
+}
+.bubble:nth-of-type(2) {
+   opacity: 0.4;
+}
+.bubble:nth-of-type(3) {
+   opacity: 0.29;
+}
+.bubble:nth-of-type(4) {
+   opacity: 0.59;
+}
+.bubble:nth-of-type(5) {
+   opacity: 0.36;
+}
+.bubble:nth-of-type(6) {
+   opacity: 0.18;
+}
+@keyframes bubbleEXPLODE {
+   0% {
+      transform: scale(1);
+      opacity: 1;
+   }
+
+   100% {
+      transform: scale(2.5);
+      opacity: 0;
+   }
+}
+@keyframes bubbleFadeOUT {
+   0% {
+      opacity: 1;
+   }
+
+   100% {
+      opacity: 0;
+   }
+}
+@keyframes bubbleFLOAT {
+   0% {
+      transform: translateY(10%) translateX(40);
+   }
+
+   50% {
+      transform: translateY(38%) translateX(17px);
+   }
+
+   100% {
+      transform: translateY(-23%) translateX(-11px);
+   }
+}
+
+
+
+
+/************************************************************************/
+/************************************************************************/
+/************************************************************************/
+/************************************************************************/
+/************************************************************************/
+
+
+
+
+/******************************************************************************/
+/******** Similar Artists displayed Artist's Discography ****************/
+
+
+/** The entire container **/
+.similarArtistsPlayingArea {
+  display: inline-block;
+  padding: 5px 10px 10px 10px;
+  overflow-x: scroll;
+/**  flex-wrap: nowrap; **/
+  gap: 15px;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  background-color: rgba(124,124,124, 0.55);
+  border: 2px solid rgba(212,212,212, 0.45);
+  border-radius: 10px;
+}
+
+/*****************  R E N A M E  THESE LATER ********************/
+
+/** Small containers for each Artist & Hover Effects **/
+.similarArtistCircle {
+  right: 0;
+  left: 0;
+
+/**  overflow: scroll; **/
+  background-color: transparent;
+  
+  margin: auto;
+  padding: 10px 10px 10px 10px;
+  justify-content: center;
+  align-items: center;
+  
+  text-align: center;
+  width: 80px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.similarArtistCircle:hover {
+  transform: scale(1.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.45s ease;
+}
+
+
+/** The Artist's circular photo & Hover Effect **/
+.similarArtistCircle img {
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+.similarArtistCircle img:hover {
+  transform: scale(1.25);
+  transition: transform 0.45s ease;
+}
+
+
+/** Artists's Name underneath each photo & Hover Effect **/
+.similarArtistCircle h5 {
+  font-size: 14px;
+  font-weight: thin;
+  font-weight: 300;
+  margin-top: 10px;
+  color: var(--theme--t_text-primary);
+  transition: all 0.3s ease;
+}
+.similarArtistCircle h5:hover {
+  color: #578FF9;
+  font-size: 15px;
+  font-weight: bolder;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: all 0.45s ease;
+}
+
+
+/** Load More button **/
+#loadMoreSimilarArtists {
+  margin: 20px auto;
+  display: block;
+}
+
+
+
+
+
+
+
+/******************************************************************************/
+/******** Similar Artists displayed Artist's Discography ****************/
+
+.relatedArtistsArea {
+  border: 2px SOLID LIME;
+  
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 40px 0;
+}
+.relatedArtistsArea .card {
+  position: relative;
+  width: 115px;
+  height: 115px;
+  margin: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45);
+  border-radius: 15px;
+  display: flex;
+  object-fit: cover;
+}
+.card img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.relatedArtistsArea .card .content{
+  position: absolute;
+  bottom: -160px;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  flex-direction: column;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 -10px 10px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: bottom 0.5s;
+  transition-delay: 0.8s;
+}
+.relatedArtistsArea .card:hover .content{
+  bottom: 0px;
+  transition-delay: 0s;
+}
+.relatedArtistsArea .card .content .contentBx h2{
+  color: whitesmoke;
+  font-size: 14px;
+  font-weight: thin;
+  font-weight: 300;
+  text-transform: initial;
+  letter-spacing: 1.2px;
+  line-height: 1.1em;
+  text-align: center;
+  margin: 5px 0 10px;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition-delay: 0.6s;
+}
+.relatedArtistsArea .card:hover .content .contentBx h2{
+  opacity: 1;
+  transform: translateY(-60px);
+}
+.relatedArtistsArea .card .content .sci{
+  position: relative;
+  bottom: 15px;
+  display: flex;
+}
+.relatedArtistsArea .card .content .sci li{
+  list-style: none;
+  margin:  7px;
+  transform: translateY(40px);
+  transition: 0.5s;
+  opacity: 0;
+  transition-delay: calc(0.2s * var(--i));
+}
+.relatedArtistsArea .card:hover .content .sci li{
+  transform: translateY(0px);
+  opacity: 1;
+}
+.relatedArtistsArea .card .content .sci li a{
+  color: #fff;
+}
+
+
+
+
+
+/*****  S C R O L L B A R — R E L A T E D  O N L Y  *************************/
+#nowPlayingContent .similarArtists {
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+#nowPlayingContent .similarArtists::-webkit-scrollbar {
+  display: none;
+}
+#artistDiscography .similarArtists {
+  border: 2px SOLID CRIMSON;  /** To help locate during Debug **/
+}
+
+
+</style>
+
+
+
+ </head>
+
+ <body>
+<collapseMe id="themeStyles">
+   <div>
+    <div class="styles_base w-embed">
+     <style>
+      :root {
+       --swatches--inherit: inherit;
+       --swatches--currentCo1or: currentColor;
+       --brand-blue: var(--swatches--blue);
+      }
+
+      *::selection {
+       background: var(--swatches--blue);
+       color: var(--swatches--white);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+       width: 0.5rem;
+      }
+
+      /* Scrollbar thumb */
+      ::-webkit-scrollbar-thumb {
+       background: var(--border-primary);
+      }
+
+      /* Scrollbar track */
+      ::-webkit-scrollbar-track {
+       background: var(--theme--t_bg-primary);
+       background: linear-gradient(90deg, var(--theme--t_border-primary) 0%, var(--theme--t_border-primary) 1px, var(--bg-primary) 1px, var(--theme--t_bg-primary) 100%);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+       background: var(--swatches--blue);
+      }
+
+      /* Set proper font features for WF Visual Sans */
+      body {
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+       font-feature-settings: "ss01" 1, "ss02" 1, "ss03" 1;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .h0,
+      .h1,
+      .h2,
+      .h3,
+      .h4,
+      .h5,
+      .h6,
+      .cc_featured-course-title {
+       font-feature-settings: "ss01" 0, "ss02" 0, "ss03" 0;
+      }
+
+      @font-face {
+       font-family: "Open Dyslexic";
+       src: url("https://assets.website-files.com/62fd074032c3269eb2bb89d3/63039459c5baf9960e933540_OpenDyslexic-Regular.otf");
+      }
+
+      /* Text link underline size and spacing */
+      /**
+               a {
+               	text-underline-position: under; 
+               	text-decoration-thickness: 0.1em;
+               	text-underline-offset: 0.05em;
+               }
+               **/
+      a:focus-visible {
+       outline-color: var(--swatches--blue);
+       border-radius: var(--radius--r_sm);
+       border-bottom: none !important;
+      }
+
+      /* Remove top margin on rich text first child */
+      .w-richtext > :first-child {
+       margin-top: 0;
+      }
+
+      /* Remove bottom margin of rich text last child */
+      .w-richtext > :last-child,
+      .w-richtext ol li:last-child,
+      .w-richtext ul li:last-child {
+       margin-bottom: 0;
+      }
+
+      .page-main {
+       overflow: clip;
+      }
+
+      /*Apply "..." after 3 lines of text */
+      .text-style-3lines {
+       display: -webkit-box;
+       overflow: hidden;
+       /** -webkit-**/
+       line-clamp: 3;
+       -webkit-box-orient: vertical;
+      }
+
+      /*Apply "..." after 2 lines of text */
+      .text-style-2lines {
+       display: -webkit-box;
+       overflow: hidden;
+       /** -webkit-**/
+       line-clamp: 2;
+       -webkit-box-orient: vertical;
+      }
+
+      /* Remove last-items border-bottom from list tables**/
+      .cc_list-wrap .w-dyn-item:last-child .cc_list-item {
+       border-bottom: none;
+      }
+
+      [class*="u-text-balance"] {
+       text-wrap: balance;
+      }
+
+      @media screen and (max-width: 991px) {
+       .w-webflow-badge {
+        bottom: 4.5rem !important;
+       }
+      }
+     </style>
+    </div>
+    <div class="styles_sizing w-embed">
+     <style>
+      :root {
+       /* 
+           Size scale:
+           Used as the multiplier to make the 
+           margin, padding, gap, etc spacing responsive
+                 */
+       --scale: 1;
+       /* 16px */
+
+       /* Redefine the spacing tokens */
+       --size--responsive--rs_2: calc(var(--size--fixed--fs_2) * var(--scale));
+       --size--responsive--rs_2-25: calc(var(--size--fixed--fs_2-25) * var(--scale));
+       --size--responsive--rs_2-5: calc(var(--size--fixed--fs_2-5) * var(--scale));
+       --size--responsive--rs_2-75: calc(var(--size--fixed--fs_2-75) * var(--scale));
+       --size--responsive--rs_3: calc(var(--size--fixed--fs_3) * var(--scale));
+       --size--responsive--rs_3-5: calc(var(--size--fixed--fs_3-5) * var(--scale));
+       --size--responsive--rs_4: calc(var(--size--fixed--fs_4) * var(--scale));
+       --size--responsive--rs_4-5: calc(var(--size--fixed--fs_4-5) * var(--scale));
+       --size--responsive--rs_5: calc(var(--size--fixed--fs_5) * var(--scale));
+       --size--responsive--rs_5-5: calc(var(--size--fixed--fs_5-5) * var(--scale));
+       --size--responsive--rs_6: calc(var(--size--fixed--fs_6) * var(--scale));
+       --size--responsive--rs_6-5: calc(var(--size--fixed--fs_6-5) * var(--scale));
+       --size--responsive--rs_7: calc(var(--size--fixed--fs_7) * var(--scale));
+       --size--responsive--rs_7-5: calc(var(--size--fixed--fs_7-5) * var(--scale));
+       --size--responsive--rs_8: calc(var(--size--fixed--fs_8) * var(--scale));
+       --size--responsive--rs_8-5: calc(var(--size--fixed--fs_8-5) * var(--scale));
+       --size--responsive--rs_9: calc(var(--size--fixed--fs_9) * var(--scale));
+       --size--responsive--rs_9-5: calc(var(--size--fixed--fs_9-5) * var(--scale));
+       --size--responsive--rs_10: calc(var(--size--fixed--fs_10) * var(--scale));
+       --size--responsive--rs_11: calc(var(--size--fixed--fs_11) * var(--scale));
+       --size--responsive--rs_12: calc(var(--size--fixed--fs_12) * var(--scale));
+       --size--responsive--rs_13: calc(var(--size--fixed--fs_13) * var(--scale));
+       --size--responsive--rs_14: calc(var(--size--fixed--fs_14) * var(--scale));
+       --size--responsive--rs_15: calc(var(--size--fixed--fs_15) * var(--scale));
+       --size--responsive--rs_16: calc(var(--size--fixed--fs_16) * var(--scale));
+       --size--responsive--rs_17: calc(var(--size--fixed--fs_17) * var(--scale));
+       --size--responsive--rs_18: calc(var(--size--fixed--fs_18) * var(--scale));
+       --size--responsive--rs_19: calc(var(--size--fixed--fs_19) * var(--scale));
+       --size--responsive--rs_20: calc(var(--size--fixed--fs_20) * var(--scale));
+      }
+
+      /* 
+                 Set a minimum sizing for typography
+               */
+      h1,
+      .h1 {
+       font-size: max(var(--typography--h1), var(--typography--h1_min));
+      }
+
+      h2,
+      .h2 {
+       font-size: max(var(--typography--h2), var(--typography--h2_min));
+      }
+
+      h3,
+      .h3 {
+       font-size: max(var(--typography--h3), var(--typography--h3_min));
+      }
+
+      h4,
+      .h4 {
+       font-size: max(var(--typography--h4), var(--typography--h4_min));
+      }
+
+      .text-lg {
+       font-size: max(var(--typography--text-lg), var(--typography--text-lg_min));
+      }
+
+      .text-md {
+       font-size: max(var(--typography--text-md), var(--typography--text-md_min));
+      }
+
+      /* Tablet */
+      @media screen and (max-width: 991px) {
+       :root {
+        --scale: 0.875;
+        /* 14px */
+       }
+      }
+
+      @media screen and (max-width: 767px) {
+       :root {
+        --scale: 0.75;
+        /* 12px */
+       }
+      }
+
+      @media screen and (max-width: 480px) {
+       :root {
+        --scale: 0.625;
+        /* 10px */
+        /*    --scale: 0.5;  8px */
+       }
+      }
+     </style>
+    </div>
+    <div class="styles_themes w-embed">
+     <style>
+      :root[data-theme="dark"][data-contrast="high"] {
+       --theme--t_bg-primary: var(--theme--dark--high-contrast--tdhc_bg-primary);
+       --theme--t_bg-secondary: var(--theme--dark--high-contrast--tdhc_bg-secondary);
+       --theme--t_bg-secondary-action: var(--theme--dark--high-contrast--tdhc_bg-secondary-action);
+       --theme--t_bg-tertiary: var(--theme--dark--high-contrast--tdhc_bg-tertiary);
+       --theme--t_bg-overlay: var(--theme--dark--high-contrast--tdhc_bg-overlay);
+       --theme--t_text-primary: var(--theme--dark--high-contrast--tdhc_text-primary);
+       --theme--t_text-secondary: var(--theme--dark--high-contrast--tdhc_text-secondary);
+       --theme--t_text-tertiary: var(--theme--dark--high-contrast--tdhc_text-tertiary);
+       --theme--t_border-primary: var(--theme--dark--high-contrast--tdhc_border-primary);
+       --theme--t_icon-primary: var(--theme--dark--high-contrast--tdhc_icon-primary);
+       --theme--t_icon-secondary: var(--theme--dark--high-contrast--tdhc_icon-secondary);
+       --theme--t_headings: var(--theme--dark--high-contrast--tdhc_headings);
+       --theme--t_btn-1-bg: var(--theme--dark--high-contrast--tdhc_btn-1-bg);
+       --theme--t_btn-1-bg-hover: var(--theme--dark--high-contrast--tdhc_btn-1-bg-hover);
+       --theme--t_btn-1-text: var(--theme--dark--high-contrast--tdhc_btn-1-text);
+       --theme--t_btn-1-text-hover: var(--theme--dark--high-contrast--tdhc_btn-1-text-hover);
+       --theme--t_btn-2-bg: var(--theme--dark--high-contrast--tdhc_btn-2-bg);
+       --theme--t_btn-2-bg-hover: var(--theme--dark--high-contrast--tdhc_btn-2-bg-hover);
+       --theme--t_btn-2-text: var(--theme--dark--high-contrast--tdhc_btn-2-text);
+       --theme--t_btn-2-text-hover: var(--theme--dark--high-contrast--tdhc_btn-2-text-hover);
+      }
+
+      :root[data-theme="light"] {
+       --theme--t_bg-primary: var(--theme--light--tl_bg-primary);
+       --theme--t_bg-secondary: var(--theme--light--tl_bg-secondary);
+       --theme--t_bg-secondary-action: var(--theme--light--tl_bg-secondary-action);
+       --theme--t_bg-tertiary: var(--theme--light--tl_bg-tertiary);
+       --theme--t_bg-overlay: var(--theme--light--tl_bg-overlay);
+       --theme--t_text-primary: var(--theme--light--tl_text-primary);
+       --theme--t_text-secondary: var(--theme--light--tl_text-secondary);
+       --theme--t_text-tertiary: var(--theme--light--tl_text-tertiary);
+       --theme--t_border-primary: var(--theme--light--tl_border-primary);
+       --theme--t_icon-primary: var(--theme--light--tl_icon-primary);
+       --theme--t_icon-secondary: var(--theme--light--tl_icon-secondary);
+       --theme--t_headings: var(--theme--light--tl_headings);
+       --theme--t_btn-1-bg: var(--theme--light--tl_btn-1-bg);
+       --theme--t_btn-1-bg-hover: var(--theme--light--tl_btn-1-bg-hover);
+       --theme--t_btn-1-text: var(--theme--light--tl_btn-1-text);
+       --theme--t_btn-1-text-hover: var(--theme--light--tl_btn-1-text-hover);
+       --theme--t_btn-2-bg: var(--theme--light--tl_btn-2-bg);
+       --theme--t_btn-2-bg-hover: var(--theme--light--tl_btn-2-bg-hover);
+       --theme--t_btn-2-text: var(--theme--light--tl_btn-2-text);
+       --theme--t_btn-2-text-hover: var(--theme--light--tl_btn-2-text-hover);
+      }
+
+      :root[data-theme="light"][data-contrast="high"] {
+       --theme--t_bg-primary: var(--theme--light--high-contrast--tlhc_bg-primary);
+       --theme--t_bg-secondary: var(--theme--light--high-contrast--tlhc_bg-secondary);
+       --theme--t_bg-secondary-action: var(--theme--light--high-contrast--tlhc_bg-secondary-action);
+       --theme--t_bg-tertiary: var(--theme--light--high-contrast--tlhc_bg-tertiary);
+       --theme--t_bg-overlay: var(--theme--light--high-contrast--tlhc_bg-overlay);
+       --theme--t_text-primary: var(--theme--light--high-contrast--tlhc_text-primary);
+       --theme--t_text-secondary: var(--theme--light--high-contrast--tlhc_text-secondary);
+       --theme--t_text-tertiary: var(--theme--light--high-contrast--tlhc_text-tertiary);
+       --theme--t_border-primary: var(--theme--light--high-contrast--tlhc_border-primary);
+       --theme--t_icon-primary: var(--theme--light--high-contrast--tlhc_icon-primary);
+       --theme--t_icon-secondary: var(--theme--light--high-contrast--tlhc_icon-secondary);
+       --theme--t_headings: var(--theme--light--high-contrast--tlhc_headings);
+       --theme--t_btn-1-bg: var(--theme--light--high-contrast--tlhc_btn-1-bg);
+       --theme--t_btn-1-bg-hover: var(--theme--light--high-contrast--tlhc_btn-1-bg-hover);
+       --theme--t_btn-1-text: var(--theme--light--high-contrast--tlhc_btn-1-text);
+       --theme--t_btn-1-text-hover: var(--theme--light--high-contrast--tlhc_btn-1-text-hover);
+       --theme--t_btn-2-bg: var(--theme--light--high-contrast--tlhc_btn-2-bg);
+       --theme--t_btn-2-bg-hover: var(--theme--light--high-contrast--tlhc_btn-2-bg-hover);
+       --theme--t_btn-2-text: var(--theme--light--high-contrast--tlhc_btn-2-text);
+       --theme--t_btn-2-text-hover: var(--theme--light--high-contrast--tlhc_btn-2-text-hover);
+      }
+     </style>
+    </div>
+    <div class="styles_theme-overrides w-embed">
+     <style>
+      :root[data-theme="light"] .cc_course_hero {
+       background-image: radial-gradient(circle at 0 100%, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), linear-gradient(to right, rgba(0, 0, 0, 0.6) 47%, rgba(0, 0, 0, 0.1));
+      }
+
+      :root[data-theme="dark"][data-contrast="high"] .cc_breadcrumbs-wrap,
+      .info1,
+      :root[data-theme="light"][data-contrast="high"] .cc_breadcrumbs-wrap,
+      .info1 {
+       background: var(--theme--t_bg-secondary);
+      }
+
+      :root[data-theme="dark"][data-contrast="high"] .cc_dd-toggle-group-item.active,
+      .info1 :root[data-theme="light"][data-contrast="high"] .cc_dd-toggle-group-item.active,
+      .info1 {
+       color: var(--theme--t_bg-primary);
+       background: var(--theme--t_text-primary);
+      }
+
+      :root[data-theme="light"][data-contrast="high"] .w-checkbox-input--inputType-custom.w--redirected-checked,
+      .info1 {
+       background-color: var(--theme--t_text-primary);
+       border-color: var(--swatches--white);
+      }
+
+      :root[data-theme="dark"][data-contrast="high"] .w-checkbox-input--inputType-custom.w--redirected-checked,
+      .info1 {
+       background-color: var(--theme--t_bg-primary);
+       border-color: var(--swatches--white);
+      }
+     </style>
+    </div>
+    <div class="styles_custom-breakpoints w-embed">
+     <style>
+      @media screen and (min-width: 992px) and (max-width: 1300px) {
+       .cc_courses-grid {
+        grid-template-columns: 1fr;
+       }
+      }
+     </style>
+    </div>
+   </div>
+   <!---
+/**
+*
+*     — — — — — — — — — — — — — — — — — — — — — — — — — —
+*     END END END END END END END END END END END END END
+*     — — — — — — — — — — — — — — — — — — — — — — — — — —
+**/
+--->
+  </collapseMe>
+
+
+<div id="loadingBar"></div>
+
+<style>
+    @layer utilities {
+        img {
+            @apply rounded-full; /* Apply Tailwind's circular border radius */
+        }
+    }
+</style>
+
+<div id="navBarr" class="flex flex-col">
+ 
+  <div id="navBarrInner" class="flex gap-1 shadow-xl rounded-md">
+
+
+ <div class="logoNAV-Area">
+  <img 
+  src="https://mybeats.cloud/mediaFiles/albumCovers/logoNAVThree.png"
+  class="albumNowPlayingTINY"
+  id="smallAlbumCover"
+  alt="Album Cover"
+  data-hide="yes">
+
+  <span
+    class="updateSongTitle logoNAV"
+    data-hide="yes"
+    style="font-weight: bolder; font-weight: 500; color: #D8D8D8;">
+MyBeats Music
+</span>
+
+ </div>
+  
+<!---   
+<div class="iconsAreaNAV">
+    <div class="group relative px-4 cursor-pointer">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+       <i id="btnNowPlaying" class="ph-bold ph-play"></i>
+      </div>
+      <span class="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    Playing
+  </span>
+    </div>
+   
+   
+    <div class="group relative px-4 cursor-pointer">
+      <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
+ <i id="btnQueue" class="ph-bold ph-queue"></i>
+     </div>
+      <span class="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    Queue
+  </span>
+</div>
+   
+   
+<div class="group relative px-4 cursor-pointer">
+  <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500"> 
+  <i id="favoritesBtn" class="ph-bold ph-heart"></i>
+  </div>
+  <span class="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    Favorites
+  </span>
+    </div>
+   
+   
+  <div class="group relative px-4 cursor-pointer">
+  <div class="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500"> 
+  <i id="playerOpen" class="ph-bold ph-info"></i>
+  </div>
+  <span class="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    Show
+  </span>
+  </div>
+</div>                 
+--->
+
+<!---<nav class="navBar" id="navBar">--->
+
+ <div class="iconsAreaNAV">
+ <div class="group relative px-2 cursor-pointer">
+  <i id="btnNowPlaying" class="iconItemNAV ph-fill ph-play-circle"></i>
+    <span class="absolute -top-10 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    Playing
+  </span>
+</div>
+
+<div class="group relative px-2 cursor-pointer">  
+  <i id="btnQueue" class="iconItemNAV ph-fill ph-skip-forward"></i>
+      <span class="absolute -top-10 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    Queue
+  </span>
+</div>
+
+
+<div class="group relative px-2 cursor-pointer">
+  <i id="favoritesBtn" class="iconItemNAV fas fa-heart"></i>
+  <span class="absolute -top-10 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+    Favorites
+  </span>
+</div>
+
+<div id="playerOpen" class="dropdown-icon">
+  <i class="ph-fill ph-arrow-circle-up" style="opacity: 1; visibility: visible;"></i>
+</div>
+
+ </div>
+ 
+ 
+<!---</nav>--->
+   
+  </div>
+</div>
+
+
+
+
+<div class="music-card maximized-view" id="nowPlayingMusicCard">
+  
+  
+  <div class="containerSongs">
+    <!-- Now Playing Section -->
+    <div id="nowPlaying" class="sectionSongs active">
+    <div class="nowPlayingArtArea" id="nowPlayingArtArea">
+        <img src="https://mybeats.cloud/manifestFiles/web//MyBeatsLogo1000.png" alt="Album Cover" class="nowPlayingArt" id="nowPlayingArt">
+    </div>
+<h4 class="updateSongTitle hover"></h4>
+<span class="updateAlbumName hover" style="left: 0; right: 0; margin: auto;"></span><br>
+<!---
+<span class="updateArtistName hover" style="left: 0; right: 0; ; margin: auto;"></span><br>
+--->
+
+<div id="controlsContainer">
+<div class="controls">
+<div class="control">
+
+<!--- R E P E A T --->
+ <div class="repeat songControl" id="btnRepeat">
+  <i class="ph-fill ph-repeat"></i>
+ </div>
+ 
+<!--- S K I P  B A C K U P --->
+ <div class="skip-backward songControl" id="btnBackward">
+  <i class="ph-fill ph-skip-back"></i>
+ </div>
+
+<!--- P L A Y  OR  P A U S E --->
+ <div class="play-pause songControl" id="btnPlayPause">
+  <i id="btnPause" class="btnPause ph-fill ph-pause icon-pause"></i>
+  <i id="btnPlay" class="btnPlay ph-fill ph-headset icon-play"></i>
+ </div>
+
+<!--- S K I P  F O R W A R D --->
+ <div class="skip-forward songControl" id="btnForward">
+  <i class="ph-fill ph-skip-forward"></i>
+ </div>
+
+<!--- S H U F F L E --->
+ <div class="shuffle songControl" id="btnShuffle">
+  <i class="ph-fill ph-shuffle"></i>
+ </div>
+ 
+</div><!--- Inner --->
+</div><!--- Controls --->
+</div>
+
+
+<!--- P R O G R E S S  SLIDER  --->
+<div id="sliderContainer">
+<div class="progress-slider">
+<div class="progress-bar">
+ <div class="progress-elapsed" id="progressElapsed"></div>
+</div>
+<div class="slider-thumb" id="sliderThumb"></div>
+<div class="timeToolTip" id="timeToolTip"></div>
+</div>
+<!--- TIME ELAPSED --- TOTAL TIME --->
+<div class="progress-time" id="progress-time">
+<span class="currentTime" id="currentTime">0:00</span>
+<span class="totalTime" id="totalTime">0:00</span>
+</div>
+</div>
+
+
+</div>
+
+
+    <!-- Favorites --->
+    <div class="favoriteSongs sectionSongs myMusic" id="favoriteSongs">
+        <div class="favoriteHeader">
+            <h2 class="maximized-view-title">Favorites</h2>
+        </div>
+       <div id="myFavorites">
+         
+       </div>
+        
+        </div>
+        
+  
+
+    <!-- Queue Section -->
+    <div id="queue" class="sectionSongs myMusic">
+      <h1 class="maximized-view-title">Queue</h1>
+      <div id="myQueue">
+      
+      </div>
+    </div>
+ 
+</div>
+</div>
+
+<!----  <script>
+    const playerUpDown = document.getElementById("playerOpen");
+    const nowPlaying = document.getElementById("nowPlaying");
+    const favorites = document.getElementById("favoriteSongs");
+    const queue = document.getElementById("queue");
+
+    const btnNowPlaying = document.getElementById("btnNowPlaying");
+    const btnFavorites = document.getElementById("favoritesBtn");
+    const btnQueue = document.getElementById("btnQueue");
+
+    function setActiveSection(activeSection) {
+      [nowPlaying, favorites, queue].forEach(section => {
+        section.classList.remove("active");
+        arrowUp.style.visibility = "visible";
+      });
+      activeSection.classList.add("active");
+      arrowDown.style.visibility = "visible";
+    }
+    
+    const arrowUp = document.querySelector("#musicCardArrowUP");
+    const arrowDown = document.querySelector("#musicCardArrowDOWN");
+
+    btnNowPlaying.addEventListener("click", () => setActiveSection(nowPlaying));
+    btnFavorites.addEventListener("click", () => setActiveSection(favorites));
+    btnQueue.addEventListener("click", () => setActiveSection(queue));
+    
+    playerUpDown.addEventListener("click")
+  </script>
+
+
+
+<script>
+    // Elements
+    const sections = [
+        document.getElementById("nowPlayingMusicCard"),
+        document.getElementById("favoriteSongs"),
+        document.getElementById("queue")
+    ];
+
+    const buttons = [
+        document.getElementById("btnNowPlaying"),
+        document.getElementById("favoritesBtn"),
+        document.getElementById("btnQueue")
+    ];
+
+    const arrowUp = document.getElementById("musicCardArrowUP");
+    const arrowDown = document.getElementById("musicCardArrowDOWN");
+
+    // Update arrow visibility based on active sections
+    const updateArrowVisibility = () => {
+        const isActive = sections.some(section => section.classList.contains("active"));
+        arrowUp.style.visibility = isActive ? "hidden" : "visible";
+        arrowUp.style.opacity = isActive ? "0" : "1";
+        arrowUp.style.transition = "all 0.55s ease";
+
+        arrowDown.style.visibility = isActive ? "visible" : "hidden";
+        arrowDown.style.opacity = isActive ? "1" : "0";
+        arrowDown.style.transition = "all 0.55s ease";
+    };
+
+    // Set active section and update arrows
+    const setActiveSection = (activeSection) => {
+        sections.forEach(section => section.classList.remove("active"));
+        if (activeSection) activeSection.classList.add("active");
+        updateArrowVisibility();
+    };
+
+    // Attach click listeners to buttons
+    buttons.forEach((button, index) => {
+        button.addEventListener("click", () => setActiveSection(sections[index]));
+    });
+
+    // Initialize the arrows on page load
+    updateArrowVisibility();
+</script>
+--->
+
+
+  <script>
+    const nowPlaying = document.getElementById("nowPlaying");
+    const favorites = document.getElementById("favoriteSongs");
+    const queue = document.getElementById("queue");
+
+    const btnNowPlaying = document.getElementById("btnNowPlaying");
+    const btnFavorites = document.getElementById("favoritesBtn");
+    const btnQueue = document.getElementById("btnQueue");
+
+    function setActiveSection(activeSection) {
+      [nowPlaying, favorites, queue].forEach(section => {
+        section.classList.remove("active");
+      });
+      activeSection.classList.add("active");
+    }
+
+    btnNowPlaying.addEventListener("click", () => setActiveSection(nowPlaying));
+    btnFavorites.addEventListener("click", () => setActiveSection(favorites));
+    btnQueue.addEventListener("click", () => setActiveSection(queue));
+  </script>
+
+<script>
+$(document).ready(function() {
+  $('#playerOpen').on('click', function() {
+    const icon = $(this).find('i');
+    
+    // Add fade-out effect
+    icon.addClass('hiddenn');
+    
+    setTimeout(function() {
+      // Toggle icon class after fade-out
+      if (icon.hasClass('ph-arrow-circle-up')) {
+        icon.removeClass('ph-arrow-circle-up').addClass('ph-arrow-circle-down');
+      } else {
+        icon.removeClass('ph-arrow-circle-down').addClass('ph-arrow-circle-up');
+      }
+      
+      // Add fade-in effect
+      setTimeout(function() {
+        icon.removeClass('hiddenn');
+      }, 400); // Small delay to ensure smooth fade-in starts after class change
+    }, 500); // Duration of the fade-out transition
+  });
+});
+
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  
+  const navBarItems = document.querySelectorAll('[data-hide="yes"]');
+  const playerOpen = document.getElementById('playerOpen');
+  const nowPlayingMusicCard = document.getElementById('nowPlayingMusicCard');
+
+  // Toggle Music Card Visibility
+// Toggle active class on navBar click
+playerOpen.addEventListener('click', (event) => {
+  event.stopPropagation(); // Prevent click from triggering on document
+  nowPlayingMusicCard.classList.toggle('active');
+  
+  // Toggle visibility of playerOpen items
+  navBarItems.forEach(item => {
+      item.style.opacity = nowPlayingMusicCard.classList.contains('active') ? '0' : '1';
+      item.style.transition = 'opacity 1s ease';
+  });
+});
+
+// Hide nowPlayingMusicCard when clicking outside of it
+/**
+document.addEventListener('click', (event) => {
+  if (!nowPlayingMusicCard.contains(event.target) && !playerOpen.contains(event.target)) {
+      nowPlayingMusicCard.classList.remove('active');
+      
+      // Reset visibility of navBar items
+      navBarItems.forEach(item => {
+          item.style.opacity = '1';
+          item.style.transition = 'opacity 1s ease';
+      });
+  }
+});
+**/
+});
+
+
+// Track the currently expanded .favoriteSong
+let currentExpanded = null;
+
+// Add event listeners for .favoriteSong elements
+document.addEventListener("click", function(event) {
+    // Check if the clicked element is a .favoriteSong or inside one
+    const favoriteSong = event.target.closest(".favoriteSong");
+
+    if (favoriteSong) {
+        // If the clicked song is already expanded, collapse it
+        if (favoriteSong.classList.contains("expanded")) {
+            favoriteSong.classList.remove("expanded");
+            currentExpanded = null; // No song is expanded
+        } else {
+            // Collapse the currently expanded song (if any)
+            if (currentExpanded) {
+                currentExpanded.classList.remove("expanded");
+            }
+            // Expand the clicked song
+            favoriteSong.classList.add("expanded");
+            currentExpanded = favoriteSong; // Track the expanded song
+        }
+    } else {
+        // If click is outside any .favoriteSong, collapse the current expanded one
+        if (currentExpanded) {
+            currentExpanded.classList.remove("expanded");
+            currentExpanded = null; // Reset tracking
+        }
+    }
+});
+
+</script>
+
+
+
+  <div class="page-wrapper">
+   <div class="sidebar_wrap">
+    <nav id="sidebar" class="sidebar">
+     <div class="sidebar_header">
+      <div class="sidebar_logo-wrap">
+
+
+
+
+
+
+      </div>
+      
+      
+     </div>
+     
+     
+
+
+
+     <div class="sidebar__links-wrap">
+      <div class="sidebar_group">
+       <a data-logged-in-display="none" data-tooltip="Home" href="https://mybeats.cloud/" class="sidebar_link-group hide-mobile-p w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+           d="M5.75 10.113V18C5.75 18.1381 5.86193 18.25 6 18.25H18C18.1381 18.25 18.25 18.1381 18.25 18V10.113C18.25 10.0412 18.2191 9.9728 18.1652 9.92534L12.1652 4.64522C12.0707 4.56212 11.9293 4.56212 11.8348 4.64522L5.83484 9.92534C5.78091 9.9728 5.75 10.0412 5.75 10.113Z"
+           stroke="currentColor"
+           stroke-width="1.5"
+          />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Home
+        </div>
+       </a>
+
+       <a data-logged-in-display="flex" data-tooltip="Dashboard" href="https://coleycodes.com/404" class="sidebar_link-group hide-logged-out w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6C4 5.86193 4.11193 5.75 4.25 5.75H19.75C19.8881 5.75 20 5.86193 20 6V18C20 18.1381 19.8881 18.25 19.75 18.25H4.25C4.11193 18.25 4 18.1381 4 18V6Z" stroke="currentColor" stroke-width="1.5" />
+          <path d="M17 10L9 10" stroke="currentColor" stroke-width="1.5" />
+          <path d="M17 14L9 14" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Option 1
+        </div>
+       </a>
+
+
+
+<!-----------
+       <a data-tooltip="Search" href="#" class="sidebar_link-group openSearch w-inline-block" id="openSearch">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.25 10.25C15.25 13.0114 13.0114 15.25 10.25 15.25C7.48858 15.25 5.25 13.0114 5.25 10.25C5.25 7.48858 7.48858 5.25 10.25 5.25C13.0114 5.25 15.25 7.48858 15.25 10.25Z" stroke="currentColor" stroke-width="1.5" />
+          <path d="M13.7856 13.7855L19.5001 19.5" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Search
+        </div>
+        <div class="sidebar_link-text secondary">
+         ⌘E
+        </div>
+       </a>
+
+       <a id="openCard" class="floatControl btn-floating btn-large waves-effect waves-light red" data-bs-toggle="offcanvas" data-bs-target="#offfcanvasBottom" aria-controls="offcanvasBottom">
+        <i class="material-icons ph-fill ph-playlist"></i>
+       </a>
+------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+      <!---
+/**
+*
+*     — — — — — — — — — — — — — — — — — — —
+*               Sidebar — Desktop 
+*     — — — — — — — — — — — — — — — — — — —
+**/
+--->
+      <div class="sidebar_group">
+       <div class="sidebar_title u-fc-3">
+        Playlists
+       </div>
+
+       <a data-tooltip="Interactive learning" href="https://university.webflow.com/interactive-learning" class="sidebar_link-group hide-mobile-l w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+           d="M15.4909 15.3666L15.4871 14.6166C15.2272 14.618 14.9865 14.7538 14.851 14.9756C14.7154 15.1974 14.7044 15.4735 14.8218 15.7054L15.4909 15.3666ZM18.7569 21.8165L19.0957 22.4856C19.2732 22.3957 19.4077 22.2391 19.4696 22.05C19.5316 21.861 19.5159 21.6551 19.426 21.4777L18.7569 21.8165ZM15.8903 23.268L15.2212 23.6068C15.4084 23.9764 15.8596 24.1243 16.2292 23.9371L15.8903 23.268ZM12.6243 16.818L13.2934 16.4792C13.1759 16.2473 12.9468 16.0927 12.6878 16.0707C12.4288 16.0487 12.1769 16.1623 12.022 16.3711L12.6243 16.818ZM9.41291 21.1454L8.66292 21.1492C8.66456 21.4721 8.87258 21.7576 9.17935 21.8581C9.48613 21.9587 9.82281 21.8516 10.0152 21.5924L9.41291 21.1454ZM9.33991 6.77598L9.78686 6.17371C9.55873 6.00441 9.25454 5.97854 9.0011 6.10688C8.74766 6.23521 8.58848 6.49572 8.58992 6.77979L9.33991 6.77598ZM12.2249 8.91688L11.7779 9.51916C12.006 9.68845 12.3102 9.71433 12.5637 9.58599L12.2249 8.91688ZM12.225 8.91682L12.8941 8.57801C12.707 8.20847 12.2557 8.06059 11.8862 8.24772L12.225 8.91682ZM12.2251 8.91706L11.556 9.25588C11.6086 9.35975 11.6847 9.44996 11.7782 9.51934L12.2251 8.91706ZM20.8793 15.3393L20.8831 16.0892C21.2059 16.0876 21.4914 15.8796 21.592 15.5728C21.6925 15.266 21.5855 14.9294 21.3262 14.737L20.8793 15.3393ZM14.8218 15.7054L18.0878 22.1553L19.426 21.4777L16.1601 15.0278L14.8218 15.7054ZM18.4181 21.1474L15.5515 22.5989L16.2292 23.9371L19.0957 22.4856L18.4181 21.1474ZM16.5594 22.9292L13.2934 16.4792L11.9552 17.1568L15.2212 23.6068L16.5594 22.9292ZM12.022 16.3711L8.81063 20.6985L10.0152 21.5924L13.2265 17.2649L12.022 16.3711ZM10.1629 21.1416L10.0899 6.77217L8.58992 6.77979L8.66292 21.1492L10.1629 21.1416ZM8.89297 7.37826L11.7779 9.51916L12.6718 8.31461L9.78686 6.17371L8.89297 7.37826ZM12.5637 9.58599L12.5638 9.58593L11.8862 8.24772L11.886 8.24778L12.5637 9.58599ZM11.5559 9.25564L11.556 9.25588L12.8942 8.57825L12.8941 8.57801L11.5559 9.25564ZM11.7782 9.51934L20.4323 15.9415L21.3262 14.737L12.6721 8.31479L11.7782 9.51934ZM20.8755 14.5893L15.4871 14.6166L15.4948 16.1166L20.8831 16.0892L20.8755 14.5893Z"
+           fill="currentColor"
+          />
+          <path
+           d="M9.60889 13.9872C6.30223 13.7712 3.79674 10.9156 4.01273 7.60891C4.22872 4.30225 7.08439 1.79676 10.391 2.01275C13.6977 2.22874 16.2032 5.08441 15.9872 8.39107C15.933 9.22091 15.7126 10.0003 15.3604 10.6989"
+           stroke="currentColor"
+           stroke-width="1.5"
+          />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Interactive learning
+        </div>
+       </a>
+       <a data-tooltip="Glossary" href="https://university.webflow.com/glossary" class="sidebar_link-group hide-mobile-l w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.75 6.75C5.75 5.64543 6.64543 4.75 7.75 4.75H18.25V19.25H7.75C6.64543 19.25 5.75 18.3546 5.75 17.25V6.75Z" stroke="currentColor" stroke-width="1.5" />
+          <path d="M5.75 15.75H18.25" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Glossary
+        </div>
+       </a>
+       <a data-tooltip="Certifications" href="https://university.webflow.com/certifications" class="sidebar_link-group hide-mobile-p w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="9" r="5.25" stroke="currentColor" stroke-width="1.5" />
+          <path d="M8 12.5V21L12 19L16 21V12.5" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Certifications
+        </div>
+       </a>
+      </div>
+      
+      
+      <div class="sidebar_group">
+       <div class="sidebar_title u-fc-3">
+        Engage
+       </div>
+       <a data-tooltip="Support" href="https://university.webflow.com/support" class="sidebar_link-group hide-mobile-l w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="M12 19.5C10.199 19.5 8.54635 18.8652 7.25344 17.8072L9.55708 15.5036C10.2493 15.9872 11.0916 16.2708 12 16.2708C12.9085 16.2708 13.7507 15.9872 14.443 15.5036L16.7466 17.8072C15.4537 18.8652 13.801 19.5 12 19.5ZM17.8072 16.7465C18.8652 15.4536 19.5 13.8009 19.5 12C19.5 10.199 18.8652 8.54635 17.8072 7.25344L15.5036 9.55702C15.9872 10.2493 16.2709 11.0915 16.2709 12C16.2709 12.9085 15.9872 13.7507 15.5036 14.4429L17.8072 16.7465ZM8.49642 14.4429L6.19278 16.7465C5.13477 15.4536 4.5 13.8009 4.5 12C4.5 10.199 5.13478 8.54635 6.1928 7.25344L8.49642 9.55706C8.01285 10.2493 7.72921 11.0915 7.72921 12C7.72921 12.9084 8.01286 13.7507 8.49642 14.4429ZM16.7465 6.19278C15.4536 5.13477 13.8009 4.5 12 4.5C10.1991 4.5 8.54636 5.13477 7.25346 6.19278L9.55707 8.4964C10.2493 8.01281 11.0916 7.72915 12 7.72915C12.9085 7.72915 13.7507 8.0128 14.443 8.49636L16.7465 6.19278ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12ZM9.22921 12C9.22921 10.4697 10.4698 9.22915 12 9.22915C13.5303 9.22915 14.7709 10.4697 14.7709 12C14.7709 13.5303 13.5303 14.7708 12 14.7708C10.4698 14.7708 9.22921 13.5303 9.22921 12Z"
+           fill="currentColor"
+          />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Support
+        </div>
+       </a>
+       <a data-tooltip="Community" href="https://webflow.com/community" class="sidebar_link-group hide-tablet w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="M10.2708 6.44912C10.3475 5.35986 11.2554 4.5 12.3642 4.5C13.5232 4.5 14.4628 5.43957 14.4628 6.59859C14.4628 7.75762 13.5232 8.69719 12.3642 8.69719C12.0409 8.69719 11.7347 8.6241 11.4612 8.49354C11.5742 9.01176 11.5806 9.55419 11.4709 10.0854C11.7565 10.1584 12.0558 10.1972 12.3642 10.1972C14.3516 10.1972 15.9628 8.58604 15.9628 6.5986C15.9628 4.61115 14.3516 3 12.3642 3C10.7027 3 9.30416 4.12602 8.89014 5.65657C9.14278 5.7384 9.39072 5.84784 9.62997 5.98597C9.86344 6.12076 10.0774 6.27638 10.2708 6.44912Z"
+           fill="currentColor"
+          />
+          <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="M13.2967 13.8457C13.0097 13.772 12.7089 13.7328 12.3989 13.7328C10.4114 13.7328 8.80029 15.3439 8.80029 17.3314C8.80029 19.3188 10.4114 20.93 12.3989 20.93C14.0385 20.93 15.422 19.8335 15.856 18.3337C15.6062 18.2522 15.361 18.1436 15.1243 18.007C14.8921 17.8729 14.6792 17.7183 14.4866 17.5466C14.3788 18.6045 13.4852 19.43 12.3989 19.43C11.2399 19.43 10.3003 18.4904 10.3003 17.3314C10.3003 16.1724 11.2399 15.2328 12.3989 15.2328C12.7126 15.2328 13.0103 15.3016 13.2776 15.425C13.1757 14.9092 13.179 14.3713 13.2967 13.8457Z"
+           fill="currentColor"
+          />
+          <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="M8.94988 7.26991C10.0682 7.91554 10.4513 9.34548 9.80567 10.4638C9.65588 10.7232 9.46387 10.9431 9.24334 11.1197C9.71694 11.3145 10.154 11.6046 10.5228 11.9816C10.7435 11.7561 10.9397 11.4996 11.1047 11.2138C12.1646 9.37804 11.5356 7.03072 9.69988 5.97087C7.86416 4.91102 5.51684 5.53998 4.45698 7.3757C3.57578 8.90199 3.86204 10.782 5.03871 11.9815C5.27724 11.7384 5.55235 11.5232 5.86175 11.3445C6.01091 11.2584 6.16345 11.1835 6.3184 11.1194C5.43102 10.41 5.17059 9.1397 5.75602 8.1257C6.40166 7.00742 7.8316 6.62427 8.94988 7.26991Z"
+           fill="currentColor"
+          />
+          <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="M14.2552 11.9813C14.0346 12.2068 13.8385 12.4632 13.6735 12.7489C12.6137 14.5847 13.2426 16.932 15.0784 17.9918C16.9141 19.0517 19.2614 18.4227 20.3213 16.587C21.2024 15.0607 20.9162 13.1808 19.7396 11.9813C19.501 12.2245 19.2259 12.4398 18.9164 12.6185C18.7673 12.7045 18.6149 12.7795 18.4601 12.8435C19.3473 13.553 19.6076 14.8231 19.0222 15.837C18.3766 16.9553 16.9466 17.3384 15.8284 16.6928C14.7101 16.0472 14.3269 14.6172 14.9726 13.4989C15.1223 13.2396 15.3142 13.0198 15.5346 12.8432C15.061 12.6484 14.624 12.3583 14.2552 11.9813Z"
+           fill="currentColor"
+          />
+          <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="M6.61181 12.6437C7.73009 11.998 9.16003 12.3812 9.80567 13.4994C10.0108 13.8547 10.112 14.2413 10.1189 14.6243C10.5258 14.282 11.0096 14.0282 11.5407 13.8925C11.4598 13.5007 11.3157 13.1149 11.1047 12.7494C10.0449 10.9137 7.69753 10.2848 5.86181 11.3446C4.02609 12.4045 3.39713 14.7518 4.45698 16.5875C5.37873 18.184 7.27429 18.8678 8.96019 18.3217C8.87892 18.0213 8.83555 17.7054 8.83555 17.3794C8.83555 17.1555 8.85599 16.9365 8.89509 16.724C7.78531 17.3263 6.39116 16.9376 5.75602 15.8375C5.11038 14.7192 5.49353 13.2893 6.61181 12.6437Z"
+           fill="currentColor"
+          />
+          <path
+           fill-rule="evenodd"
+           clip-rule="evenodd"
+           d="M13.2375 10.0704C13.3185 10.4624 13.4626 10.8482 13.6736 11.2138C14.7335 13.0495 17.0808 13.6785 18.9165 12.6186C20.7522 11.5588 21.3812 9.21145 20.3213 7.37573C19.3996 5.77923 17.5041 5.09547 15.8182 5.64153C15.8994 5.94179 15.9428 6.25763 15.9428 6.58358C15.9428 6.80752 15.9223 7.02668 15.8832 7.2393C16.993 6.63693 18.3871 7.02561 19.0223 8.12573C19.6679 9.24401 19.2848 10.6739 18.1665 11.3196C17.0482 11.9652 15.6183 11.5821 14.9727 10.4638C14.7675 10.1085 14.6662 9.7217 14.6594 9.33861C14.2525 9.68092 13.7686 9.93474 13.2375 10.0704Z"
+           fill="currentColor"
+          />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Community
+        </div>
+        <div class="sidebar_link-text secondary">
+         ↗
+        </div>
+       </a>
+       <a data-tooltip="Events" href="https://webflow.com/events" class="sidebar_link-group hide-tablet w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.75 6C5.75 5.86193 5.86193 5.75 6 5.75H18C18.1381 5.75 18.25 5.86193 18.25 6V18C18.25 18.1381 18.1381 18.25 18 18.25H6C5.86193 18.25 5.75 18.1381 5.75 18V6Z" stroke="currentColor" stroke-width="1.5" />
+          <path d="M8.75 3.5V8" stroke="currentColor" stroke-width="1.5" />
+          <path d="M15.25 3.5V8" stroke="currentColor" stroke-width="1.5" />
+          <path d="M18.25 10.25H5.75" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Events
+        </div>
+        <div class="sidebar_link-text secondary">
+         ↗
+        </div>
+       </a>
+       <a data-tooltip="Forum" href="https://forum.webflow.com/" class="sidebar_link-group hide-tablet w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+           d="M4.75 5C4.75 4.86193 4.86193 4.75 5 4.75H15C15.1381 4.75 15.25 4.86193 15.25 5V13C15.25 13.1381 15.1381 13.25 15 13.25H7.60355C7.53725 13.25 7.47366 13.2763 7.42678 13.3232L5.17678 15.5732C5.01929 15.7307 4.75 15.6192 4.75 15.3964V5Z"
+           stroke="currentColor"
+           stroke-width="1.5"
+          />
+          <path d="M18.75 8V19L16.5 16.75H9" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Forum
+        </div>
+        <div class="sidebar_link-text secondary">
+         ↗
+        </div>
+       </a>
+      </div>
+      
+      
+
+<div class="nav-controls">
+        <i
+           class="ph-fill ph-play play-btn btnPlay"
+           data-hide="yes">          
+           </i>
+           </div>
+           
+<div class="nav-controls">
+        <i
+           class="ph-fill ph-skip-forward skip-btn skip-forward"
+           data-hide="yes">            
+           </i>
+</div>
+  
+
+      <div class="sidebar_group hide-tablet">
+       <div class="sidebar_title u-fc-3">
+        Build
+       </div>
+       <a data-tooltip="New Site" href="https://webflow.com/dashboard/sites/new" class="sidebar_link-group w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.75 6C5.75 5.86193 5.86193 5.75 6 5.75H18C18.1381 5.75 18.25 5.86193 18.25 6V18C18.25 18.1381 18.1381 18.25 18 18.25H6C5.86193 18.25 5.75 18.1381 5.75 18V6Z" stroke="currentColor" stroke-width="1.5" />
+          <path d="M12 9V15" stroke="currentColor" stroke-width="1.5" />
+          <path d="M15 12L9 12" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         New site
+        </div>
+        <div class="sidebar_link-text secondary">
+         ↗
+        </div>
+       </a>
+       <a data-tooltip="Project Dashboard" href="https://webflow.com/dashboard" class="sidebar_link-group w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+           d="M19.25 5V19C19.25 19.1381 19.1381 19.25 19 19.25H18.9727H18.9453H18.918H18.8906H18.8633H18.8359H18.8086H18.7812H18.7539H18.7266H18.6992H18.6719H18.6445H18.6172H18.5898H18.5625H18.5352H18.5078H18.4805H18.4531H18.4258H18.3984H18.3711H18.3438H18.3164H18.2891H18.2617H18.2344H18.207H18.1797H18.1523H18.125H18.0977H18.0703H18.043H18.0156H17.9883H17.9609H17.9336H17.9062H17.8789H17.8516H17.8242H17.7969H17.7695H17.7422H17.7148H17.6875H17.6602H17.6328H17.6055H17.5781H17.5508H17.5234H17.4961H17.4688H17.4414H17.4141H17.3867H17.3594H17.332H17.3047H17.2773H17.25H17.2227H17.1953H17.168H17.1406H17.1133H17.0859H17.0586H17.0312H17.0039H16.9766H16.9492H16.9219H16.8945H16.8672H16.8398H16.8125H16.7852H16.7578H16.7305H16.7031H16.6758H16.6484H16.6211H16.5938H16.5664H16.5391H16.5117H16.4844H16.457H16.4297H16.4023H16.375H16.3477H16.3203H16.293H16.2656H16.2383H16.2109H16.1836H16.1562H16.1289H16.1016H16.0742H16.0469H16.0195H15.9922H15.9648H15.9375H15.9102H15.8828H15.8555H15.8281H15.8008H15.7734H15.7461H15.7188H15.6914H15.6641H15.6367H15.6094H15.582H15.5547H15.5273H15.5H15.4727H15.4453H15.418H15.3906H15.3633H15.3359H15.3086H15.2812H15.2539H15.2266H15.1992H15.1719H15.1445H15.1172H15.0898H15.0625H15.0352H15.0078H14.9805H14.9531H14.9258H14.8984H14.8711H14.8438H14.8164H14.7891H14.7617H14.7344H14.707H14.6797H14.6523H14.625H14.5977H14.5703H14.543H14.5156H14.4883H14.4609H14.4336H14.4062H14.3789H14.3516H14.3242H14.2969H14.2695H14.2422H14.2148H14.1875H14.1602H14.1328H14.1055H14.0781H14.0508H14.0234H13.9961H13.9688H13.9414H13.9141H13.8867H13.8594H13.832H13.8047H13.7773H13.75H13.7227H13.6953H13.668H13.6406H13.6133H13.5859H13.5586H13.5312H13.5039H13.4766H13.4492H13.4219H13.3945H13.3672H13.3398H13.3125H13.2852H13.2578H13.2305H13.2031H13.1758H13.1484H13.1211H13.0938H13.0664H13.0391H13.0117H12.9844H12.957H12.9297H12.9023H12.875H12.8477H12.8203H12.793H12.7656H12.7383H12.7109H12.6836H12.6562H12.6289H12.6016H12.5742H12.5469H12.5195H12.4922H12.4648H12.4375H12.4102H12.3828H12.3555H12.3281H12.3008H12.2734H12.2461H12.2188H12.1914H12.1641H12.1367H12.1094H12.082H12.0547H12.0273H12H11.9727H11.9453H11.918H11.8906H11.8633H11.8359H11.8086H11.7812H11.7539H11.7266H11.6992H11.6719H11.6445H11.6172H11.5898H11.5625H11.5352H11.5078H11.4805H11.4531H11.4258H11.3984H11.3711H11.3438H11.3164H11.2891H11.2617H11.2344H11.207H11.1797H11.1523H11.125H11.0977H11.0703H11.043H11.0156H10.9883H10.9609H10.9336H10.9062H10.8789H10.8516H10.8242H10.7969H10.7695H10.7422H10.7148H10.6875H10.6602H10.6328H10.6055H10.5781H10.5508H10.5234H10.4961H10.4688H10.4414H10.4141H10.3867H10.3594H10.332H10.3047H10.2773H10.25H10.2227H10.1953H10.168H10.1406H10.1133H10.0859H10.0586H10.0312H10.0039H9.97656H9.94922H9.92188H9.89453H9.86719H9.83984H9.8125H9.78516H9.75781H9.73047H9.70312H9.67578H9.64844H9.62109H9.59375H9.56641H9.53906H9.51172H9.48438H9.45703H9.42969H9.40234H9.375H9.34766H9.32031H9.29297H9.26562H9.23828H9.21094H9.18359H9.15625H9.12891H9.10156H9.07422H9.04688H9.01953H8.99219H8.96484H8.9375H8.91016H8.88281H8.85547H8.82812H8.80078H8.77344H8.74609H8.71875H8.69141H8.66406H8.63672H8.60938H8.58203H8.55469H8.52734H8.5H8.47266H8.44531H8.41797H8.39062H8.36328H8.33594H8.30859H8.28125H8.25391H8.22656H8.19922H8.17188H8.14453H8.11719H8.08984H8.0625H8.03516H8.00781H7.98047H7.95312H7.92578H7.89844H7.87109H7.84375H7.81641H7.78906H7.76172H7.73438H7.70703H7.67969H7.65234H7.625H7.59766H7.57031H7.54297H7.51562H7.48828H7.46094H7.43359H7.40625H7.37891H7.35156H7.32422H7.29688H7.26953H7.24219H7.21484H7.1875H7.16016H7.13281H7.10547H7.07812H7.05078H7.02344H6.99609H6.96875H6.94141H6.91406H6.88672H6.85938H6.83203H6.80469H6.77734H6.75H6.72266H6.69531H6.66797H6.64062H6.61328H6.58594H6.55859H6.53125H6.50391H6.47656H6.44922H6.42188H6.39453H6.36719H6.33984H6.3125H6.28516H6.25781H6.23047H6.20312H6.17578H6.14844H6.12109H6.09375H6.06641H6.03906H6.01172H5.98438H5.95703H5.92969H5.90234H5.875H5.84766H5.82031H5.79297H5.76562H5.73828H5.71094H5.68359H5.65625H5.62891H5.60156H5.57422H5.54688H5.51953H5.49219H5.46484H5.4375H5.41016H5.38281H5.35547H5.32812H5.30078H5.27344H5.24609H5.21875H5.19141H5.16406H5.13672H5.10938H5.08203H5.05469H5.02734H5C4.86193 19.25 4.75 19.1381 4.75 19V5C4.75 4.86193 4.86193 4.75 5 4.75H19C19.1381 4.75 19.25 4.86193 19.25 5Z"
+           stroke="currentColor"
+           stroke-width="1.5"
+           stroke-linecap="square"
+          />
+          <path d="M5 8.25H19" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" />
+         </svg>
+        </div>
+        <div class="sidebar_link-text">
+         Project Dashboard
+        </div>
+        <div class="sidebar_link-text secondary">
+         ↗
+        </div>
+       </a>
+      </div>
+      <div class="sidebar_group sidebar-cta-group">
+       <div data-logged-in-display="none" class="cc_sidebar-cta-wrap"></div>
+      </div>
+      <div class="sidebar_footer">
+       <a id="toLightMode" data-tooltip="Switch to Light Mode" data-w-id="a9f77ad5-b5b7-d24e-795b-cb5432855c9b" href="#" class="sidebar_footer-button hide-mobile-p w-inline-block">
+        <div
+         id="themeIcon"
+         data-is-ix2-target="1"
+         class="sidebar_moon-icon"
+         data-w-id="a9f77ad5-b5b7-d24e-795b-cb5432855c9c"
+         data-animation-type="lottie"
+         data-src="https://assets-global.website-files.com/6491b4dd238fa881faab3d5c/64dd4613a2e57c8cbc1ee8fc_moon-to-sun_v05.json"
+         data-loop="0"
+         data-direction="1"
+         data-autoplay="0"
+         data-renderer="svg"
+         data-default-duration="0.6666666666666666"
+         data-duration="0"
+         data-ix2-initial-state="0.01"
+        ></div>
+       </a>
+       <a id="toDarkMode" data-tooltip="Switch to Dark Mode" data-w-id="d540b063-7b0b-0779-e524-b03dfc84167a" href="#" class="sidebar_footer-button hide-mobile-p w-inline-block">
+        <div
+         id="themeIcon"
+         data-is-ix2-target="1"
+         class="sidebar_sun-icon"
+         data-w-id="d540b063-7b0b-0779-e524-b03dfc84167b"
+         data-animation-type="lottie"
+         data-src="https://assets-global.website-files.com/6491b4dd238fa881faab3d5c/64dd4613f642f16df9a102b8_sun-to-moon_v05.json"
+         data-loop="0"
+         data-direction="1"
+         data-autoplay="0"
+         data-renderer="svg"
+         data-default-duration="0.7083333333333334"
+         data-duration="0"
+         data-ix2-initial-state="0.01"
+        ></div>
+       </a>
+       <a id="toggleContrast" data-tooltip="Toggle High Contrast Mode" href="#" class="sidebar_footer-button hide-mobile-l toggle-contrast w-inline-block">
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="7.25" stroke="currentColor" stroke-width="1.5" />
+          <path d="M7 12C7 14.7614 9.23858 17 12 17V7C9.23858 7 7 9.23858 7 12Z" fill="currentColor" />
+         </svg>
+        </div>
+       </a>
+       <div id="sidebar-close" data-tooltip="Toggle the sidebar (⌘ / )" class="sidebar_footer-button last">
+        Hii
+        <div class="icon-1-5 w-embed">
+         <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.75 5.75H19.25V18.25H4.75V5.75Z" stroke="currentColor" stroke-width="1.5" />
+          <path d="M9.75 5.75V18.25" stroke="currentColor" stroke-width="1.5" />
+         </svg>
+        </div>
+       </div>
+
+
+
+
+<style>
+/*****
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100
+      background-color: #2c2f33;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+*****
+    
+    #testcontainer {
+      display: flex;
+      align-items: center;
+    
+    
+      justify-content: center;
+      overflow: visible;
+     
+      pointer-events: auto;
+    }**/
+    
+    .search-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .search-icon {
+    /**  background-color: #1a1a1a;
+      border: 1px solid #3a3a3a; **/
+      background-color: var(--theme--t_bg-primary);
+      border: 1px solid var(--theme--t_border-primary);
+      border-radius: 20px;
+      padding: 10px;
+      cursor: pointer;
+      color: #4d90fe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.45s ease, transform 0.45s ease, opacity .6s ease;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      pointer-events: auto;
+      opacity: 1;
+      margin-left: 30px;
+      margin-bottom: 15px;
+     
+    }
+
+    .search-container.active .search-icon {
+      transform: scale(0.0);
+      opacity: 0;
+      transition: transform .75s ease, opacity .6s ease;
+    }
+
+    .search-input {
+      width: 0;
+      padding: 10px;
+      opacity: 0;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: thin;
+      font-weight: 300;
+      letter-spacing: .95px;
+     /** border: 1px solid #4d4d4d;**/
+      border: 1px solid var(--theme--t_border-primary);
+      border-radius: 10px;
+    /**  background-color: #1a1a1a; **/
+    background-color: var(--theme--t_bg-primary);
+      color: var(--theme--t_text-primary);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      outline: none;
+      transition: width 0.75s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.35s ease;
+      position: absolute;
+      right: 0;
+      z-index: -1;
+    }
+
+    .search-container.active .search-input {
+      width: 200px;
+      opacity: 1;
+      height: 40px;
+      margin: auto;
+      z-index: 100000000;
+    }
+
+    /* Placeholder for search results */
+    .results {
+      position: absolute;
+      bottom: 50px;
+      right: 0;
+      width: 200px;
+    /**  background-color: #1a1a1a;**/
+    background-color: var(--theme--t_bg-secondary);
+    /**  color: #e0e0e0;**/
+    color: var(--theme--t_text-primary);
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      font-size: 14px;
+      display: none;
+    }
+
+    /* Show results */
+    .results.show {
+      display: block;
+    }
+</style>
+
+<div id="testcontainer">
+  <!-- Search Bar Structure -->
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Search Artists" oninput="debouncedSearch(event)">
+    <div class="search-icon">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.1a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
+      </svg>
+    </div>
+    <div class="results"></div>
+  </div>
+</div>
+
+<script>
+    const searchContainer = document.querySelector('.search-container');
+    const searchIcon = document.querySelector('.search-icon');
+    const searchInput = document.querySelector('.search-input');
+    const resultsContainer = document.querySelector('.results');
+
+    let isExpanded = false;
+
+    // Toggle expand on first click, then require a double-click to focus the input
+    searchIcon.addEventListener('click', () => {
+      if (!isExpanded) {
+        searchContainer.classList.add('active');
+        isExpanded = true;
+      }
+    });
+
+    // Double-click to focus and bring up the keyboard
+    searchIcon.addEventListener('dblclick', () => {
+      if (isExpanded) {
+        searchInput.focus();
+      }
+    });
+
+    // Close the search bar if clicked outside
+    document.addEventListener('click', (event) => {
+      if (!searchContainer.contains(event.target)) {
+        searchContainer.classList.remove('active');
+        isExpanded = false;
+        resultsContainer.classList.remove('show');
+      }
+    });
+
+    // Debounce function
+    function debounce(func, delay) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
+    // Sample search function that shows results
+    function search(event) {
+      const query = event.target.value.trim();
+
+      // Simulated search results for demonstration purposes
+      if (query) {
+        const results = [
+          `Result for "${query}" #1`,
+          `Result for "${query}" #2`,
+         `Result for "${query}" #3`,
+          `Result for "${query}" #4`,
+          `Result for "${query}" #5`,
+          `Result for "${query}" #6`,
+          `Result for "${query}" #7`,
+          `Result for "${query}" #8`,         
+          `Result for "${query}" #9`
+        ];
+        resultsContainer.innerHTML = results.map(result => `<div>${result}</div>`).join('');
+        resultsContainer.classList.add('show');
+      } else {
+        resultsContainer.classList.remove('show');
+        resultsContainer.innerHTML = '';
+      }
+    }
+
+    // Debounced version of the search function
+    const debouncedSearch = debounce(search, 300);
+</script>
+
+
+
+
+
+
+
+
+
+
+       <div id="mobile-menu" data-tooltip="Open the sidebar" data-w-id="9e4eaedb-2c01-7abe-0d94-c783a233fdb9" class="sidebar_footer-button last mobile-menu">
+        <i class="ph-fill ph-caret-circle-up-down" style="font-size: 2rem; color: #757575; font-weight: 600; overflow: visible; margin: auto; margin-bottom: 35px;"></i>
+        <!---
+              <div
+                class="sidenav-btn__wrap">
+                <div
+                  data-w-id="10987b4a-c1ec-a9ed-5cac-1b031eedd8db"
+                  class="sidenav-btn__line line-top">
+                </div>
+                <div
+                  data-w-id="10987b4a-c1ec-a9ed-5cac-1b031eedd8dc"
+                  class="sidenav-btn__line line-middle">
+                </div>
+                <div
+                  data-w-id="10987b4a-c1ec-a9ed-5cac-1b031eedd8dd"
+                  class="sidenav-btn__line line-bottom">
+                </div>
+              </div>
+--->
+       </div>
+      </div>
+     </div>
+    </nav>
+
+    <!---
+/**
+*
+*     — — — — — — — — — — — — — — — — — — —
+*               Sidebar — Mobile 
+*     — — — — — — — — — — — — — — — — — — —
+**/
+--->
+    <div class="sidebar_mobile-wrap" style="z-index: 999;">
+     <div class="sidebar_mobile-menu" style="border: none; overflow-y: scroll; bottom: 75px; z-index: 9999;">
+       
+       
+
+
+
+
+      
+      
+      
+      
+      
+      
+     </div><!--- SIDEBAR WRAP --->
+
+     <!--- SITE THEMES --->
+    </div>
+    <div id="mobileBgClose" data-w-id="d88dc439-4959-9433-349e-e7455bd19f85" class="sidebar_mobile-bg-close"></div>
+    <div class="styles_sidebar-custom-styles w-embed">
+     <style>
+      :root[data-theme="dark"][data-contrast="high"] .sidebar,
+      :root[data-theme="light"][data-contrast="high"] .sidebar {
+       background-color: var(--theme--t_bg-secondary);
+      }
+
+      :root[data-contrast="high"] .sidebar_link-group.toggle-contrast,
+      :root[data-contrast="high"] .sidebar_link-group.toggle-contrast .sidebar_link-text,
+      :root[data-theme="dark"][data-contrast="high"] .sidebar_link-group.w--current,
+      :root[data-theme="dark"][data-contrast="high"] .sidebar_link-group:hover,
+      :root[data-theme="light"][data-contrast="high"] .sidebar_link-group.w--current,
+      :root[data-theme="light"][data-contrast="high"] .sidebar_link-group:hover {
+       background-color: var(--theme--t_text-primary);
+       color: var(--theme--t_bg-primary);
+      }
+
+      :root[data-theme="dark"][data-contrast="high"] .sidebar_link-group.w--current .sidebar_link-text,
+      :root[data-theme="dark"][data-contrast="high"] .sidebar_link-group:hover .sidebar_link-text,
+      :root[data-theme="light"][data-contrast="high"] .sidebar_link-group.w--current .sidebar_link-text,
+      :root[data-theme="light"][data-contrast="high"] .sidebar_link-group:hover .sidebar_link-text {
+       color: var(--theme--t_bg-primary);
+      }
+
+      .sidebar.opened .sidebar_link-text,
+      .sidebar.opened .sidebar_title,
+      .sidebar.opened .wf_wordmark {
+       display: block;
+       opacity: 1;
+       max-height: 2rem;
+       visibility: visible;
+       pointer-events: auto;
+      }
+
+      .sidebar .wf_wordmark {
+       display: flex;
+      }
+
+      .sidebar.opened .wf_wordmark {
+       display: flex;
+      }
+
+      .sidebar.opened .sidebar-cta-btn {
+       display: block;
+       opacity: 1;
+       height: auto;
+       padding: 0.5rem;
+       visibility: visible;
+       pointer-events: auto;
+      }
+
+      .sidebar.opened .sidebar_title {
+       margin: 0.5rem 0 0.25rem 0;
+      }
+
+      .no-transition {
+       transition: none !important;
+      }
+
+      .sidebar.opened .cc_sidebar-cta-wrap {
+       display: block;
+      }
+
+      .sidebar_footer {
+       width: calc(3.125rem - 1px);
+       height: 8rem;
+      }
+
+      .sidebar.opened .sidebar_footer {
+       width: 100%;
+       height: 2.75rem;
+      }
+
+      .sidebar_footer-button {
+       transition: border-width 0.35s 0.35s cubic-bezier(0.8, 0.1, 0.38, 0.88), border-color 0.35s 0.35s cubic-bezier(0.8, 0.1, 0.38, 0.88);
+      }
+
+      .sidebar.opened .sidebar_footer-button {
+       border-bottom-style: none;
+       border-bottom-width: 0;
+       border-right-width: 1px;
+       border-right-style: solid;
+       height: 100%;
+      }
+
+      .sidebar.opened .sidebar_footer-button.last {
+       border: none;
+      }
+
+      #toggleContrast {
+       transition: background-color 0.25s cubic-bezier(0.8, 0.1, 0.38, 0.88), color 0.25s cubic-bezier(0.8, 0.1, 0.38, 0.88);
+      }
+
+      :root[data-theme="dark"][data-contrast="high"] #toggleContrast,
+      :root[data-theme="light"][data-contrast="high"] #toggleContrast {
+       background: var(--theme--t_text-primary);
+       color: var(--theme--t_bg-primary);
+      }
+
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]::after,
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]::before {
+       position: absolute;
+       left: 100%;
+       top: 50%;
+       transform: translateY(-50%);
+       opacity: 0;
+       pointer-events: none;
+       visibility: hidden;
+       transition: visibility 0s 0.15s, opacity 0.15s cubic-bezier(0.8, 0.1, 0.38, 0.88), left 0.15s cubic-bezier(0.8, 0.1, 0.38, 0.88);
+      }
+
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]::after {
+       content: attr(data-tooltip);
+       background: var(--theme--t_btn-1-bg);
+       color: var(--theme--t_btn-1-text);
+       box-shadow: var(--btn-shadow);
+       padding: 0.25rem 0.5rem;
+       border-radius: 0.125rem;
+       white-space: nowrap;
+      }
+
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]::before {
+       content: "";
+       border-top: 5px solid transparent;
+       border-bottom: 5px solid transparent;
+       border-right: 5px solid var(--theme--t_btn-1-bg);
+      }
+
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::after,
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::before {
+       opacity: 1;
+       visibility: visible;
+       transition: visibility 0.25s 0.75s, opacity 0.25s 0.6s cubic-bezier(0.8, 0.1, 0.38, 0.88), left 0.25s 0.6s cubic-bezier(0.8, 0.1, 0.38, 0.88);
+      }
+
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::after {
+       left: calc(100% + 0.75rem);
+      }
+
+      .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::before {
+       left: calc(100% + 0.45rem);
+      }
+
+      #moon-stroke,
+      #sun-stroke {
+       stroke: currentColor;
+       fill: currentColor;
+      }
+     </style>
+    </div>
+    <div class="styles_sidebar-mobile-styles w-embed">
+     <style>
+      @media (max-height: 850px) {
+       .sidebar {
+        overflow-y: auto;
+        overflow-x: hidden;
+       }
+
+       .sidebar .sidebar_title {
+        display: none !important;
+       }
+      }
+
+      @media screen and (min-width: 992px) and (max-width: 1040px) {
+       .sidebar:not(.opened) .wf_wordmark {
+        transition: none !important;
+       }
+      }
+
+      @media screen and (max-width: 991px) {
+       .sidebar_wrap {
+        /** Floating Menu **/
+        padding: 0.75rem;
+        width: 100%;
+        position: fixed !important;
+
+        bottom: 0 !important;
+        z-index: 99999999;
+       }
+
+       .sidebar,
+       .sidebar.opened {
+        width: 100%;
+        height: 3rem;
+        flex-direction: row;
+        background: var(--theme--t_bg-secondary);
+        transition: none !important;
+        overflow: visible;
+       }
+
+       .sidebar .sidebar_header,
+       .sidebar.opened .sidebar_header {
+        min-height: 3rem;
+        padding: 0 0.75rem;
+        display: flex;
+        border: none;
+       }
+
+       .sidebar .sidebar_link-text,
+       .sidebar .sidebar_link-text.secondary,
+       .sidebar .sidebar_title,
+       .sidebar.opened .sidebar_link-text,
+       .sidebar.opened .sidebar_link-text.secondary,
+       .sidebar.opened .sidebar_title {
+        opacity: 0;
+        max-height: 0;
+        visibility: hidden;
+        pointer-events: none;
+        display: none;
+       }
+
+       .sidebar .wf_wordmark,
+       .sidebar.opened .wf_wordmark {
+        display: flex;
+        opacity: 1;
+        max-height: 2rem;
+        pointer-events: auto;
+        visibility: visible;
+       }
+
+       .sidebar .sidebar__links-wrap,
+       .sidebar.opened .sidebar__links-wrap {
+        width: 100%;
+        height: calc(3rem - 2px);
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+       }
+
+       .sidebar .sidebar_group,
+       .sidebar.opened .sidebar_group {
+        flex-direction: row;
+        display: flex;
+        border: none;
+        width: auto;
+        padding: 0;
+       }
+
+       .sidebar .sidebar_link-group,
+       .sidebar.opened .sidebar_link-group {
+        margin: 0;
+       }
+
+       .sidebar_footer-button:hover,
+       .sidebar_link-group:hover {
+        background: 0 0;
+       }
+
+       .sidebar .sidebar_group.hide-tablet,
+       .sidebar .sidebar_link-group.hide-tablet,
+       .sidebar.opened .sidebar_group.hide-tablet,
+       .sidebar.opened .sidebar_link-group.hide-tablet {
+        display: none;
+       }
+
+       .sidebar .sidebar_footer,
+       .sidebar.opened .sidebar_footer {
+        width: auto;
+        height: 100%;
+        margin: 0;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-top: none;
+        border-color: var(--theme--t_border-primary);
+        transition: none !important;
+       }
+
+       .sidebar .sidebar_footer-button,
+       .sidebar.opened .sidebar_footer-button {
+        width: auto;
+        border: none;
+        height: 100%;
+       }
+
+       .sidebar .sidebar_footer-button#sidebar-close,
+       .sidebar.opened .sidebar_footer-button#sidebar-close {
+        display: none;
+       }
+
+       .sidebar .sidebar_footer-button#mobile-menu,
+       .sidebar.opened .sidebar_footer-button#mobile-menu {
+        display: flex;
+       }
+
+       .sidebar:not(.opened) .sidebar_link-group[data-tooltip]::after,
+       .sidebar:not(.opened) .sidebar_link-group[data-tooltip]::before {
+        left: 50%;
+        top: auto;
+        bottom: 100%;
+        transform: translateX(-50%) translateY(0);
+        transition: opacity 0.15s cubic-bezier(0.8, 0.1, 0.38, 0.88), bottom 0.15s cubic-bezier(0.8, 0.1, 0.38, 0.88);
+       }
+
+       .sidebar:not(.opened) .sidebar_link-group[data-tooltip]::before {
+        border-top: 5px solid var(--theme--t_btn-1-bg);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: none;
+       }
+
+       .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::after,
+       .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::before {
+        transition: visibility 0.25s 0.75s, opacity 0.25s 0.6s cubic-bezier(0.8, 0.1, 0.38, 0.88), bottom 0.25s 0.6s cubic-bezier(0.8, 0.1, 0.38, 0.88);
+        left: 100%;
+        margin-left: -50%;
+       }
+
+       .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::after {
+        bottom: calc(100% + 0.75rem);
+       }
+
+       .sidebar:not(.opened) .sidebar_link-group[data-tooltip]:hover::before {
+        bottom: calc(100% + 0.45rem);
+       }
+
+       .sidebar_mobile-menu {
+        background: transparent;
+        width: calc(100vw - 2.5rem + 1px);
+       }
+      }
+
+      @media screen and (max-width: 768px) {
+       .sidebar .sidebar_footer-button.hide-mobile-l,
+       .sidebar .sidebar_group.hide-mobile-l,
+       .sidebar .sidebar_link-group.hide-mobile-l {
+        display: none;
+       }
+      }
+
+      @media screen and (max-width: 600px) {
+       .sidebar .sidebar_footer-button.hide-mobile-p,
+       .sidebar .sidebar_group.hide-mobile-p,
+       .sidebar .sidebar_link-group.hide-mobile-p {
+        display: none;
+       }
+      }
+     </style>
+    </div>
+    <div class="styles_sidebar-script w-embed w-script">
+     <script src="https://mybeats.cloud/javaScripts/sidebar.js"></script>
+    </div>
+   </div>
+
+<!---- M U S I C Player ----
+<input type="checkbox" id="toggle-card" />
+<label id="floating-btn" for="toggle-card">
+    <i class="ph-fill ph-headphones"></i>
+   </label>
+<div class="music-card" id="floatinCard">
+ <div class="card-header">
+  <div class="track-info">
+   <div class="track-details" id="musicCard">
+    <span class="track-title marquee">MyBeats™</span>
+
+    <p class="track-artist">Music Streaming</p>
+   </div>
+  </div>
+
+  <div class="card-icons">
+   <svg class="icon-heart" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+   </svg>
+
+   <svg class="icon-star" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+   </svg>
+  </div>
+ </div>
+ <div class="controls">
+  <div class="control" id="songControls">
+   <div class="repeat songControl" id="btnRepeat">
+    <i class="ph-fill ph-repeat"></i>
+   </div>
+
+   <div class="skip-backward songControl" id="btnBackward">
+    <i class="ph-fill ph-skip-back"></i>
+   </div>
+
+   <div class="play-pause songControl" id="btnPlayPause">
+    <i id="btnPause" class="btnPause ph-fill ph-pause icon-pause"></i>
+    <i id="btnPlay" class="btnPlay ph-fill ph-headset icon-play"></i>
+   </div>
+
+   <div class="skip-forward songControl" id="btnForward">
+    <i class="ph-fill ph-skip-forward"></i>
+   </div>
+
+   <div class="shuffle songControl" id="btnShuffle">
+    <i class="ph-fill ph-shuffle"></i>
+   </div>
+  </div>
+ </div>
+
+ <style>
+  .progress-slider {
+   width: 90%; /* Adjust as needed */
+   height: 3px;
+   position: relative;
+   cursor: pointer;
+   border-radius: 10px; /* Optional: Rounded corners */
+   overflow: visible; /* Hide wave animation overflow */
+  }
+
+  .progress-bar {
+   width: 100%;
+   height: 100%;
+   background-color: #bdbdbd; /* Total time color */
+   position: relative;
+  }
+
+  .progress-elapsed {
+   height: 100%;
+   background-color: #dc4c64; /* Elapsed time color */
+   width: 0%; /* Initially 0% */
+   position: relative; /* For wave positioning */
+  }
+
+  .slider-thumb {
+   width: 10px;
+   height: 10px;
+   background-color: #dc4c64;
+   border: 1px solid #efefef;
+   border-radius: 40%;
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   left: 0%; /* Initially at 0% */
+  }
+
+  .tooltip {
+   position: absolute;
+   top: -33px; /* Adjust as needed */
+   left: 50%;
+   transform: translateX(-50%);
+   background-color: rgba(0, 0, 0, 0.7);
+   color: white;
+   padding: 5px 10px;
+   border-radius: 5px;
+   font-size: 12px;
+   opacity: 0; /* Hidden by default */
+   transition: opacity 0.45s;
+  }
+
+  .tooltip.show {
+   opacity: 1;
+  }
+ </style>
+ <div class="progress-slider">
+  <div class="progress-bar">
+   <div class="progress-elapsed" id="progressElapsed"></div>
+  </div>
+  <div class="slider-thumb" id="sliderThumb"></div>
+  <div class="tooltip" id="timeToolTip"></div>
+ </div>
+
+ <div class="progress-time" id="progress-time">
+  <span class="currentTime" id="currentTime">0:00</span>
+  <span class="totalTime" id="totalTime">0:00</span>
+ </div>
+</div>
+<script>
+    const draggable = document.getElementById("floating-btn");
+    const card = document.getElementById("floatinCard");
+    const checkbox = document.getElementById("toggle-card");
+
+    let isDragging = false;
+    let initialX, initialY;
+    let currentX, currentY;
+    let offsetX, offsetY;
+
+    // Handle dragging for both touch and mouse events
+    draggable.addEventListener("touchstart", dragStart);
+    draggable.addEventListener("touchmove", drag);
+    draggable.addEventListener("touchend", dragEnd);
+
+    draggable.addEventListener("mousedown", dragStart);
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", dragEnd);
+
+    checkbox.addEventListener("change", function () {
+     if (checkbox.checked) {
+      positionCardNearButton();
+     }
+    });
+
+    function dragStart(e) {
+     isDragging = true;
+     if (e.type === "touchstart") {
+      initialX = e.touches[0].clientX - draggable.offsetLeft;
+      initialY = e.touches[0].clientY - draggable.offsetTop;
+     } else {
+      initialX = e.clientX - draggable.offsetLeft;
+      initialY = e.clientY - draggable.offsetTop;
+     }
+    }
+
+    function drag(e) {
+     if (isDragging) {
+      e.preventDefault();
+      if (e.type === "touchmove") {
+       currentX = e.touches[0].clientX;
+       currentY = e.touches[0].clientY;
+      } else {
+       currentX = e.clientX;
+       currentY = e.clientY;
+      }
+      offsetX = currentX - initialX;
+      offsetY = currentY - initialY;
+      draggable.style.left = offsetX + "px";
+      draggable.style.top = offsetY + "px";
+      draggable.style.position = "fixed";
+     }
+    }
+
+    function dragEnd(e) {
+     isDragging = false;
+    }
+
+    // Position the card next to the draggable button
+    function positionCardNearButton() {
+     const buttonRect = draggable.getBoundingClientRect();
+     const cardWidth = card.offsetWidth;
+     const cardHeight = card.offsetHeight;
+
+     // Place the card to the left or right of the button depending on available space
+     let cardX = buttonRect.right + 10; // default to the right side of the button
+     let cardY = buttonRect.top;
+
+     // Adjust position if there's not enough space on the right side of the screen
+     if (buttonRect.right + cardWidth > window.innerWidth) {
+      cardX = buttonRect.left - cardWidth - 10; // Move card to the left of the button
+     }
+
+     // Adjust position if there's not enough space vertically
+     if (buttonRect.top + cardHeight > window.innerHeight) {
+      cardY = window.innerHeight - cardHeight - 10; // Move card up if necessary
+     }
+
+     // Apply calculated position to the card
+     card.style.left = cardX + "px";
+     card.style.top = cardY + "px";
+    }
+   </script>
+--------------------------------------------------->
+
+
+
+<!----- N E T W O R K  OFFLINE  N O T I F I C A T I O N ------>
+<style>
+  /******* O F F L I N E  B A N N E R *******/
+  .offlineBanner {
+    display: none;
+    border: 1px solid #896110;
+    border-radius: 12px;
+    position: fixed;
+    top: 20px;
+    width: 100vw;
+    background-color: #daae56;
+    color: #252525;
+    padding: 5px 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.45);
+    z-index: 1000001;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.9px;
+    line-height: 1.25;
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: slideDown 0.75s ease-in-out, bounceIn 2s ease-in-out;
+  }
+  .offlineBanner p {
+    margin: 0;
+    display: inline-block;
+  }
+  .dismiss-btn {
+    background: none;
+    border: none;
+    color: #080808;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+  .dismiss-btn:hover {
+    color: #f39c12;
+  }
+  .offlineBanner {
+    -webkit-animation: heartbeat 1.5s ease-in-out 15s infinite both;
+    animation: heartbeat 1.5s ease-in-out 15s infinite both;
+  }
+  .offlineBanner {
+    -webkit-animation: bounce-in-top 1.1s both;
+    animation: bounce-in-top 1.1s both;
+  }
+</style>
+
+<div
+   id="offlineBanner"
+   class="offlineBanner"
+   style="width: 80vw; margin: auto;">
+<p>
+It looks like you're offline. Please check your internet connection.
+</p>
+
+<button id="dismissBtn" class="dismiss-btn">&times;</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const banner = document.getElementById("offlineBanner");
+    const dismissBtn = document.getElementById("dismissBtn");
+
+    function updateOnlineStatus() {
+      banner.style.display = navigator.onLine ? "none" : "block";
+    }
+
+    dismissBtn.addEventListener("click", () => {
+      banner.style.display = "none";
+    });
+
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
+
+    // Initial check on page load
+    updateOnlineStatus();
+  });
+</script>
+
+
+
+
+   <!--- T O A S T   NOTIFICATIONS  C O N T A I N E R --->
+   <div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div id="toastContainer" class="toast-container top-50 end-0 p-3" style="justify-content: space-beteeen; gap: 1rem;">
+     <!---
+/**
+*
+*   Toasts wil be Dynamically Loaded into this container 
+*
+**/
+--->
+    </div>
+   </div>
+
+   <style>
+    .cc_sticky-nav-item,
+    #phGlobe,
+    #phMicrophone,
+    #phHeadset,
+    #phRecord,
+    #phMusicNote {
+     font-size: 17px;
+     position: relative;
+     z-index: 100;
+    }
+   </style>
+
+   <!--- P A G E --->
+   <main id="main" class="page-main">
+    <!--- W R A P P E R S --->
+    <div>
+     <section id="typography" class="section section_header" style="margin: 10px 0 0 15px; padding: 0;">
+      <div class="container" style="margin: 0; padding: 0;">
+       <div id="mainAreaTitle" style="max-height: 50px;">
+        <h3 id="artistNameTitle">
+         <!--- Artist's Name will be displayed here --->
+        </h3>
+
+        <h5 id="artistNameSUBTitle" style="font-style: cursive bold; font-weight: 600; letter-spacing: 0.75;">
+         <!--- Artist Number of Albums Here --->
+        </h5>
+       </div>
+      </div>
+     </section>
+
+     <!--- SLIDING T O P  N A V --->
+     <section class="cc_sticky-nav" style="padding-top: 0;">
+      <div class="cc_sticky-nav-scroll-track">
+        
+        
+       <div class="container cc_sticky-container" id="stickyNAV" style="position: sticky; z-index: 10;">
+
+
+        <span class="cc_sticky-nav-item w-inline-block">
+         <div class="cc_sticy-nav-icon w-embed">
+          <i id="phGlobe" class="ph-fill ph-globe navItem"></i>
+         </div>
+         <div id="goHome"
+            class="topLinks fadeInSlowly active"
+            data-page="home">
+          Discover
+         </div>
+        </span>
+
+        <span class="cc_sticky-nav-item w-inline-block">
+         <div class="cc_sticy-nav-icon w-embed">
+          <i id="phMicrophone" class="ph-bold ph-microphone"></i>
+         </div>
+         <div id="showAll"
+            class="topLinks fadeInSlowly"
+            data-page="all">
+          Artists
+         </div>
+        </span>
+
+        <span class="cc_sticky-nav-item w-inline-block">
+         <div class="cc_sticy-nav-icon w-embed">
+          <i id="phHeadset" class="ph-fill ph-headset"></i>
+         </div>
+         <div id="myCollections"
+            class="topLinks fadeInSlowly"
+            data-page="collections">
+          Collections
+         </div>
+        </span>
+
+        <span class="cc_sticky-nav-item w-inline-block">
+         <div class="cc_sticy-nav-icon w-embed">
+          <i id="phRecord" class="ph-bold ph-vinyl-record"></i>
+         </div>
+         <div id="artistDiscography" class="topLinks fadeInSlowly">
+          Discography
+         </div>
+        </span>
+
+        <span class="cc_sticky-nav-item last w-inline-block">
+         <div class="cc_sticy-nav-icon w-embed">
+          <i id="phMusicNote" class="ph-fill ph-music-note"></i>
+         </div>
+         <div class="topLinks fadeInSlowly">
+          Source Code ( Soon )
+         </div>
+        </span>
+       </div>
+       
+       
+      </div>
+
+      <!--- STYLES  AND  SCRIPT FOR STICKY TOP NAV --->
+      <div class="script__sticky-nav w-embed w-script">
+       <style>
+        .cc_sticky-nav-scroll-track {
+         overflow-x: auto;
+         width: 100%;
+        }
+
+        .cc_sticky-nav-scroll-track::-webkit-scrollbar {
+         display: none;
+         /* Hide scrollbar for Chrome, Safari and Opera */
+        }
+
+        .cc_sticky-nav-scroll-track {
+         -ms-overflow-style: none;
+         /* IE and Edge */
+         scrollbar-width: none;
+         /* Firefox */
+        }
+
+        .cc_sticky-nav-item i {
+         font-size: 2rem;
+        }
+       </style>
+       <script>
+        document.addEventListener("DOMContentLoaded", function () {
+         const navItems = document.querySelectorAll(".cc_sticky-nav-item");
+         const scrollContainer = document.querySelector(".cc_sticky-nav-scroll-track");
+
+         setTimeout(() => {
+          if (window.innerWidth > 991) {
+           scrollContainer.scrollLeft = 0;
+          }
+         }, 100);
+
+         const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+           if (mutation.attributeName === "class") {
+            let accumulatedWidth = 0;
+
+            navItems.forEach((item, index) => {
+             if (item.classList.contains("w--current")) {
+              if (index > 0) {
+               accumulatedWidth += 28;
+              }
+
+              scrollContainer.scrollTo({
+               left: accumulatedWidth,
+               behavior: "smooth",
+              });
+              return;
+             }
+             accumulatedWidth += item.offsetWidth;
+            });
+           }
+          });
+         });
+
+         navItems.forEach((item) => {
+          observer.observe(item, {
+           attributes: true,
+          });
+         });
+        });
+       </script>
+      </div>
+     </section>
+     <!---------------------------------------------------------->
+
+
+     <!--- Progressive Web App Install Button --->
+     <div id="appStoreContainer" class="appStoreContainer">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256">
+       <path
+        d="M207.06,80.67c-.74-.74-1.49-1.46-2.24-2.17l24.84-24.84a8,8,0,0,0-11.32-11.32l-26,26a111.43,111.43,0,0,0-128.55.19L37.66,42.34A8,8,0,0,0,26.34,53.66L51.4,78.72A113.38,113.38,0,0,0,16,161.13V184a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V160A111.25,111.25,0,0,0,207.06,80.67ZM92,160a12,12,0,1,1,12-12A12,12,0,0,1,92,160Zm72,0a12,12,0,1,1,12-12A12,12,0,0,1,164,160Z"
+       ></path>
+      </svg>
+
+      <button id="install-button" style="display: none;" class="appstore-button">
+       <span class="button-text">
+        <span class="top-text">Download the</span>
+        <span class="bottom-text">Web App</span>
+       </span>
+      </button>
+     </div>
+
+     <!---  M  A  I  N   C  O  N  T  E  N  T --->
+     <div id="mainContent">
+
+
+<!---
+<style>
+
+#switch{
+  
+  position: absolute;
+  width: 300px;
+  height: 120px;
+  
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-30%) scale(.25);
+  
+  border-radius: 70px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgb(211, 239, 255);
+  
+  background-color: rgb(186, 230, 255);
+  
+  transition: background-color 1s;
+  
+  box-shadow: 0 0 35px 1px #565656;
+  
+}
+
+#switch.off{
+  
+  border-color: rgb(40, 40, 51);
+  background-color: rgb(23, 23, 35);
+  
+}
+
+#contentwrapper{
+  
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  
+  border-radius: 60px;
+  -webkit-border-radius: 60px;
+  overflow: hidden;
+  
+  z-index: 2;
+  
+}
+
+
+
+#circle{
+  
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  
+  left: 0%;
+  top: 50%;
+  transform: translate(-0%, -50%);
+  
+  border-radius: 50%;
+  
+  background-color: rgb(255, 233, 183);
+  box-shadow: 0 0 20px 10px rgb(255, 233, 183), 
+    0 0 40px 30px rgb(255, 219, 140), 
+    0 0 90px 50px rgb(255, 209, 109);
+  
+  transition: left 2s, transform 2s, width 2s, height 2s, box-shadow 2s, background-color 2s 0.2s;
+  z-index: 1;
+  
+}
+
+#circle::before{
+  
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 20px;
+  
+  left: 13%;
+  top: 30%;
+  
+  border-radius: 50%;
+  
+  background-color: rgb(183, 188, 187);
+  
+  box-shadow: 0 0 4px 1px rgb(183, 188, 187), 0 0 10px 6px rgb(192, 198, 197);
+  
+  opacity: 0;
+  transition: opacity 0s;
+  
+}
+
+#circle::after{
+  
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  
+  left: 60%;
+  top: 75%;
+  
+  border-radius: 50%;
+  
+  background-color: rgb(183, 188, 187);
+  
+  box-shadow: 0 0 3px 1px rgb(183, 188, 187), 0 0 5px 4px rgb(192, 198, 197);
+  
+  opacity: 0;
+  transition: opacity 0s;
+  
+}
+
+#switch.off #circle{
+  
+  width: 100px;
+  height: 100px;
+  
+  border-radius: 50%;
+  background-color: rgb(237, 242, 241);
+  
+  left: 100%;
+  transform: translate(-100%, -50%);
+  
+  box-shadow: 0 0 20px 3px rgb(244, 247, 246);
+  
+}
+
+#switch.off #circle::before{
+  
+  opacity: 1;
+  transition: opacity 2s 0.2s;
+  
+}
+
+#switch.off #circle::after{
+  
+  opacity: 1;
+  transition: opacity 2s 0.2s;
+  
+}
+
+
+
+.star{
+  
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  
+  left: 80%;
+  top: 50%;
+  
+  border-radius: 50%;
+  
+  background-color: white;
+  box-shadow: 0 0 5px 0px rgb(255,255,255);
+  animation: none;
+  opacity: 0;
+  
+}
+
+.star::before{
+  
+  content: "";
+  
+  position: absolute;
+  width: 20px;
+  height: 1px;
+  
+  left: 50%;
+  top: 50%;
+  
+  transform: translate(-50%,-50%);
+  
+  border-radius: 50%;
+
+  background-color: white;
+  
+  box-shadow: 0 0 4px 0px rgb(255,255,255);
+  
+  animation: growbrighter 1s linear alternate infinite;
+  
+}
+
+.star::after{
+  
+  content: "";
+  
+  position: absolute;
+  width: 1px;
+  height: 20px;
+  
+  left: 50%;
+  top: 50%;
+  
+  transform: translate(-50%,-50%);
+  
+  border-radius: 50%;
+  
+  background-color: white;
+  
+  box-shadow: 0 0 4px 0px rgb(255,255,255);
+  
+  animation: growbrighter 1s linear alternate infinite;
+  
+}
+
+#switch.off .star{
+  
+  opacity: 1;
+  transition: opacity 2s 1.5s;
+  
+}
+
+#switch.off #stars .star:nth-of-type(1){
+  
+  animation: startravel1 15s linear infinite;
+  animation-delay: 0.4s;
+  
+}
+
+#switch.off #stars .star:nth-of-type(2){
+
+  animation: startravel2 12s linear infinite;
+  animation-delay: 0.2s;
+  
+}
+
+#switch.off #stars .star:nth-of-type(3){
+
+  animation: startravel3 18s linear infinite;
+  animation-delay: 0s;
+  
+}
+
+@keyframes growbrighter {
+  
+  0%{ box-shadow: 0 0 4px 0px rgb(255,255,255); }
+  100%{ box-shadow: 0 0 15px 0px rgb(255,255,255);}
+  
+}
+
+@keyframes startravel1 {
+  0%{ transform: rotate(65deg) translate(-80px) scale(1.0); }
+  100%{ transform: rotate(-60deg) translate(-80px) scale(1.3); }
+}
+
+@keyframes startravel2 { 
+  0%{ transform: rotate(27deg) translate(-160px) scale(1.6); }
+  100%{ transform: rotate(-25deg) translate(-160px) scale(1.2); } 
+}
+
+@keyframes startravel3 {
+  
+  0%{ transform: rotate(22deg) translate(-200px) scale(1.2); }
+  100%{ transform: rotate(-20deg) translate(-200px) scale(0.7); }
+}
+
+
+
+#shtngstarwrapper{
+  
+  position: absolute;
+  
+  transform: translate(200px, -30px) rotate(-30deg);
+  
+  opacity: 0;
+  
+}
+
+#shootingstar{
+  
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  
+  border-radius: 50%;
+  
+  left: 20%;
+  top: 50%;
+  
+  background: radial-gradient(rgba(255, 231, 193, 0.9) 30%, rgba(237, 155, 61, 1));
+  box-shadow: -5px 0 20px 2px rgba(237, 155, 61, 0.7), 0 0 15px 5px rgba(237, 155, 61, 0.5);
+  
+}
+
+#shootingstar::after{
+  
+  content: "";
+  
+  position: absolute;
+  width: 160px;
+  height: 15px;
+  
+  border-top-right-radius:70%;
+  border-bottom-right-radius: 70%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  
+  top: 50%;
+  transform: translate(0,-50%);
+  
+  background: radial-gradient(rgba(255, 231, 193, 0.9) 1%, rgba(237, 155, 61, 0.9));
+  box-shadow: 10px 0 10px 1px rgba(237, 155, 61, 0.5), 
+    0px 3px 15px 5px rgba(237, 155, 61, 0.5), 
+    0px -3px 15px 5px rgba(237, 155, 61, 0.5);
+  z-index: -1;
+  
+}
+
+#switch.off #shtngstarwrapper{
+  
+  animation: shootingstartravel 24s linear infinite;
+  animation-delay: 6s;
+  
+  opacity: 1;
+  transition: opacity 0s 2s;
+  
+}
+
+#switch.off #shootingstar::after{
+  
+  animation: growtrail 24s linear infinite;
+  animation-delay: 6s;
+  
+}
+
+@keyframes shootingstartravel{ 
+  0%{ transform: translate(200px, -30px) rotate(-30deg); }
+  8.33%{ transform: translate(-180px, 170px) rotate(-30deg);} 
+  100%{ transform: translate(-180px, 170px) rotate(-30deg);}
+}
+
+@keyframes growtrail{
+  0%{ width: 40px; }
+  8.33%{ width: 180px; }
+  100%{ width: 180px; }
+}
+
+
+
+.cloud:nth-of-type(1){
+  
+  position: absolute;
+  width: 50px;
+  height: 55px; 
+  
+  left: -80px;
+  top: 5px;
+  
+  border-radius: 50%;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+  z-index: 2;
+  opacity: 1;
+  
+  transition: opacity 2s 0.4s;
+  animation: cloudtravel1 22s linear infinite;
+  animation-delay: 5.4s;
+  
+}
+
+.cloud:nth-of-type(1)::before{
+  
+  content: "";
+   
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  
+  left: -55%;
+  top: 70%;
+  transform: translate(100%,-0%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+.cloud:nth-of-type(1)::after{
+  
+  content: "";
+   
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  
+  left: 100%;
+  top: 50%;
+  transform: translate(-70%,-0%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+.cloud:nth-of-type(1) .cloudpart:nth-of-type(1){
+  
+  content: "";
+   
+  position: absolute;
+  width: 60px;
+  height: 45px;
+  
+  left: -100%;
+  bottom: 0%;
+  transform: translate(40%, -0%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 2;
+  
+}
+
+.cloud:nth-of-type(1) .cloudpart:nth-of-type(2){
+  
+  content: "";
+   
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  
+  left: 100%;
+  bottom: 0%;
+  transform: translate(-50%, -0%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 2;
+  
+}
+
+.cloud:nth-of-type(1) .cloudpart:nth-of-type(1)::after{
+  
+  content: "";
+   
+  position: absolute;
+  width: 55px;
+  height: 35px;
+  
+  left: 50%;
+  top: 50%;
+  transform: translate(-35%,-50%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+.cloud:nth-of-type(1) .cloudpart:nth-of-type(2)::before{
+  
+  content: "";
+   
+  position: absolute;
+  width: 45px;
+  height: 40px;
+  
+  left: -50%;
+  top: 50%;
+  transform: translate(20%,-70%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+
+
+.cloud:nth-of-type(2){
+  
+  position: absolute;
+  width: 55px;
+  height: 50px;
+ 
+  left: -90px;
+  top: 26px;
+  
+  border-radius: 50%;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+  z-index: 2;
+  opacity: 1;
+  
+  transition: opacity 2s 0.4s;
+  animation: cloudtravel2 18s linear infinite;
+  animation-delay: 1.2s;
+  
+}
+
+.cloud:nth-of-type(2)::before{
+  
+  content: "";
+   
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  
+  left: -55%;
+  top: 70%;
+  transform: translate(100%,-30%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+.cloud:nth-of-type(2)::after{
+  
+  content: "";
+   
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-40%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+.cloud:nth-of-type(2) .cloudpart:nth-of-type(1){
+  
+  content: "";
+   
+  position: absolute;
+  width: 55px;
+  height: 45px;
+  
+  left: -100%;
+  bottom: 0%;
+  transform: translate(50%, -0%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 2;
+  
+}
+
+.cloud:nth-of-type(2) .cloudpart:nth-of-type(2){
+  
+  content: "";
+   
+  position: absolute;
+  width: 50px;
+  height: 40px;
+  
+  left: 100%;
+  bottom: 0%;
+  transform: translate(-50%, -0%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 2;
+  
+}
+
+.cloud:nth-of-type(2) .cloudpart:nth-of-type(1)::after{
+  
+  content: "";
+   
+  position: absolute;
+  width: 55px;
+  height: 30px;
+  
+  left: 50%;
+  top: 50%;
+  transform: translate(-35%,-20%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+.cloud:nth-of-type(2) .cloudpart:nth-of-type(2)::before{
+  
+  content: "";
+   
+  position: absolute;
+  width: 50px;
+  height: 35px;
+  
+  left: -50%;
+  top: 50%;
+  transform: translate(10%,-40%);
+  
+  border-radius: 50%;
+  
+  background: inherit;
+  
+  z-index: 3;
+  
+}
+
+
+
+.cloud:nth-of-type(3){
+  
+  position: absolute;
+  width: 50px;
+  height: 40px;
+  
+  left: -100px;
+  top: 48px;
+  
+  border-radius: 50%;
+  
+  z-index: 3;
+  opacity: 1;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+  transition: opacity 2s 0.4s;
+  animation: cloudtravel3 30s linear infinite;
+  animation-delay: 8.6s;
+  
+}
+
+.cloud:nth-of-type(3)::before{
+  
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  
+  left: -50%;
+  top: 50%;
+  
+  transform: translate(25%, -30%);
+  
+  border-radius: 50%;
+  
+  z-index: 3;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3)::after{
+  
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 25px;
+  
+  left: 50%;
+  top: 50%;
+  
+  transform: translate(5%, -60%);
+  
+  border-radius: 50%;
+  
+  z-index: 3;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(1){
+  
+  position: absolute;
+  width: 45px;
+  height: 35px;
+  
+  left: -50%;
+  top: 50%;
+  
+  border-radius: 50%;
+  
+  z-index: 2;
+  
+  transform: translate(0%, -40%);
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(1)::before{
+  
+  content: "";
+  position: absolute;
+  
+  width: 30px;
+  height: 20px;
+  
+  left: -30%;
+  top: 50%;
+  
+  transform: translate(-0%, -60%);
+  
+  border-radius: 50%;
+  z-index: 3;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(1)::after{
+  
+  content: "";
+  position: absolute;
+  
+  width: 20px;
+  height: 15px;
+  
+  left: 0%;
+  top: 50%;
+  
+  transform: translate(-0%, 10%);
+  
+  border-radius: 50%;
+  z-index: 3;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(2){
+  
+  position: absolute;
+  width: 50px;
+  height: 45px;
+  
+  left: 50%;
+  top: 50%;
+  
+  border-radius: 50%;
+  
+  z-index: 2;
+  
+  transform: translate(10%, -20%);
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(2)::before{
+  
+  content: "";
+  position: absolute;
+  
+  width: 35px;
+  height: 25px;
+  
+  left: 50%;
+  top: 50%;
+  
+  transform: translate(-50%, -50%);
+  
+  border-radius: 50%;
+  z-index: 3;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(2)::after{
+  
+  content: "";
+  position: absolute;
+  
+  width: 35px;
+  height: 25px;
+  
+  left: 60%;
+  top: 50%;
+  
+  transform: translate(-0%, -40%);
+  
+  border-radius: 50%;
+  z-index: 3;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(3){
+  
+  position: absolute;
+  width: 55px;
+  height: 40px;
+  
+  left: 50%;
+  top: 50%;
+  
+  border-radius: 50%;
+  
+  z-index: 2;
+  
+  transform: translate(-50%, -10%);
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+.cloud:nth-of-type(3) .cloudpart:nth-of-type(3)::before{
+  
+  content: "";
+  position: absolute;
+  
+  width: 40px;
+  height: 25px;
+  
+  left: -50%;
+  top: 50%;
+  
+  transform: translate(40%, -30%);
+  
+  border-radius: 50%;
+  z-index: 3;
+  
+  background: radial-gradient(rgb(255, 255, 255) 30%, 
+rgb(230, 230, 230));
+  
+}
+
+
+
+#switch.off .cloud:nth-of-type(1){
+  
+  animation: none;
+  opacity: 0;
+  transition: opacity 1s 0s;
+  
+}
+
+#switch.off .cloud:nth-of-type(2){
+  
+  animation: none;
+  opacity: 0;
+  transition: opacity 1s 0s;
+  
+}
+
+#switch.off .cloud:nth-of-type(3){
+  
+  animation: none;
+  opacity: 0;
+  transition: opacity 1s 0s;
+  
+}
+
+
+
+@keyframes cloudtravel1{
+  
+  0%{ left: -80px; transform: scale(1); }
+  100%{ left: 330px; transform: scale(0.8); }
+  
+}
+
+@keyframes cloudtravel2{
+  
+  0%{ left: -90px; transform: scale(0.6); }
+  100%{ left: 330px; transform: scale(1); }
+  
+}
+
+@keyframes cloudtravel3{
+  
+  0%{ left: -100px; transform: scale(0.7); }
+  100%{ left: 340px; transform: scale(0.65); }
+  
+}
+
+</style>
+<div id="switch">
+  
+  <div id="contentwrapper">
+    
+    <div id="circle"></div>
+    
+    <div id="stars">
+      <div class="star"></div>
+      <div class="star"></div>
+      <div class="star"></div>
+      <div id="shtngstarwrapper">
+        <div id="shootingstar"></div>
+      </div>
+      
+    </div>
+    
+    <div>
+      <div class="cloud">
+        <div class="cloudpart"></div>
+        <div class="cloudpart"></div> 
+      </div>
+      <div class="cloud">
+        <div class="cloudpart"></div>
+        <div class="cloudpart"></div> 
+      </div>
+      <div class="cloud">
+        <div class="cloudpart"></div>
+        <div class="cloudpart"></div>
+        <div class="cloudpart"></div>
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+<script>
+  var switchBody = document.getElementById("switch");
+//"hsl(238, 50%, 12%)";
+
+switchBody.addEventListener("click", toggle);
+
+function toggle(){
+  switchBody.classList.toggle("off");
+  
+}
+</script>
+--->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="dynamicAreaLoader">
+       <!---  R E D   L O A D I N G   S P I N N E R  --->
+     <div id="pageLoader">
+      <div class="spinner center">
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+       <div class="spinner-blade"></div>
+      </div>
+     </div>
+
+
+<div id="dynamicArea">
+<!----------------------------------- 
+            D Y N A M I C 
+            L O A D I N G
+        C O N T A I N E R 
+----------------------------------->
+
+</div>
+<div id="dynamicAreaBottom">
+<!----------------------------------- 
+             B O T T O M 
+            L O A D I N G
+        C O N T A I N E R 
+----------------------------------->
+</div> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button id="toLightMode">Light Mode</button>
+<button id="toDarkMode">Dark Mode</button>
+
+<button id="toLightModeMobile">Light Mode (Mobile)</button>
+<button id="toDarkModeMobile">Dark Mode (Mobile)</button>
+
+
+
+<button id="notifyMe">Show Music Controls</button>
+<script>
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+    }
+</script>
+
+
+
+
+
+<!---
+
+<script>
+loadPlayerState();
+
+let initialDistance = null;
+let isDragging = false, isResizing = false;
+let startX, startY, startWidth, startHeight;
+let isDragging = false, isResizing = false, startX, startY, startWidth, startHeight;
+const musicCard = document.getElementById("floatinCard");
+const floatingBtn = document.getElementById("floating-btn");
+
+
+
+function loadPlayerState() {
+    const playerPosition = JSON.parse(localStorage.getItem("playerPosition"));
+    if (playerPosition) {
+        musicCard.style.left = playerPosition.x + "px";
+        musicCard.style.top = playerPosition.y + "px";
+        musicCard.style.width = playerPosition.width + "px";
+        musicCard.style.height = playerPosition.height + "px";
+    }
+}
+function savePlayerState() {
+    const playerPosition = {
+        x: musicCard.getBoundingClientRect().left,
+        y: musicCard.getBoundingClientRect().top,
+        width: musicCard.offsetWidth,
+        height: musicCard.offsetHeight
+    };
+    localStorage.setItem("playerPosition", JSON.stringify(playerPosition));
+}
+function dragStart(e) {
+  const event = e.type.includes('touch') ? e.touches[0] : e;
+  if (event.target !== musicCard) return;
+
+  if (e.type.includes('touch') && e.touches.length > 1) return; // Ignore multi-touch
+  isDragging = true;
+  startX = event.clientX - musicCard.offsetLeft;
+  startY = event.clientY - musicCard.offsetTop;
+
+  document.addEventListener("mousemove", dragMove);
+  document.addEventListener("touchmove", dragMove);
+  document.addEventListener("mouseup", dragEnd);
+  document.addEventListener("touchend", dragEnd);
+}
+function dragMove(e) {
+  if (!isDragging) return;
+  const event = e.type.includes('touch') ? e.touches[0] : e;
+  musicCard.style.left = `${event.clientX - startX}px`;
+  musicCard.style.top = `${event.clientY - startY}px`;
+  savePlayerState();
+}
+function dragEnd() {
+  isDragging = false;
+  document.removeEventListener("mousemove", dragMove);
+  document.removeEventListener("touchmove", dragMove);
+}
+function drag(e) {
+    if (!isDragging) return;
+    musicCard.style.left = `${e.clientX - startX}px`;
+    musicCard.style.top = `${e.clientY - startY}px`;
+    savePlayerState();
+}
+function stopDragging() {
+    isDragging = false;
+    document.removeEventListener("mousemove", drag);
+}
+function resize(e) {
+    if (!isResizing) return;
+    musicCard.style.width = `${startWidth + e.clientX - startX}px`;
+    musicCard.style.height = `${startHeight + e.clientY - startY}px`;
+    savePlayerState();
+}
+function stopResizing() {
+    isResizing = false;
+    document.removeEventListener("mousemove", resize);
+}
+function enterPictureInPicture() {
+    if (document.pictureInPictureElement) {
+        document.exitPictureInPicture();
+    } else {
+        const pipVideo = document.createElement("video");
+        pipVideo.src = "sample-video.mp4"; // Add a video file to simulate PiP mode
+        pipVideo.play();
+        pipVideo.requestPictureInPicture();
+    }
+}
+
+
+
+musicCard.addEventListener("mousedown", dragStart);
+musicCard.addEventListener("mousedown", (e) => {
+    if (e.target !== musicCard) return;
+    isDragging = true;
+    startX = e.clientX - musicCard.offsetLeft;
+    startY = e.clientY - musicCard.offsetTop;
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", stopDragging);
+});
+musicCard.addEventListener("mousedown", (e) => {
+    if (e.target !== musicCard) return;
+    isResizing = true;
+    startWidth = musicCard.offsetWidth;
+    startHeight = musicCard.offsetHeight;
+    startX = e.clientX;
+    startY = e.clientY;
+    document.addEventListener("mousemove", resize);
+    document.addEventListener("mouseup", stopResizing);
+});
+
+musicCard.addEventListener("touchstart", dragStart);
+musicCard.addEventListener("touchmove", (e) => {
+  if (e.touches.length === 2) {
+    const touch1 = e.touches[0];
+    const touch2 = e.touches[1];
+    const currentDistance = Math.hypot(
+      touch2.clientX - touch1.clientX,
+      touch2.clientY - touch1.clientY
+    );
+
+    if (!initialDistance) initialDistance = currentDistance;
+    const scaleFactor = currentDistance / initialDistance;
+    musicCard.style.transform = `scale(${scaleFactor})`;
+  }
+});
+musicCard.addEventListener("touchend", () => {
+  initialDistance = null; // Reset after pinch ends
+});
+
+floatingBtn.addEventListener("click", enterPictureInPicture);
+</script>
+
+
+--->
+
+
+<!----
+/**
+*
+*     - - - - - - - - - - - - - - - - - - -
+*     Create, Edit, Add to     M O D A L S
+*     - - - - - - - - - - - - - - - - - - -
+**/
+----->
+      <div id="creatorModal" class="modal">
+       <div class="insideModal">
+        <button class="close-modal close" id="closeCreatorModal">
+         <i class="ph-fill ph-arrow-circle-left"></i>
+        </button>
+
+        <input type="text" class="input" id="createTitle" placeholder="Title" />
+
+        <textarea id="createDescription" class="input" placeholder="Description"></textarea>
+
+        <!-- Tags input container -->
+        <div id="tags-input-container">
+         <!-- This is where the tags will appear -->
+        </div>
+        <div class="tag-input-wrapper">
+         <input type="text" id="createTags" class="input" placeholder="Add a tag" />
+         <button type="button" id="addTagBtn">Add</button>
+        </div>
+
+        <input type="text" id="createGenre" class="input" placeholder="Genre" />
+
+        <div class="drop-container">
+         <div class="upload-icon">
+          <i class="ph-fill ph-file-image"></i>
+         </div>
+         <p class="drop-title">Click Me</p>
+         <p class="or">Drag - Drop</p>
+         <input type="file" id="uploadThumbnail" accept="image/*" />
+        </div>
+
+        <button class="form-submit-btn">Create Playlist</button>
+       </div>
+      </div>
+
+      <div id="playlistEditModal" class="modal">
+       <div class="insideModal">
+        <input type="text" id="editTitle" class="input" placeholder="Title" />
+        <textarea id="editDescription" class="input" placeholder="Description"></textarea>
+        <input type="text" id="editTags" class="input" placeholder="Tags" />
+        <input type="text" id="editGenre" class="input" placeholder="Genre" />
+        <div class="drop-container">
+         <div class="upload-icon">📁</div>
+         <p class="drop-title">Drag & Drop to Upload Thumbnail</p>
+         <p class="or">or</p>
+         <input type="file" id="editThumbnail" accept="image/*" />
+        </div>
+        <button class="form-submit-btn">Save Changes</button>
+       </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  /**
+   *   Responsible for Floating Icon's Periodic Bounces
+   * 
+   *   Set for every 15 seconds
+   *   for New Users to see the Music Player's
+   * 
+   *   Hide and Show Features
+   */
+function cycleAnimations() {
+  const floaterIcon = document.getElementById("floating-btn");
+  const animations = window.getComputedStyle(floaterIcon).animationName.split(', ');
+
+  // Initial pause
+  animations.forEach(animation => {
+    floaterIcon.style.animationPlayState = 'paused';
+  });
+
+  let currentAnimationIndex = 0;
+  const intervalId = setInterval(() => {
+    // Play the current animation
+    floaterIcon.style.animationPlayState = 'running';
+
+    // After one iteration, pause it and move to the next
+    setTimeout(() => {
+      floaterIcon.style.animationPlayState = 'paused';
+      currentAnimationIndex = (currentAnimationIndex + 1) % animations.length;
+    }, getAnimationDuration(floaterIcon, animations[currentAnimationIndex]));
+  }, 15000);
+
+  // Function to get the duration of a specific animation
+  function getAnimationDuration(element, animationName) {
+    const computedStyle = window.getComputedStyle(element);
+    const animationDuration = computedStyle.getPropertyValue(`animation-duration`);
+    return parseFloat(animationDuration.replace('s', '')) * 1000;
+  }
+}
+</script>
+
+
+
+
+
+
+      <section id="Bottom" style="position: relative; bottom: 0;">
+       <footer class="g-footer">
+        <div class="container">
+         <div class="g-footer-column_wrapper">
+          <div class="g-footer-copyright u-fc-2">
+           <span class="footer-copyright_year">
+            ©️ MyBeats 2024
+           </span>
+           <br />
+           All Rights Reserved.<br />
+           <p></p>
+           <p style="font-size: 10px;">
+            All music files, album covers, album & song names, artists' photos, any & everything related to every bit of music on this site is owned & trademarked hy the Artist listed. <br />
+            Used with permission.
+           </p>
+          </div>
+         </div>
+         <div class="g-footer-column">
+          <div>
+           <div class="g-footer-section_title h6">
+            Contact Me
+           </div>
+           <ul aria-label="Product" role="list" class="g-footer-list w-list-unstyled">
+            <li class="g-footer-list_item">
+             <a href="https://facebook.com/Chevrolay" class="g-footer-list_item-link w-inline-block">
+              <div>Facebook</div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://m.me/Chevrolay" class="g-footer-list_item-link w-inline-block">
+              <div>Messenger</div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a
+              class="g-footer-list_item-link w-inline-block"
+              href="mailto:
+Chevrolay@me.ColeyCodes.cloud?subject=READ%20ME&body=Site%20Visitor:
+"
+             >
+              <div>
+               Email Me [ Outlook ]
+              </div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a
+              class="g-footer-list_item-link w-inline-block"
+              href="mailto:
+Antagoniiise@GMail.com?subject=READ%20ME&body=Site%20Visitor:
+"
+             >
+              <div>
+               Email Me [ GMail ]
+              </div>
+             </a>
+            </li>
+           </ul>
+
+           <div class="g-footer-section_title h6">
+            Resources
+           </div>
+           <ul aria-label="Product" role="list" class="g-footer-list w-list-unstyled">
+            <li class="g-footer-list_item">
+             <a href="https://codepen.io/ClockBlock" class="g-footer-list_item-link w-inline-block">
+              <div>CodePen</div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://w3schools.com/" class="g-footer-list_item-link w-inline-block">
+              <div>W3Schools</div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://uiverse.io/" class="g-footer-list_item-link w-inline-block">
+              <div>UIverse</div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://music.apple.com" class="g-footer-list_item-link w-inline-block">
+              <div>Apple Music</div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://azlyrics.com/" class="g-footer-list_item-link cc-combo w-inline-block">
+              <div>AZ Lyrics</div>
+              <!--<div
+                        class="g-footer-list_item-tag">
+                        5</div>-->
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://openai.com/chatgpt/" class="g-footer-list_item-link cc-combo w-inline-block">
+              <div>ChatGPT</div>
+              <!--<div
+                        class="g-footer-list_item-tag">
+                        5-2</div>-->
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://copilot.microsoft.com/" class="g-footer-list_item-link w-inline-block">
+              <div>MS Copilot</div>
+             </a>
+            </li>
+            <li class="g-footer-list_item">
+             <a href="https://dreamhost.com/" class="g-footer-list_item-link w-inline-block">
+              <div>DreamHost</div>
+             </a>
+            </li>
+            <!--
+                  <li
+                    class="g-footer-list_item">
+                    <a href="https://coleycodes.cloud/"
+                      class="g-footer-list_item-link w-inline-block">
+                      <div>Bottom Link 7
+                      </div>
+                    </a></li>-->
+           </ul>
+          </div>
+         </div>
+        </div>
+
+        <!--- Bottom Section Wrapper --->
+       </footer>
+       <!--- Bottom --->
+      </section>
+      <!--- Bottom --->
+     </div>
+    </div>
+    <!--- P A G E --->
+   </main>
+   <!--- W R A P P E R S --->
+
+   <!-- songsMoreMenuBtn JS and dependencies -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <audio
+     id="audio"
+     src=""
+     preload="metadata"
+     style="width: 100%;
+            margin-left: 5%;
+            margin-right: 5%;
+            border-radius: 10px;
+            border: .45px DOTTED #EFEFEF;">
+  </audio>
+
+<!---   <script>
+    document.getElementById("openCard").addEventListener("click", function () {
+     openCard("upNext");
+    });
+
+    document.getElementById("openSearch").addEventListener("click", function () {
+     openCard("search");
+    });
+
+    function openCard(tabName) {
+     const card = document.getElementById("card");
+     card.classList.add("show");
+     openTab(null, tabName);
+    }
+
+    function closeCard() {
+     const card = document.getElementById("card");
+     card.classList.remove("show");
+    }
+
+    function openTab(evt, tabName) {
+     var i, tabcontent, tablinks;
+
+     // Hide all tab contents
+     tabcontent = document.getElementsByClassName("tabcontent");
+     for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+     }
+
+     // Remove the "active" class from all tablinks
+     tablinks = document.getElementsByClassName("tablinks");
+     for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+     }
+
+     // Show the specific tab content
+     document.getElementById(tabName).style.display = "block";
+
+     // Add "active" class to the button that opened the tab
+     if (evt) {
+      evt.currentTarget.className += " active";
+     } else {
+      document.getElementById("defaultOpen").className += " active";
+     }
+    }
+
+    // Optionally, add a button or another trigger to close the card
+    document.getElementById("closeCard").addEventListener("click", function () {
+     closeCard();
+    });
+
+    // Set the default tab to be open when the card is first displayed
+    document.getElementById("defaultOpen").click();
+   </script>--->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  </div>
+  <!--- Page Wrapper --->
+
+  <!---- PLACE --- BELOW --- EVERYTHING ---->
+
+  <script src="https://unpkg.com/@phosphor-icons/web">
+   /**
+    * Icons
+   */
+  </script>
+
+<!---  <script>
+   /**
+    * Hover Over Artists
+    */
+   const photo1 = document.getElementById("photo1");
+   const artist1 = document.getElementById("artist1");
+
+   photo1.addEventListener("click", function () {
+    if (artist1.style.color === "rgb(238, 238, 238)") {
+     artist1.style.color = "#7C72DF";
+    } else {
+     artist1.style.color = "#EEEEEE";
+    }
+   });
+
+   artist1.addEventListener("click", function () {
+    if (artist1.style.color === "rgb(238, 238, 238)") {
+     artist1.style.color = "#7C72DF";
+    } else {
+     artist1.style.color = "#EEEEEE";
+    }
+   });
+  </script> --->
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://unpkg.com/@phosphor-icons/web">
+    /**
+     * Icons
+    **/
+import PhosphorIconsWeb from "https://esm.sh/@phosphor-icons/web";
+</script>
+
+
+
+
+
+
+
+<script>
+  /**
+   *    Hides the PWA (Web App) after 1 minute
+   */
+  const webApp = document.getElementById("appStoreContainer");
+
+  setTimeout(function () {
+    webApp.style.display = "none";
+  }, 60000);
+</script>
+
+
+<script defer>
+  let deferredPrompt;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallPromotion();
+  });
+
+  const installButton = document.getElementById("install-button");
+  if (installButton) {
+    installButton.addEventListener("click", () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === "accepted") {
+            console.log("User accepted the install prompt");
+          } else {
+            console.log("User dismissed the install prompt");
+          }
+          deferredPrompt = null;
+        });
+      }
+    });
+  }
+
+  function showInstallPromotion() {
+    if (installButton) {
+      installButton.style.display = "block";
+    }
+  }
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("./serviceWorker.js")
+        .then((registration) => {
+          console.log("Service Worker registered with scope:", registration.scope);
+
+          // Register Periodic Sync
+          if ("periodicSync" in navigator.serviceWorker) {
+            navigator.permissions
+              .query({ name: "periodic-background-sync" })
+              .then((result) => {
+                if (result.state === "granted") {
+                  try {
+                    registration.periodicSync.register("content-sync", {
+                      minInterval: 12 * 60 * 60 * 1000, // 12 hours
+                    });
+                    console.log("Periodic Sync registered successfully.");
+                  } catch (error) {
+                    console.error("Periodic Sync registration failed:", error);
+                  }
+                } else {
+                  console.log("Periodic Background Sync permission not granted.");
+                }
+              })
+              .catch((error) => {
+                console.error("Permission query failed:", error);
+              });
+          } else {
+            console.log("Periodic Sync is not supported in this browser.");
+          }
+        })
+        .catch((error) => {
+          console.error("Service Worker registration failed:", error);
+        });
+    });
+  }
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./serviceWorker.js").then(() => console.log("Service Worker Registered"));
+}
+</script>
+<script src="https://unpkg.com/@floating-ui/dom"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+<script type="module" src="./globalScript.js" defer>
+   /**
+    *  Resoponsible for just about everything.
+    *  So do not modify or omit this area
+    *  if you are even relatively new to code
+    *
+    *  Moved to external for sake of
+    *   simplicity and organization
+    *
+    *  Doesn't matter if your main JS is on
+    *  an external file or if want to move it back
+    *  in here
+    **/
+import { loadAndPlayAudio } from "./globalScript.js";
+
+window.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has("file")) {
+    const audioFileUrl = urlParams.get("file");
+    loadAndPlayAudio(audioFileUrl);
+  }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const addCustomClassToImages = () => {
+    const container = document.querySelector("#dynamicArea");
+    if (container) {
+      const images = container.querySelectorAll("img:not(.custom-img)"); // Avoid reapplying the class
+      images.forEach(img => img.classList.add("custom-img"));
+    }
+  };
+
+  // Initial run
+  addCustomClassToImages();
+
+  // Observe the DOM for new images
+  const observer = new MutationObserver(() => {
+    addCustomClassToImages(); // Apply the class to new images
+  });
+
+  observer.observe(document.querySelector("#dynamicArea"), { childList: true, subtree: true });
+});
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const similarImagesFix = () => {
+    const container = document.querySelector("#dynamicAreaBottom");
+    if (container) {
+      const images = container.querySelectorAll("img:not(.classFix)"); // Avoid reapplying the class
+      images.forEach(img => img.classList.add("classFix"));
+    }
+  };
+
+  // Initial run
+  similarImagesFix();
+
+  // Observe the DOM for new images
+  const observer = new MutationObserver(() => {
+    similarImagesFix(); // Apply the class to new images
+  });
+
+  observer.observe(document.querySelector("#dynamicAreaBottom"), { childList: true, subtree: true });
+});
+</script>
+</body>
+</html>

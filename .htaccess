@@ -1,0 +1,31 @@
+RewriteEngine On
+
+# If the request is for an existing file or directory, let it pass
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirect specific paths to avoid interference with client-side routing
+RewriteCond %{REQUEST_URI} !^/myCollections$
+RewriteCond %{REQUEST_URI} !^/allArtists$
+
+# For all other requests, redirect to index.html, allowing the SPA to handle routing
+RewriteRule ^ index.html [L]
+
+# Optionally handle artist routing directly in the query string, if needed
+RewriteCond %{REQUEST_URI} ^/allArtists$
+RewriteCond %{QUERY_STRING} artist=([^&]+)
+RewriteRule ^allArtists$ /?artist=%1 [L]
+
+ErrorDocument 404 /404.html
+
+<FilesMatch "\.(?i:pdf|mp3|mp4|zip|doc|docx|xls|xlsx|ppt|pptx)$">
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+</FilesMatch>
+
+# Enable CORS for all resources
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET,POST,OPTIONS,DELETE,PUT"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
