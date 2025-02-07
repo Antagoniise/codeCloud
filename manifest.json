@@ -1,0 +1,135 @@
+{
+  "id": "6988637",
+  "orientation": "portrait",
+  "description": "Stream all of your favorite music, or save them for offline streaming, for free.",
+  "background_color": "#bab9b4",
+  "theme_color": "#e0e0e0",
+  "name": "MyBeats Music",
+  "short_name": "MyBeats",
+  "start_url": "/",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay"
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "itunes",
+      "url": "https://itunes.apple.com/app/apple-music/id1108187250",
+      "id": "1108187250"
+    },
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music",
+      "id": "1017492454"
+    },
+    {
+      "platform": "play",
+      "url": "https://open.spotify.com/",
+      "id": "324684580"
+    },
+    {
+      "platform": "play",
+      "url": "https://soundcloud.com/",
+      "id": "336353151"
+    }
+  ],
+  "icons": [
+    {
+      "src": "./web/MyBeatsLogo20.ico",
+      "type": "image/x-icon",
+      "sizes": "16x16 32x32"
+    },
+    {
+      "src": "./web/MyBeatsLogo150.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "./web/MyBeatsLogo96.png",
+      "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any"
+    },
+    {
+      "src": "./web/MyBeatsLogo200.png",
+      "type": "image/png",
+      "sizes": "200x200",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./web/MyBeatsLogo600.png",
+      "type": "image/png",
+      "sizes": "5600x600",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./web/MyBeatsLogo800.png",
+      "type": "image/png",
+      "sizes": "800x800",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./web/MyBeatsLogo1000.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "splashscreen"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "My Playlists",
+      "short_name": "Collections",
+      "description": "Manage your Music Collection",
+      "url": "/myCollections",
+      "icons": [
+        {
+          "src": "./icons/topTracks.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Discover",
+      "short_name": "Discover",
+      "description": "Discover New Artists",
+      "url": "/allArtists",
+      "icons": [
+        {
+          "src": "./icons/favoriteMusic.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./screenShot001.png",
+      "sizes": "640x480",
+      "type": "image/png"
+    },
+    {
+      "src": "./screenShot002.png",
+      "sizes": "640x480",
+      "type": "image/png"
+    },
+    {
+      "src": "./screenShot003.png",
+      "sizes": "640x480",
+      "type": "image/png"
+    }
+  ],
+  "categories": [
+    "entertainment",
+    "music"
+  ],
+  "dir": "ltr",
+  "scope": "/",
+  "lang": "en",
+  "edge_side_panel": {
+    "preferred_width": 200
+  }
+}
