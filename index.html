@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-  <script>
-   window.addEventListener("DOMContentLoaded", () => {
-    const iframe = document.querySelector("#dynamiciFrame");
-    const hash = location.hash.slice(1);
-    if (hash) {
-     iframe.src = hash;
-    }
-   });
-  </script>
 
   <link rel="manifest" href="./manifest.json" />
   <link href="./colours/styles.css" rel="stylesheet" />
@@ -2723,44 +2714,55 @@
    }
    document.addEventListener("DOMContentLoaded", initApp);
   </script>
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const iframe = document.getElementById("dynamiciFrame");
+  const loadingStrip = $("#loadingStrip");
+  let isLoading = false; // Prevent multiple clicks
 
-  <script>
-   document.addEventListener("DOMContentLoaded", () => {
-    const iframe = document.getElementById("dynamiciFrame");
-    const loadingStrip = $("#loadingStrip");
 
-    document.body.addEventListener("click", function (e) {
-     const link = e.target.closest('a[data-link="dynamic"]');
-     if (!link || !iframe) return;
+  document.body.addEventListener("click", function (e) {
+    if (isLoading) return;
 
-     e.preventDefault();
+    const link = e.target.closest('a[data-link="dynamic"]');
+    if (!link || !iframe) return;
 
-     const rawHref = link.getAttribute("href");
-     const basePath = "/gitHub/";
-     const url = new URL(rawHref, location.origin + basePath).href;
+    isLoading = true; // Block further clicks during loading
+    e.preventDefault();
 
-     resetProgressBar();
-     startLoading();
-     $(iframe).fadeOut(200);
+    const rawHref = link.getAttribute("href");
+    const basePath = window.location.pathname.endsWith("/")
+      ? window.location.pathname
+      : window.location.pathname + "/";
+    const url = new URL(rawHref, location.origin + basePath).href;
 
-     let loadStartTime = Date.now();
-     iframe.onload = () => {
+    resetProgressBar();
+    startLoading();
+    $(iframe).fadeOut(200);
+
+    let loadStartTime = Date.now();
+    iframe.onload = () => {
       const elapsed = Date.now() - loadStartTime;
       const delay = Math.max(0, 2000 - elapsed);
       setTimeout(() => {
-       finishLoading();
-       $(iframe).fadeIn(300);
+        finishLoading();
+        $(iframe).fadeIn(300);
+        isLoading = false; // Allow clicks again
       }, delay);
-     };
+    };
 
-     loadStartTime = Date.now();
-     iframe.src = url;
+    iframe.onerror = () => {
+      finishLoading();
+      $(iframe).fadeIn(300);
+      alert("Failed to load the content. Please try again later.");
+      isLoading = false; // Allow clicks again
+    };
 
-     history.pushState(null, "", url);
-    });
-   });
-  </script>
-
+    iframe.src = url;
+    history.pushState(null, "", url);
+  });
+});
+ </script>
   <script>
    if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
