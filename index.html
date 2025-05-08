@@ -2721,59 +2721,21 @@
 
 
 
-  
- <script>
+  <script>
 document.addEventListener("DOMContentLoaded", () => {
   const iframe = document.getElementById("dynamiciFrame");
-  const loadingStrip = $("#loadingStrip");
-  let isLoading = false; // Prevent multiple clicks
 
-
-  document.body.addEventListener("click", function (e) {
-    if (isLoading) return;
-
+  document.body.addEventListener("click", (e) => {
     const link = e.target.closest('a[data-link="dynamic"]');
     if (!link || !iframe) return;
 
-    isLoading = true; // Block further clicks during loading
     e.preventDefault();
 
     const rawHref = link.getAttribute("href");
-    const basePath = window.location.pathname.endsWith("/")
-      ? window.location.pathname
-      : window.location.pathname + "/";
-    const url = new URL(rawHref, location.origin + basePath).href;
-
-    resetProgressBar();
-    startLoading();
-    $(iframe).fadeOut(200);
-
-    let loadStartTime = Date.now();
-    iframe.onload = () => {
-      const elapsed = Date.now() - loadStartTime;
-      const delay = Math.max(0, 2000 - elapsed);
-      setTimeout(() => {
-        finishLoading();
-        $(iframe).fadeIn(300);
-        isLoading = false; // Allow clicks again
-      }, delay);
-    };
-
-    iframe.onerror = () => {
-      finishLoading();
-      $(iframe).fadeIn(300);
-      alert("Failed to load the content. Please try again later.");
-      isLoading = false; // Allow clicks again
-    };
-
-    iframe.src = url;
-   // history.pushState(null, "", url);
+    iframe.src = rawHref;
   });
 });
- </script>
-
-
-
+</script>
 
 
   
