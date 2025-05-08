@@ -2041,7 +2041,7 @@ input:checked + .switch-slider:before {
      const snippetId = $snippetCard.data("id");
 
      $.ajax({
-      url: "https://antagoniise.github.io/codeCloud/snippets.php",
+      url: "http://dev.wuaze.com/gitHub/snippets/snippets.php",
       type: "GET",
       data: { action: "get", id: snippetId },
       dataType: "json",
@@ -2070,7 +2070,7 @@ input:checked + .switch-slider:before {
      const snippetId = $snippetCard.data("id");
 
      $.ajax({
-      url: "https://antagoniise.github.io/codeCloud/snippets.php",
+      url: "http://dev.wuaze.com/gitHub/snippets/snippets.php",
       type: "GET",
       data: { action: "get", id: snippetId },
       dataType: "json",
@@ -2111,7 +2111,7 @@ input:checked + .switch-slider:before {
      const newTitle = prompt("Enter new title:", currentTitle);
      if (newTitle && newTitle !== currentTitle) {
       $.ajax({
-       url: "https://antagoniise.github.io/codeCloud/snippets.php",
+      url: "http://dev.wuaze.com/gitHub/snippets/snippets.php",
        type: "POST",
        data: {
         action: "update",
@@ -2182,7 +2182,7 @@ input:checked + .switch-slider:before {
     // CRUD Functions
     function loadSnippets() {
      $.ajax({
-      url: "https://antagoniise.github.io/codeCloud/snippets.php",
+      url: "http://dev.wuaze.com/gitHub/snippets/snippets.php",
       type: "GET",
       data: { action: "list" },
       dataType: "json",
@@ -2206,7 +2206,7 @@ input:checked + .switch-slider:before {
 
     function saveSnippet(title, language, code, callback) {
      $.ajax({
-      url: "https://antagoniise.github.io/codeCloud/snippets.php",
+      url: "http://dev.wuaze.com/gitHub/snippets/snippets.php",
       type: "POST",
       data: {
        action: "create",
@@ -2233,7 +2233,7 @@ input:checked + .switch-slider:before {
 
     function updateSnippet(id, title, language, code, callback) {
      $.ajax({
-      url: "https://antagoniise.github.io/codeCloud/snippets.php",
+      url: "http://dev.wuaze.com/gitHub/snippets/snippets.php",
       type: "POST",
       data: {
        action: "update",
@@ -2261,7 +2261,7 @@ input:checked + .switch-slider:before {
 
     function deleteSnippet(id, $snippetCard) {
      $.ajax({
-      url: "https://antagoniise.github.io/codeCloud/snippets.php",
+      url: "http://dev.wuaze.com/gitHub/snippets/snippets.php",
       type: "POST",
       data: { action: "delete", id: id },
       dataType: "json",
