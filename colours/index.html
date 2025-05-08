@@ -1,0 +1,2700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  if (window.top === window.self) {
+    const fullPath = location.pathname.replace('/gitHub/', '');
+    location.href = `/gitHub/#${fullPath}`;
+  }
+</script> 
+ 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Color Palette Manager</title>
+    
+    <!-- Flowbite CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    
+    <!-- Custom CSS -->
+    <link href="./styles.css" rel="stylesheet" />
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Flowbite JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="app.js" defer></script>
+<style>
+/* Custom styles to enhance Flowbite */
+:root {
+    --transition-speed: 300ms;
+}
+
+/* Color Card Styles */
+.color-card {
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.color-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.color-preview {
+    height: 8rem;
+    transition: opacity var(--transition-speed);
+}
+
+.color-preview:hover {
+    opacity: 0.9;
+}
+
+/* Color Picker Enhancement */
+input[type="color"] {
+    -webkit-appearance: none;
+    padding: 0;
+    border: none;
+    border-radius: 0.375rem 0 0 0.375rem;
+    width: 3rem;
+    height: 2.5rem;
+    cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 0.375rem 0 0 0.375rem;
+}
+
+/* Scheme Preview Enhancements */
+.scheme-button {
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.scheme-button:hover {
+    transform: translateY(-2px);
+}
+
+/* CSS Preview Enhancement */
+#css-output {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    line-height: 1.6;
+    tab-size: 4;
+}
+
+/* Notification Toast Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.toast-enter {
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+.toast-exit {
+    animation: slideOut 0.3s ease-out forwards;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 640px) {
+    .color-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+    .color-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .color-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .color-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* Accessibility Enhancements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus Styles */
+:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    .color-card {
+        background-color: #1f2937;
+        color: #f3f4f6;
+    }
+    
+    .color-name {
+        color: #f3f4f6;
+    }
+    
+    .color-value {
+        color: #d1d5db;
+    }
+}
+</style>
+
+</head>
+<body id="page-container" class="bg-gray-50">
+    <!-- Notification Toast -->
+    <div id="notification-toast" class="fixed top-4 right-4 z-50 hidden">
+        <div class="flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow">
+            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <div id="notification-message" class="ml-3 text-sm font-normal"></div>
+            <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" data-dismiss-target="#notification-toast" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Advanced Color Palette</h1>
+            <p class="text-gray-600">Manage your favorite colors with enhanced features</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" role="tablist">
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg" id="browse-tab" data-tabs-target="#browse" type="button" role="tab" aria-controls="browse" aria-selected="true">Browse Colors</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="custom-tab" data-tabs-target="#custom" type="button" role="tab" aria-controls="custom" aria-selected="false">Add Custom Colors</button>
+                </li>
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="schemes-tab" data-tabs-target="#schemes" type="button" role="tab" aria-controls="schemes" aria-selected="false">Color Schemes</button>
+                </li>
+                <li role="presentation">
+                    <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" id="css-tab" data-tabs-target="#css" type="button" role="tab" aria-controls="css" aria-selected="false">CSS Variables</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="tab-contents">
+            <!-- Browse Colors Tab -->
+            <div class="hidden p-4 rounded-lg bg-gray-50" id="browse" role="tabpanel" aria-labelledby="browse-tab">
+                <!-- Search and Filter Controls -->
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div class="relative">
+                        <input type="text" id="color-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Search colors...">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <button id="toggle-favorites" type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                            Show Favorites
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Color Grid -->
+                <div id="color-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Colors will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- Custom Colors Tab -->
+            <div class="hidden p-4 rounded-lg bg-gray-50" id="custom" role="tabpanel" aria-labelledby="custom-tab">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">Add Custom Color</h2>
+                    
+                    <form id="custom-color-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="color-name" class="block mb-2 text-sm font-medium text-gray-900">Color Name</label>
+                                <input type="text" id="color-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                            </div>
+                            <div>
+                                <label for="color-value" class="block mb-2 text-sm font-medium text-gray-900">Color Value</label>
+                                <div class="flex">
+                                    <input type="color" id="color-picker" class="h-10 w-12 rounded-l border border-gray-300">
+                                    <input type="text" id="color-value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                            Add Color
+                        </button>
+                    </form>
+
+                    <div id="custom-colors-section" class="mt-8 hidden">
+                        <h3 class="text-lg font-semibold mb-4">Your Custom Colors</h3>
+                        <div id="custom-colors-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <!-- Custom colors will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Schemes Tab -->
+            <div class="hidden p-4 rounded-lg bg-gray-50" id="schemes" role="tabpanel" aria-labelledby="schemes-tab">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">Color Scheme Builder</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6" id="scheme-controls">
+                        <!-- Color scheme controls will be dynamically inserted here -->
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="mt-6 mb-8 border rounded-lg overflow-hidden" id="scheme-preview">
+                        <!-- Preview content will be dynamically updated -->
+                    </div>
+
+                    <button id="generate-css-btn" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                        Generate CSS Variables
+                    </button>
+                </div>
+            </div>
+
+            <!-- CSS Variables Tab -->
+            <div class="hidden p-4 rounded-lg bg-gray-50" id="css" role="tabpanel" aria-labelledby="css-tab">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-semibold mb-4">CSS Variables</h2>
+                    
+                    <div class="mb-6">
+                        <p class="text-gray-600 mb-4">
+                            Here are your CSS variables ready to use in your project. These include your color scheme and any favorited or custom colors.
+                        </p>
+                        
+                        <div class="relative">
+                            <pre id="css-output" class="bg-gray-800 text-gray-200 p-4 rounded-md overflow-x-auto">
+                                <!-- CSS variables will be dynamically inserted here -->
+                            </pre>
+                            
+                            <button id="copy-css" class="absolute top-2 right-2 text-white bg-gray-700 hover:bg-gray-600 p-2 rounded-md">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button id="download-css" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                        Download CSS File
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="testWrapper">
+<div
+id="test"
+style="background-color: crimson; width: 250px; height: 250px;">
+TEST TEST TEST TEST TEST TEST <br>
+TEST TEST TEST TEST TEST TEST <br>
+TEST TEST TEST TEST TEST TEST
+</div>
+</div>
+
+
+  <script>
+$(document).ready(function () {
+  // Color Database
+  const defaultColors = [
+    
+  {
+    name: "button-inactive-bgColor",
+    hex: "#2a313c",
+    rgb: "rgb(42, 49, 60)"
+  },
+  {
+    name: "button-inactive-fgColor",
+    hex: "#656c76",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "button-invisible-bgColor-disabled",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "button-invisible-borderColor-disabled",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "button-invisible-iconColor-hover",
+    hex: "#b7bdc8",
+    rgb: "rgb(183, 189, 200)"
+  },
+  {
+    name: "button-invisible-iconColor-rest",
+    hex: "#b7bdc8",
+    rgb: "rgb(183, 189, 200)"
+  },
+  {
+    name: "button-outline-bgColor-active",
+    hex: "#1b4b91",
+    rgb: "rgb(27, 75, 145)"
+  },
+  {
+    name: "button-outline-bgColor-rest",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "button-outline-fgColor-hover",
+    hex: "#539bf5",
+    rgb: "rgb(83, 155, 245)"
+  },
+  {
+    name: "button-outline-fgColor-rest",
+    hex: "#4184e4",
+    rgb: "rgb(65, 132, 228)"
+  },
+  {
+    name: "button-star-iconColor",
+    hex: "#daaa3f",
+    rgb: "rgb(218, 170, 63)"
+  },
+  {
+    name: "buttonCounter-danger-bgColor-rest",
+    hex: "#5d0f1233",
+    rgb: "rgb(93, 15, 18)"
+  },
+  {
+    name: "buttonCounter-default-bgColor-rest",
+    hex: "#2f3742",
+    rgb: "rgb(47, 55, 66)"
+  },
+  {
+    name: "buttonCounter-outline-bgColor-hover",
+    hex: "#0f2d5c33",
+    rgb: "rgb(15, 45, 92)"
+  },
+  {
+    name: "buttonCounter-outline-bgColor-rest",
+    hex: "#0f2d5c33",
+    rgb: "rgb(15, 45, 92)"
+  },
+  {
+    name: "buttonCounter-outline-fgColor-disabled",
+    hex: "#478be680",
+    rgb: "rgb(71, 139, 230)"
+  },
+  {
+    name: "buttonCounter-outline-fgColor-hover",
+    hex: "#539bf5",
+    rgb: "rgb(83, 155, 245)"
+  },
+  {
+    name: "buttonCounter-outline-fgColor-rest",
+    hex: "#4184e4",
+    rgb: "rgb(65, 132, 228)"
+  },
+  {
+    name: "buttonCounter-primary-bgColor-rest",
+    hex: "#11341733",
+    rgb: "rgb(17, 52, 23)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-comment",
+    hex: "#656c76",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-constant",
+    hex: "#6cb6ff",
+    rgb: "rgb(108, 182, 255)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-entity",
+    hex: "#dcbdfb",
+    rgb: "rgb(220, 189, 251)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-keyword",
+    hex: "#f47067",
+    rgb: "rgb(244, 112, 103)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-storage",
+    hex: "#f47067",
+    rgb: "rgb(244, 112, 103)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-string",
+    hex: "#96d0ff",
+    rgb: "rgb(150, 208, 255)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-support",
+    hex: "#6cb6ff",
+    rgb: "rgb(108, 182, 255)"
+  },
+  {
+    name: "codeMirror-syntax-fgColor-variable",
+    hex: "#f69d50",
+    rgb: "rgb(246, 157, 80)"
+  },
+  {
+    name: "color-ansi-black",
+    hex: "#2f3742",
+    rgb: "rgb(47, 55, 66)"
+  },
+  {
+    name: "color-ansi-black-bright",
+    hex: "#656c76",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "color-ansi-blue",
+    hex: "#539bf5",
+    rgb: "rgb(83, 155, 245)"
+  },
+  {
+    name: "color-ansi-blue-bright",
+    hex: "#6cb6ff",
+    rgb: "rgb(108, 182, 255)"
+  },
+  {
+    name: "color-ansi-gray",
+    hex: "#656c76",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "color-ansi-green",
+    hex: "#57ab5a",
+    rgb: "rgb(87, 171, 90)"
+  },
+  {
+    name: "color-ansi-green-bright",
+    hex: "#6bc46d",
+    rgb: "rgb(107, 196, 109)"
+  },
+  {
+    name: "color-ansi-magenta",
+    hex: "#b083f0",
+    rgb: "rgb(176, 131, 240)"
+  },
+  {
+    name: "color-ansi-magenta-bright",
+    hex: "#dcbdfb",
+    rgb: "rgb(220, 189, 251)"
+  },
+  {
+    name: "color-ansi-red",
+    hex: "#f47067",
+    rgb: "rgb(244, 112, 103)"
+  },
+  {
+    name: "color-ansi-red-bright",
+    hex: "#ff938a",
+    rgb: "rgb(255, 147, 138)"
+  },
+  {
+    name: "color-ansi-white",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "color-ansi-yellow",
+    hex: "#c69026",
+    rgb: "rgb(198, 144, 38)"
+  },
+  {
+    name: "color-ansi-yellow-bright",
+    hex: "#daaa3f",
+    rgb: "rgb(218, 170, 63)"
+  },
+  {
+    name: "color-prettylights-syntax-brackethighlighter-angle",
+    hex: "#9198a1",
+    rgb: "rgb(145, 152, 161)"
+  },
+  {
+    name: "color-prettylights-syntax-brackethighlighter-unmatched",
+    hex: "#e5534b",
+    rgb: "rgb(229, 83, 75)"
+  },
+  {
+    name: "color-prettylights-syntax-carriage-return-bg",
+    hex: "#ad2e2c",
+    rgb: "rgb(173, 46, 44)"
+  },
+  {
+    name: "color-prettylights-syntax-carriage-return-text",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "color-prettylights-syntax-comment",
+    hex: "#9198a1",
+    rgb: "rgb(145, 152, 161)"
+  },
+  {
+    name: "color-prettylights-syntax-constant",
+    hex: "#6cb6ff",
+    rgb: "rgb(108, 182, 255)"
+  },
+  {
+    name: "color-prettylights-syntax-constant-other-reference-link",
+    hex: "#96d0ff",
+    rgb: "rgb(150, 208, 255)"
+  },
+  {
+    name: "color-prettylights-syntax-entity",
+    hex: "#dcbdfb",
+    rgb: "rgb(220, 189, 251)"
+  },
+  {
+    name: "color-prettylights-syntax-entity-tag",
+    hex: "#8ddb8c",
+    rgb: "rgb(141, 219, 140)"
+  },
+  {
+    name: "color-prettylights-syntax-invalid-illegal-bg",
+    hex: "#922323",
+    rgb: "rgb(146, 35, 35)"
+  },
+  {
+    name: "color-prettylights-syntax-invalid-illegal-text",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "color-prettylights-syntax-keyword",
+    hex: "#f47067",
+    rgb: "rgb(244, 112, 103)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-bold",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-changed-bg",
+    hex: "#682d0f",
+    rgb: "rgb(104, 45, 15)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-changed-text",
+    hex: "#ffddb0",
+    rgb: "rgb(255, 221, 176)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-deleted-bg",
+    hex: "#78191b",
+    rgb: "rgb(120, 25, 27)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-deleted-text",
+    hex: "#ffd8d3",
+    rgb: "rgb(255, 216, 211)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-heading",
+    hex: "#316dca",
+    rgb: "rgb(49, 109, 202)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-ignored-bg",
+    hex: "#255ab2",
+    rgb: "rgb(37, 90, 178)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-ignored-text",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-inserted-bg",
+    hex: "#1b4721",
+    rgb: "rgb(27, 71, 33)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-inserted-text",
+    hex: "#b4f1b4",
+    rgb: "rgb(180, 241, 180)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-italic",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "color-prettylights-syntax-markup-list",
+    hex: "#eac55f",
+    rgb: "rgb(234, 197, 95)"
+  },
+  {
+    name: "color-prettylights-syntax-meta-diff-range",
+    hex: "#dcbdfb",
+    rgb: "rgb(220, 189, 251)"
+  },
+  {
+    name: "color-prettylights-syntax-storage-modifier-import",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "color-prettylights-syntax-string",
+    hex: "#96d0ff",
+    rgb: "rgb(150, 208, 255)"
+  },
+  {
+    name: "color-prettylights-syntax-string-regexp",
+    hex: "#8ddb8c",
+    rgb: "rgb(141, 219, 140)"
+  },
+  {
+    name: "color-prettylights-syntax-sublimelinter-gutter-mark",
+    hex: "#3d444d",
+    rgb: "rgb(61, 68, 77)"
+  },
+  {
+    name: "color-prettylights-syntax-variable",
+    hex: "#f69d50",
+    rgb: "rgb(246, 157, 80)"
+  },
+  {
+    name: "contribution-default-bgColor-0",
+    hex: "#2a313c",
+    rgb: "rgb(42, 49, 60)"
+  },
+  {
+    name: "contribution-default-bgColor-1",
+    hex: "#1b4721",
+    rgb: "rgb(27, 71, 33)"
+  },
+  {
+    name: "contribution-default-bgColor-2",
+    hex: "#2b6a30",
+    rgb: "rgb(43, 106, 48)"
+  },
+  {
+    name: "contribution-default-bgColor-3",
+    hex: "#46954a",
+    rgb: "rgb(70, 149, 74)"
+  },
+  {
+    name: "contribution-default-bgColor-4",
+    hex: "#6bc46d",
+    rgb: "rgb(107, 196, 109)"
+  },
+  {
+    name: "contribution-default-borderColor-0",
+    hex: "#cdd9e50d",
+    rgb: "rgb(205, 217, 229)"
+  },
+  {
+    name: "contribution-default-borderColor-1",
+    hex: "#cdd9e50d",
+    rgb: "rgb(205, 217, 229)"
+  },
+  {
+    name: "contribution-default-borderColor-2",
+    hex: "#cdd9e50d",
+    rgb: "rgb(205, 217, 229)"
+  },
+  {
+    name: "contribution-default-borderColor-3",
+    hex: "#cdd9e50d",
+    rgb: "rgb(205, 217, 229)"
+  },
+  {
+    name: "contribution-default-borderColor-4",
+    hex: "#cdd9e50d",
+    rgb: "rgb(205, 217, 229)"
+  },
+  {
+    name: "contribution-halloween-bgColor-1",
+    hex: "#fac68f",
+    rgb: "rgb(250, 198, 143)"
+  },
+  {
+    name: "contribution-halloween-bgColor-2",
+    hex: "#c46212",
+    rgb: "rgb(196, 98, 18)"
+  },
+  {
+    name: "contribution-halloween-bgColor-3",
+    hex: "#984b10",
+    rgb: "rgb(152, 75, 16)"
+  },
+  {
+    name: "contribution-halloween-bgColor-4",
+    hex: "#e3d04f",
+    rgb: "rgb(227, 208, 79)"
+  },
+  {
+    name: "contribution-winter-bgColor-1",
+    hex: "#143d79",
+    rgb: "rgb(20, 61, 121)"
+  },
+  {
+    name: "contribution-winter-bgColor-2",
+    hex: "#255ab2",
+    rgb: "rgb(37, 90, 178)"
+  },
+  {
+    name: "contribution-winter-bgColor-3",
+    hex: "#539bf5",
+    rgb: "rgb(83, 155, 245)"
+  },
+  {
+    name: "contribution-winter-bgColor-4",
+    hex: "#c6e6ff",
+    rgb: "rgb(198, 230, 255)"
+  },
+  {
+    name: "control-bgColor-active",
+    hex: "#3d444d",
+    rgb: "rgb(61, 68, 77)"
+  },
+  {
+    name: "control-bgColor-hover",
+    hex: "#2f3742",
+    rgb: "rgb(47, 55, 66)"
+  },
+  {
+    name: "control-bgColor-rest",
+    hex: "#2a313c",
+    rgb: "rgb(42, 49, 60)"
+  },
+  {
+    name: "control-borderColor-disabled",
+    hex: "#656c761a",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "control-borderColor-selected",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "control-danger-fgColor-hover",
+    hex: "#f47067",
+    rgb: "rgb(244, 112, 103)"
+  },
+  {
+    name: "control-transparent-bgColor-active",
+    hex: "#656c7633",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "control-transparent-bgColor-hover",
+    hex: "#656c7626",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "control-transparent-bgColor-rest",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "control-transparent-bgColor-selected",
+    hex: "#656c761a",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "control-transparent-borderColor-active",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "control-transparent-borderColor-hover",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "control-transparent-borderColor-rest",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "controlTrack-bgColor-active",
+    hex: "#3d444d",
+    rgb: "rgb(61, 68, 77)"
+  },
+  {
+    name: "controlTrack-bgColor-hover",
+    hex: "#2f3742",
+    rgb: "rgb(47, 55, 66)"
+  },
+  {
+    name: "controlTrack-bgColor-rest",
+    hex: "#2a313c",
+    rgb: "rgb(42, 49, 60)"
+  },
+  {
+    name: "controlTrack-borderColor-rest",
+    hex: "#3d444d",
+    rgb: "rgb(61, 68, 77)"
+  },
+  {
+    name: "counter-borderColor",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "data-auburn-color-emphasis",
+    hex: "#a86f6b",
+    rgb: "rgb(168, 111, 107)"
+  },
+  {
+    name: "data-auburn-color-muted",
+    hex: "#271817",
+    rgb: "rgb(39, 24, 23)"
+  },
+  {
+    name: "data-blue-color-emphasis",
+    hex: "#0576ff",
+    rgb: "rgb(5, 118, 255)"
+  },
+  {
+    name: "data-blue-color-muted",
+    hex: "#001a47",
+    rgb: "rgb(0, 26, 71)"
+  },
+  {
+    name: "data-brown-color-emphasis",
+    hex: "#94774c",
+    rgb: "rgb(148, 119, 76)"
+  },
+  {
+    name: "data-brown-color-muted",
+    hex: "#241c14",
+    rgb: "rgb(36, 28, 20)"
+  },
+  {
+    name: "data-coral-color-emphasis",
+    hex: "#e1430e",
+    rgb: "rgb(225, 67, 14)"
+  },
+  {
+    name: "data-coral-color-muted",
+    hex: "#351008",
+    rgb: "rgb(53, 16, 8)"
+  },
+  {
+    name: "data-gray-color-emphasis",
+    hex: "#576270",
+    rgb: "rgb(87, 98, 112)"
+  },
+  {
+    name: "data-gray-color-muted",
+    hex: "#1c1c1c",
+    rgb: "rgb(28, 28, 28)"
+  },
+  {
+    name: "data-green-color-emphasis",
+    hex: "#2f6f37",
+    rgb: "rgb(47, 111, 55)"
+  },
+  {
+    name: "data-green-color-muted",
+    hex: "#122117",
+    rgb: "rgb(18, 33, 23)"
+  },
+  {
+    name: "data-lemon-color-emphasis",
+    hex: "#977b0c",
+    rgb: "rgb(151, 123, 12)"
+  },
+  {
+    name: "data-lemon-color-muted",
+    hex: "#291d00",
+    rgb: "rgb(41, 29, 0)"
+  },
+  {
+    name: "data-lime-color-emphasis",
+    hex: "#5f892f",
+    rgb: "rgb(95, 137, 47)"
+  },
+  {
+    name: "data-lime-color-muted",
+    hex: "#141f0f",
+    rgb: "rgb(20, 31, 15)"
+  },
+  {
+    name: "data-olive-color-emphasis",
+    hex: "#7a8321",
+    rgb: "rgb(122, 131, 33)"
+  },
+  {
+    name: "data-olive-color-muted",
+    hex: "#171e0b",
+    rgb: "rgb(23, 30, 11)"
+  },
+  {
+    name: "data-orange-color-emphasis",
+    hex: "#984b10",
+    rgb: "rgb(152, 75, 16)"
+  },
+  {
+    name: "data-orange-color-muted",
+    hex: "#311708",
+    rgb: "rgb(49, 23, 8)"
+  },
+  {
+    name: "data-pine-color-emphasis",
+    hex: "#18915e",
+    rgb: "rgb(24, 145, 94)"
+  },
+  {
+    name: "data-pine-color-muted",
+    hex: "#082119",
+    rgb: "rgb(8, 33, 25)"
+  },
+  {
+    name: "data-pink-color-emphasis",
+    hex: "#d34591",
+    rgb: "rgb(211, 69, 145)"
+  },
+  {
+    name: "data-pink-color-muted",
+    hex: "#2d1524",
+    rgb: "rgb(45, 21, 36)"
+  },
+  {
+    name: "data-plum-color-emphasis",
+    hex: "#b643ef",
+    rgb: "rgb(182, 67, 239)"
+  },
+  {
+    name: "data-plum-color-muted",
+    hex: "#2a0e3f",
+    rgb: "rgb(42, 14, 63)"
+  },
+  {
+    name: "data-purple-color-emphasis",
+    hex: "#975bf1",
+    rgb: "rgb(151, 91, 241)"
+  },
+  {
+    name: "data-purple-color-muted",
+    hex: "#211047",
+    rgb: "rgb(33, 16, 71)"
+  },
+  {
+    name: "data-red-color-emphasis",
+    hex: "#eb3342",
+    rgb: "rgb(235, 51, 66)"
+  },
+  {
+    name: "data-red-color-muted",
+    hex: "#3c0614",
+    rgb: "rgb(60, 6, 20)"
+  },
+  {
+    name: "data-teal-color-emphasis",
+    hex: "#106c70",
+    rgb: "rgb(16, 108, 112)"
+  },
+  {
+    name: "data-teal-color-muted",
+    hex: "#041f25",
+    rgb: "rgb(4, 31, 37)"
+  },
+  {
+    name: "data-yellow-color-emphasis",
+    hex: "#895906",
+    rgb: "rgb(137, 89, 6)"
+  },
+  {
+    name: "data-yellow-color-muted",
+    hex: "#2e1a00",
+    rgb: "rgb(46, 26, 0)"
+  },
+  {
+    name: "diffBlob-additionNum-bgColor",
+    hex: "#57ab5a4d",
+    rgb: "rgb(87, 171, 90)"
+  },
+  {
+    name: "diffBlob-additionWord-bgColor",
+    hex: "#46954a66",
+    rgb: "rgb(70, 149, 74)"
+  },
+  {
+    name: "diffBlob-deletionNum-bgColor",
+    hex: "#e5534b4d",
+    rgb: "rgb(229, 83, 75)"
+  },
+  {
+    name: "diffBlob-deletionWord-bgColor",
+    hex: "#e5534b66",
+    rgb: "rgb(229, 83, 75)"
+  },
+  {
+    name: "diffBlob-hunkNum-bgColor-rest",
+    hex: "#143d79",
+    rgb: "rgb(20, 61, 121)"
+  },
+  {
+    name: "display-auburn-bgColor-emphasis",
+    hex: "#87534f",
+    rgb: "rgb(135, 83, 79)"
+  },
+  {
+    name: "display-auburn-bgColor-muted",
+    hex: "#271817",
+    rgb: "rgb(39, 24, 23)"
+  },
+  {
+    name: "display-auburn-borderColor-emphasis",
+    hex: "#a86f6b",
+    rgb: "rgb(168, 111, 107)"
+  },
+  {
+    name: "display-auburn-borderColor-muted",
+    hex: "#3a2422",
+    rgb: "rgb(58, 36, 34)"
+  },
+  {
+    name: "display-auburn-fgColor",
+    hex: "#bf9592",
+    rgb: "rgb(191, 149, 146)"
+  },
+  {
+    name: "display-blue-bgColor-emphasis",
+    hex: "#005bd1",
+    rgb: "rgb(0, 91, 209)"
+  },
+  {
+    name: "display-blue-bgColor-muted",
+    hex: "#001a47",
+    rgb: "rgb(0, 26, 71)"
+  },
+  {
+    name: "display-blue-borderColor-emphasis",
+    hex: "#0576ff",
+    rgb: "rgb(5, 118, 255)"
+  },
+  {
+    name: "display-blue-borderColor-muted",
+    hex: "#002766",
+    rgb: "rgb(0, 39, 102)"
+  },
+  {
+    name: "display-blue-fgColor",
+    hex: "#4da0ff",
+    rgb: "rgb(77, 160, 255)"
+  },
+  {
+    name: "display-brown-bgColor-emphasis",
+    hex: "#755e3e",
+    rgb: "rgb(117, 94, 62)"
+  },
+  {
+    name: "display-brown-bgColor-muted",
+    hex: "#241c14",
+    rgb: "rgb(36, 28, 20)"
+  },
+  {
+    name: "display-brown-borderColor-emphasis",
+    hex: "#94774c",
+    rgb: "rgb(148, 119, 76)"
+  },
+  {
+    name: "display-brown-borderColor-muted",
+    hex: "#342a1d",
+    rgb: "rgb(52, 42, 29)"
+  },
+  {
+    name: "display-brown-fgColor",
+    hex: "#b69a6d",
+    rgb: "rgb(182, 154, 109)"
+  },
+  {
+    name: "display-coral-bgColor-emphasis",
+    hex: "#c31328",
+    rgb: "rgb(195, 19, 40)"
+  },
+  {
+    name: "display-coral-bgColor-muted",
+    hex: "#3c0614",
+    rgb: "rgb(60, 6, 20)"
+  },
+  {
+    name: "display-coral-borderColor-emphasis",
+    hex: "#eb3342",
+    rgb: "rgb(235, 51, 66)"
+  },
+  {
+    name: "display-coral-borderColor-muted",
+    hex: "#58091a",
+    rgb: "rgb(88, 9, 26)"
+  },
+  {
+    name: "display-coral-fgColor",
+    hex: "#f27d83",
+    rgb: "rgb(242, 125, 131)"
+  },
+  {
+    name: "display-cyan-bgColor-emphasis",
+    hex: "#036a8c",
+    rgb: "rgb(3, 106, 140)"
+  },
+  {
+    name: "display-cyan-bgColor-muted",
+    hex: "#001f29",
+    rgb: "rgb(0, 31, 41)"
+  },
+  {
+    name: "display-cyan-borderColor-emphasis",
+    hex: "#0587b3",
+    rgb: "rgb(5, 135, 179)"
+  },
+  {
+    name: "display-cyan-borderColor-muted",
+    hex: "#002e3d",
+    rgb: "rgb(0, 46, 61)"
+  },
+  {
+    name: "display-cyan-fgColor",
+    hex: "#07ace4",
+    rgb: "rgb(7, 172, 228)"
+  },
+  {
+    name: "display-gray-bgColor-emphasis",
+    hex: "#576270",
+    rgb: "rgb(87, 98, 112)"
+  },
+  {
+    name: "display-gray-bgColor-muted",
+    hex: "#1c1c1c",
+    rgb: "rgb(28, 28, 28)"
+  },
+  {
+    name: "display-gray-borderColor-emphasis",
+    hex: "#6e7f96",
+    rgb: "rgb(110, 127, 150)"
+  },
+  {
+    name: "display-gray-borderColor-muted",
+    hex: "#2a2b2d",
+    rgb: "rgb(42, 43, 45)"
+  },
+  {
+    name: "display-gray-fgColor",
+    hex: "#92a1b5",
+    rgb: "rgb(146, 161, 181)"
+  },
+  {
+    name: "display-green-bgColor-emphasis",
+    hex: "#2f6f37",
+    rgb: "rgb(47, 111, 55)"
+  },
+  {
+    name: "display-green-bgColor-muted",
+    hex: "#122117",
+    rgb: "rgb(18, 33, 23)"
+  },
+  {
+    name: "display-green-borderColor-emphasis",
+    hex: "#388f3f",
+    rgb: "rgb(56, 143, 63)"
+  },
+  {
+    name: "display-green-borderColor-muted",
+    hex: "#182f1f",
+    rgb: "rgb(24, 47, 31)"
+  },
+  {
+    name: "display-green-fgColor",
+    hex: "#41b445",
+    rgb: "rgb(65, 180, 69)"
+  },
+  {
+    name: "display-indigo-bgColor-emphasis",
+    hex: "#514ed4",
+    rgb: "rgb(81, 78, 212)"
+  },
+  {
+    name: "display-indigo-bgColor-muted",
+    hex: "#1b183f",
+    rgb: "rgb(27, 24, 63)"
+  },
+  {
+    name: "display-indigo-borderColor-emphasis",
+    hex: "#7070e1",
+    rgb: "rgb(112, 112, 225)"
+  },
+  {
+    name: "display-indigo-borderColor-muted",
+    hex: "#25215f",
+    rgb: "rgb(37, 33, 95)"
+  },
+  {
+    name: "display-indigo-fgColor",
+    hex: "#9899ec",
+    rgb: "rgb(152, 153, 236)"
+  },
+  {
+    name: "display-lemon-bgColor-emphasis",
+    hex: "#786008",
+    rgb: "rgb(120, 96, 8)"
+  },
+  {
+    name: "display-lemon-bgColor-muted",
+    hex: "#291d00",
+    rgb: "rgb(41, 29, 0)"
+  },
+  {
+    name: "display-lemon-borderColor-emphasis",
+    hex: "#977b0c",
+    rgb: "rgb(151, 123, 12)"
+  },
+  {
+    name: "display-lemon-borderColor-muted",
+    hex: "#372901",
+    rgb: "rgb(55, 41, 1)"
+  },
+  {
+    name: "display-lemon-fgColor",
+    hex: "#ba9b12",
+    rgb: "rgb(186, 155, 18)"
+  },
+  {
+    name: "display-lime-bgColor-emphasis",
+    hex: "#496c28",
+    rgb: "rgb(73, 108, 40)"
+  },
+  {
+    name: "display-lime-bgColor-muted",
+    hex: "#141f0f",
+    rgb: "rgb(20, 31, 15)"
+  },
+  {
+    name: "display-lime-borderColor-emphasis",
+    hex: "#5f892f",
+    rgb: "rgb(95, 137, 47)"
+  },
+  {
+    name: "display-lime-borderColor-muted",
+    hex: "#1f3116",
+    rgb: "rgb(31, 49, 22)"
+  },
+  {
+    name: "display-lime-fgColor",
+    hex: "#7dae37",
+    rgb: "rgb(125, 174, 55)"
+  },
+  {
+    name: "display-olive-bgColor-emphasis",
+    hex: "#5e681d",
+    rgb: "rgb(94, 104, 29)"
+  },
+  {
+    name: "display-olive-bgColor-muted",
+    hex: "#171e0b",
+    rgb: "rgb(23, 30, 11)"
+  },
+  {
+    name: "display-olive-borderColor-emphasis",
+    hex: "#7a8321",
+    rgb: "rgb(122, 131, 33)"
+  },
+  {
+    name: "display-olive-borderColor-muted",
+    hex: "#252d10",
+    rgb: "rgb(37, 45, 16)"
+  },
+  {
+    name: "display-olive-fgColor",
+    hex: "#a2a626",
+    rgb: "rgb(162, 166, 38)"
+  },
+  {
+    name: "display-orange-bgColor-emphasis",
+    hex: "#984b10",
+    rgb: "rgb(152, 75, 16)"
+  },
+  {
+    name: "display-orange-bgColor-muted",
+    hex: "#311708",
+    rgb: "rgb(49, 23, 8)"
+  },
+  {
+    name: "display-orange-borderColor-emphasis",
+    hex: "#c46212",
+    rgb: "rgb(196, 98, 18)"
+  },
+  {
+    name: "display-orange-borderColor-muted",
+    hex: "#43200a",
+    rgb: "rgb(67, 32, 10)"
+  },
+  {
+    name: "display-orange-fgColor",
+    hex: "#ed8326",
+    rgb: "rgb(237, 131, 38)"
+  },
+  {
+    name: "display-pine-bgColor-emphasis",
+    hex: "#14714c",
+    rgb: "rgb(20, 113, 76)"
+  },
+  {
+    name: "display-pine-bgColor-muted",
+    hex: "#082119",
+    rgb: "rgb(8, 33, 25)"
+  },
+  {
+    name: "display-pine-borderColor-emphasis",
+    hex: "#18915e",
+    rgb: "rgb(24, 145, 94)"
+  },
+  {
+    name: "display-pine-borderColor-muted",
+    hex: "#0b3224",
+    rgb: "rgb(11, 50, 36)"
+  },
+  {
+    name: "display-pine-fgColor",
+    hex: "#1bb673",
+    rgb: "rgb(27, 182, 115)"
+  },
+  {
+    name: "display-pink-bgColor-emphasis",
+    hex: "#ac2f74",
+    rgb: "rgb(172, 47, 116)"
+  },
+  {
+    name: "display-pink-bgColor-muted",
+    hex: "#2d1524",
+    rgb: "rgb(45, 21, 36)"
+  },
+  {
+    name: "display-pink-borderColor-emphasis",
+    hex: "#d34591",
+    rgb: "rgb(211, 69, 145)"
+  },
+  {
+    name: "display-pink-borderColor-muted",
+    hex: "#451c35",
+    rgb: "rgb(69, 28, 53)"
+  },
+  {
+    name: "display-pink-fgColor",
+    hex: "#e57bb2",
+    rgb: "rgb(229, 123, 178)"
+  },
+  {
+    name: "display-plum-bgColor-emphasis",
+    hex: "#9518d8",
+    rgb: "rgb(149, 24, 216)"
+  },
+  {
+    name: "display-plum-bgColor-muted",
+    hex: "#2a0e3f",
+    rgb: "rgb(42, 14, 63)"
+  },
+  {
+    name: "display-plum-borderColor-emphasis",
+    hex: "#b643ef",
+    rgb: "rgb(182, 67, 239)"
+  },
+  {
+    name: "display-plum-borderColor-muted",
+    hex: "#40125e",
+    rgb: "rgb(64, 18, 94)"
+  },
+  {
+    name: "display-plum-fgColor",
+    hex: "#d07ef7",
+    rgb: "rgb(208, 126, 247)"
+  },
+  {
+    name: "display-purple-bgColor-emphasis",
+    hex: "#7730e8",
+    rgb: "rgb(119, 48, 232)"
+  },
+  {
+    name: "display-purple-bgColor-muted",
+    hex: "#211047",
+    rgb: "rgb(33, 16, 71)"
+  },
+  {
+    name: "display-purple-borderColor-emphasis",
+    hex: "#975bf1",
+    rgb: "rgb(151, 91, 241)"
+  },
+  {
+    name: "display-purple-borderColor-muted",
+    hex: "#31146b",
+    rgb: "rgb(49, 20, 107)"
+  },
+  {
+    name: "display-purple-fgColor",
+    hex: "#b687f7",
+    rgb: "rgb(182, 135, 247)"
+  },
+  {
+    name: "display-red-bgColor-emphasis",
+    hex: "#c31328",
+    rgb: "rgb(195, 19, 40)"
+  },
+  {
+    name: "display-red-bgColor-muted",
+    hex: "#3c0614",
+    rgb: "rgb(60, 6, 20)"
+  },
+  {
+    name: "display-red-borderColor-emphasis",
+    hex: "#eb3342",
+    rgb: "rgb(235, 51, 66)"
+  },
+  {
+    name: "display-red-borderColor-muted",
+    hex: "#58091a",
+    rgb: "rgb(88, 9, 26)"
+  },
+  {
+    name: "display-red-fgColor",
+    hex: "#f27d83",
+    rgb: "rgb(242, 125, 131)"
+  },
+  {
+    name: "display-teal-bgColor-emphasis",
+    hex: "#106c70",
+    rgb: "rgb(16, 108, 112)"
+  },
+  {
+    name: "display-teal-bgColor-muted",
+    hex: "#041f25",
+    rgb: "rgb(4, 31, 37)"
+  },
+  {
+    name: "display-teal-borderColor-emphasis",
+    hex: "#158a8a",
+    rgb: "rgb(21, 138, 138)"
+  },
+  {
+    name: "display-teal-borderColor-muted",
+    hex: "#073036",
+    rgb: "rgb(7, 48, 54)"
+  },
+  {
+    name: "display-teal-fgColor",
+    hex: "#1cb0ab",
+    rgb: "rgb(28, 176, 171)"
+  },
+  {
+    name: "display-yellow-bgColor-emphasis",
+    hex: "#895906",
+    rgb: "rgb(137, 89, 6)"
+  },
+  {
+    name: "display-yellow-bgColor-muted",
+    hex: "#2e1a00",
+    rgb: "rgb(46, 26, 0)"
+  },
+  {
+    name: "display-yellow-borderColor-emphasis",
+    hex: "#aa7109",
+    rgb: "rgb(170, 113, 9)"
+  },
+  {
+    name: "display-yellow-borderColor-muted",
+    hex: "#3d2401",
+    rgb: "rgb(61, 36, 1)"
+  },
+  {
+    name: "display-yellow-fgColor",
+    hex: "#d3910d",
+    rgb: "rgb(211, 145, 13)"
+  },
+  {
+    name: "fgColor-attention",
+    hex: "#c69026",
+    rgb: "rgb(198, 144, 38)"
+  },
+  {
+    name: "fgColor-danger",
+    hex: "#e5534b",
+    rgb: "rgb(229, 83, 75)"
+  },
+  {
+    name: "fgColor-default",
+    hex: "#d1d7e0",
+    rgb: "rgb(209, 215, 224)"
+  },
+  {
+    name: "fgColor-disabled",
+    hex: "#656c76",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "fgColor-done",
+    hex: "#986ee2",
+    rgb: "rgb(152, 110, 226)"
+  },
+  {
+    name: "fgColor-muted",
+    hex: "#9198a1",
+    rgb: "rgb(145, 152, 161)"
+  },
+  {
+    name: "fgColor-neutral",
+    hex: "#9198a1",
+    rgb: "rgb(145, 152, 161)"
+  },
+  {
+    name: "fgColor-onEmphasis",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "fgColor-severe",
+    hex: "#cc6b2c",
+    rgb: "rgb(204, 107, 44)"
+  },
+  {
+    name: "fgColor-sponsors",
+    hex: "#c96198",
+    rgb: "rgb(201, 97, 152)"
+  },
+  {
+    name: "fgColor-success",
+    hex: "#57ab5a",
+    rgb: "rgb(87, 171, 90)"
+  },
+  {
+    name: "header-bgColor",
+    hex: "#151b23f2",
+    rgb: "rgb(21, 27, 35)"
+  },
+  {
+    name: "header-borderColor-divider",
+    hex: "#656c76",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "header-fgColor-logo",
+    hex: "#f0f6fc",
+    rgb: "rgb(240, 246, 252)"
+  },
+  {
+    name: "headerSearch-bgColor",
+    hex: "#0d1117",
+    rgb: "rgb(13, 17, 23)"
+  },
+  {
+    name: "headerSearch-borderColor",
+    hex: "#2a313c",
+    rgb: "rgb(42, 49, 60)"
+  },
+  {
+    name: "highlight-neutral-bgColor",
+    hex: "#c6902666",
+    rgb: "rgb(198, 144, 38)"
+  },
+  {
+    name: "label-auburn-bgColor-active",
+    hex: "#543331",
+    rgb: "rgb(84, 51, 49)"
+  },
+  {
+    name: "label-auburn-bgColor-hover",
+    hex: "#3a2422",
+    rgb: "rgb(58, 36, 34)"
+  },
+  {
+    name: "label-auburn-bgColor-rest",
+    hex: "#271817",
+    rgb: "rgb(39, 24, 23)"
+  },
+  {
+    name: "label-auburn-fgColor-active",
+    hex: "#d4b7b5",
+    rgb: "rgb(212, 183, 181)"
+  },
+  {
+    name: "label-auburn-fgColor-hover",
+    hex: "#c6a19f",
+    rgb: "rgb(198, 161, 159)"
+  },
+  {
+    name: "label-auburn-fgColor-rest",
+    hex: "#bf9592",
+    rgb: "rgb(191, 149, 146)"
+  },
+  {
+    name: "label-blue-bgColor-active",
+    hex: "#00378a",
+    rgb: "rgb(0, 55, 138)"
+  },
+  {
+    name: "label-blue-bgColor-hover",
+    hex: "#002766",
+    rgb: "rgb(0, 39, 102)"
+  },
+  {
+    name: "label-blue-bgColor-rest",
+    hex: "#001a47",
+    rgb: "rgb(0, 26, 71)"
+  },
+  {
+    name: "label-blue-fgColor-active",
+    hex: "#85c2ff",
+    rgb: "rgb(133, 194, 255)"
+  },
+  {
+    name: "label-blue-fgColor-hover",
+    hex: "#61adff",
+    rgb: "rgb(97, 173, 255)"
+  },
+  {
+    name: "label-blue-fgColor-rest",
+    hex: "#4da0ff",
+    rgb: "rgb(77, 160, 255)"
+  },
+  {
+    name: "label-brown-bgColor-active",
+    hex: "#483a28",
+    rgb: "rgb(72, 58, 40)"
+  },
+  {
+    name: "label-brown-bgColor-hover",
+    hex: "#342a1d",
+    rgb: "rgb(52, 42, 29)"
+  },
+  {
+    name: "label-brown-bgColor-rest",
+    hex: "#241c14",
+    rgb: "rgb(36, 28, 20)"
+  },
+  {
+    name: "label-brown-fgColor-active",
+    hex: "#cdbb98",
+    rgb: "rgb(205, 187, 152)"
+  },
+  {
+    name: "label-brown-fgColor-hover",
+    hex: "#bfa77d",
+    rgb: "rgb(191, 167, 125)"
+  },
+  {
+    name: "label-brown-fgColor-rest",
+    hex: "#b69a6d",
+    rgb: "rgb(182, 154, 109)"
+  },
+  {
+    name: "label-coral-bgColor-active",
+    hex: "#72220d",
+    rgb: "rgb(114, 34, 13)"
+  },
+  {
+    name: "label-coral-bgColor-hover",
+    hex: "#51180b",
+    rgb: "rgb(81, 24, 11)"
+  },
+  {
+    name: "label-coral-bgColor-rest",
+    hex: "#351008",
+    rgb: "rgb(53, 16, 8)"
+  },
+  {
+    name: "label-coral-fgColor-active",
+    hex: "#fdaa86",
+    rgb: "rgb(253, 170, 134)"
+  },
+  {
+    name: "label-coral-fgColor-hover",
+    hex: "#fa8c61",
+    rgb: "rgb(250, 140, 97)"
+  },
+  {
+    name: "label-coral-fgColor-rest",
+    hex: "#f7794b",
+    rgb: "rgb(247, 121, 75)"
+  },
+  {
+    name: "label-cyan-bgColor-active",
+    hex: "#014156",
+    rgb: "rgb(1, 65, 86)"
+  },
+  {
+    name: "label-cyan-bgColor-hover",
+    hex: "#002e3d",
+    rgb: "rgb(0, 46, 61)"
+  },
+  {
+    name: "label-cyan-bgColor-rest",
+    hex: "#001f29",
+    rgb: "rgb(0, 31, 41)"
+  },
+  {
+    name: "label-cyan-fgColor-active",
+    hex: "#45cbf7",
+    rgb: "rgb(69, 203, 247)"
+  },
+  {
+    name: "label-cyan-fgColor-hover",
+    hex: "#09b7f1",
+    rgb: "rgb(9, 183, 241)"
+  },
+  {
+    name: "label-cyan-fgColor-rest",
+    hex: "#07ace4",
+    rgb: "rgb(7, 172, 228)"
+  },
+  {
+    name: "label-gray-bgColor-active",
+    hex: "#393d41",
+    rgb: "rgb(57, 61, 65)"
+  },
+  {
+    name: "label-gray-bgColor-hover",
+    hex: "#2a2b2d",
+    rgb: "rgb(42, 43, 45)"
+  },
+  {
+    name: "label-gray-bgColor-rest",
+    hex: "#1c1c1c",
+    rgb: "rgb(28, 28, 28)"
+  },
+  {
+    name: "label-gray-fgColor-active",
+    hex: "#b3c0d1",
+    rgb: "rgb(179, 192, 209)"
+  },
+  {
+    name: "label-gray-fgColor-hover",
+    hex: "#9babbf",
+    rgb: "rgb(155, 171, 191)"
+  },
+  {
+    name: "label-gray-fgColor-rest",
+    hex: "#92a1b5",
+    rgb: "rgb(146, 161, 181)"
+  },
+  {
+    name: "label-green-bgColor-active",
+    hex: "#214529",
+    rgb: "rgb(33, 69, 41)"
+  },
+  {
+    name: "label-green-bgColor-hover",
+    hex: "#182f1f",
+    rgb: "rgb(24, 47, 31)"
+  },
+  {
+    name: "label-green-bgColor-rest",
+    hex: "#122117",
+    rgb: "rgb(18, 33, 23)"
+  },
+  {
+    name: "label-green-fgColor-active",
+    hex: "#75d36f",
+    rgb: "rgb(117, 211, 111)"
+  },
+  {
+    name: "label-green-fgColor-hover",
+    hex: "#46c144",
+    rgb: "rgb(70, 193, 68)"
+  },
+  {
+    name: "label-green-fgColor-rest",
+    hex: "#41b445",
+    rgb: "rgb(65, 180, 69)"
+  },
+  {
+    name: "label-indigo-bgColor-active",
+    hex: "#312c90",
+    rgb: "rgb(49, 44, 144)"
+  },
+  {
+    name: "label-indigo-bgColor-hover",
+    hex: "#25215f",
+    rgb: "rgb(37, 33, 95)"
+  },
+  {
+    name: "label-indigo-bgColor-rest",
+    hex: "#1b183f",
+    rgb: "rgb(27, 24, 63)"
+  },
+  {
+    name: "label-indigo-fgColor-active",
+    hex: "#b7baf6",
+    rgb: "rgb(183, 186, 246)"
+  },
+  {
+    name: "label-indigo-fgColor-hover",
+    hex: "#a2a5f1",
+    rgb: "rgb(162, 165, 241)"
+  },
+  {
+    name: "label-indigo-fgColor-rest",
+    hex: "#9899ec",
+    rgb: "rgb(152, 153, 236)"
+  },
+  {
+    name: "label-lemon-bgColor-active",
+    hex: "#4f3c02",
+    rgb: "rgb(79, 60, 2)"
+  },
+  {
+    name: "label-lemon-bgColor-hover",
+    hex: "#372901",
+    rgb: "rgb(55, 41, 1)"
+  },
+  {
+    name: "label-lemon-bgColor-rest",
+    hex: "#291d00",
+    rgb: "rgb(41, 29, 0)"
+  },
+  {
+    name: "label-lemon-fgColor-active",
+    hex: "#d7bc1d",
+    rgb: "rgb(215, 188, 29)"
+  },
+  {
+    name: "label-lemon-fgColor-hover",
+    hex: "#c4a717",
+    rgb: "rgb(196, 167, 23)"
+  },
+  {
+    name: "label-lemon-fgColor-rest",
+    hex: "#ba9b12",
+    rgb: "rgb(186, 155, 18)"
+  },
+  {
+    name: "label-lime-bgColor-active",
+    hex: "#2c441d",
+    rgb: "rgb(44, 68, 29)"
+  },
+  {
+    name: "label-lime-bgColor-hover",
+    hex: "#1f3116",
+    rgb: "rgb(31, 49, 22)"
+  },
+  {
+    name: "label-lime-bgColor-rest",
+    hex: "#141f0f",
+    rgb: "rgb(20, 31, 15)"
+  },
+  {
+    name: "label-lime-fgColor-active",
+    hex: "#9fcc3e",
+    rgb: "rgb(159, 204, 62)"
+  },
+  {
+    name: "label-lime-fgColor-hover",
+    hex: "#89ba36",
+    rgb: "rgb(137, 186, 54)"
+  },
+  {
+    name: "label-lime-fgColor-rest",
+    hex: "#7dae37",
+    rgb: "rgb(125, 174, 55)"
+  },
+  {
+    name: "label-olive-bgColor-active",
+    hex: "#374115",
+    rgb: "rgb(55, 65, 21)"
+  },
+  {
+    name: "label-olive-bgColor-hover",
+    hex: "#252d10",
+    rgb: "rgb(37, 45, 16)"
+  },
+  {
+    name: "label-olive-bgColor-rest",
+    hex: "#171e0b",
+    rgb: "rgb(23, 30, 11)"
+  },
+  {
+    name: "label-olive-fgColor-active",
+    hex: "#cbc025",
+    rgb: "rgb(203, 192, 37)"
+  },
+  {
+    name: "label-olive-fgColor-hover",
+    hex: "#b2af24",
+    rgb: "rgb(178, 175, 36)"
+  },
+  {
+    name: "label-olive-fgColor-rest",
+    hex: "#a2a626",
+    rgb: "rgb(162, 166, 38)"
+  },
+  {
+    name: "label-orange-bgColor-active",
+    hex: "#632f0d",
+    rgb: "rgb(99, 47, 13)"
+  },
+  {
+    name: "label-orange-bgColor-hover",
+    hex: "#43200a",
+    rgb: "rgb(67, 32, 10)"
+  },
+  {
+    name: "label-orange-bgColor-rest",
+    hex: "#311708",
+    rgb: "rgb(49, 23, 8)"
+  },
+  {
+    name: "label-orange-fgColor-active",
+    hex: "#f6b06a",
+    rgb: "rgb(246, 176, 106)"
+  },
+  {
+    name: "label-orange-fgColor-hover",
+    hex: "#f1933b",
+    rgb: "rgb(241, 147, 59)"
+  },
+  {
+    name: "label-orange-fgColor-rest",
+    hex: "#ed8326",
+    rgb: "rgb(237, 131, 38)"
+  },
+  {
+    name: "label-pine-bgColor-active",
+    hex: "#0e4430",
+    rgb: "rgb(14, 68, 48)"
+  },
+  {
+    name: "label-pine-bgColor-hover",
+    hex: "#0b3224",
+    rgb: "rgb(11, 50, 36)"
+  },
+  {
+    name: "label-pine-bgColor-rest",
+    hex: "#082119",
+    rgb: "rgb(8, 33, 25)"
+  },
+  {
+    name: "label-pine-fgColor-active",
+    hex: "#1bda81",
+    rgb: "rgb(27, 218, 129)"
+  },
+  {
+    name: "label-pine-fgColor-hover",
+    hex: "#1ac176",
+    rgb: "rgb(26, 193, 118)"
+  },
+  {
+    name: "label-pine-fgColor-rest",
+    hex: "#1bb673",
+    rgb: "rgb(27, 182, 115)"
+  },
+  {
+    name: "label-pink-bgColor-active",
+    hex: "#65244a",
+    rgb: "rgb(101, 36, 74)"
+  },
+  {
+    name: "label-pink-bgColor-hover",
+    hex: "#451c35",
+    rgb: "rgb(69, 28, 53)"
+  },
+  {
+    name: "label-pink-bgColor-rest",
+    hex: "#2d1524",
+    rgb: "rgb(45, 21, 36)"
+  },
+  {
+    name: "label-pink-fgColor-active",
+    hex: "#f4a9cd",
+    rgb: "rgb(244, 169, 205)"
+  },
+  {
+    name: "label-pink-fgColor-hover",
+    hex: "#ec8dbd",
+    rgb: "rgb(236, 141, 189)"
+  },
+  {
+    name: "label-pink-fgColor-rest",
+    hex: "#e57bb2",
+    rgb: "rgb(229, 123, 178)"
+  },
+  {
+    name: "label-plum-bgColor-active",
+    hex: "#5c1688",
+    rgb: "rgb(92, 22, 136)"
+  },
+  {
+    name: "label-plum-bgColor-hover",
+    hex: "#40125e",
+    rgb: "rgb(64, 18, 94)"
+  },
+  {
+    name: "label-plum-bgColor-rest",
+    hex: "#2a0e3f",
+    rgb: "rgb(42, 14, 63)"
+  },
+  {
+    name: "label-plum-fgColor-active",
+    hex: "#e4a5fd",
+    rgb: "rgb(228, 165, 253)"
+  },
+  {
+    name: "label-plum-fgColor-hover",
+    hex: "#d889fa",
+    rgb: "rgb(216, 137, 250)"
+  },
+  {
+    name: "label-plum-fgColor-rest",
+    hex: "#d07ef7",
+    rgb: "rgb(208, 126, 247)"
+  },
+  {
+    name: "label-purple-bgColor-active",
+    hex: "#481a9e",
+    rgb: "rgb(72, 26, 158)"
+  },
+  {
+    name: "label-purple-bgColor-hover",
+    hex: "#31146b",
+    rgb: "rgb(49, 20, 107)"
+  },
+  {
+    name: "label-purple-bgColor-rest",
+    hex: "#211047",
+    rgb: "rgb(33, 16, 71)"
+  },
+  {
+    name: "label-purple-fgColor-active",
+    hex: "#d2affd",
+    rgb: "rgb(210, 175, 253)"
+  },
+  {
+    name: "label-purple-fgColor-hover",
+    hex: "#c398fb",
+    rgb: "rgb(195, 152, 251)"
+  },
+  {
+    name: "label-purple-fgColor-rest",
+    hex: "#b687f7",
+    rgb: "rgb(182, 135, 247)"
+  },
+  {
+    name: "label-red-bgColor-active",
+    hex: "#790c20",
+    rgb: "rgb(121, 12, 32)"
+  },
+  {
+    name: "label-red-bgColor-hover",
+    hex: "#58091a",
+    rgb: "rgb(88, 9, 26)"
+  },
+  {
+    name: "label-red-bgColor-rest",
+    hex: "#3c0614",
+    rgb: "rgb(60, 6, 20)"
+  },
+  {
+    name: "label-red-fgColor-active",
+    hex: "#f7adab",
+    rgb: "rgb(247, 173, 171)"
+  },
+  {
+    name: "label-red-fgColor-hover",
+    hex: "#f48b8d",
+    rgb: "rgb(244, 139, 141)"
+  },
+  {
+    name: "label-red-fgColor-rest",
+    hex: "#f27d83",
+    rgb: "rgb(242, 125, 131)"
+  },
+  {
+    name: "label-teal-bgColor-active",
+    hex: "#0a464d",
+    rgb: "rgb(10, 70, 77)"
+  },
+  {
+    name: "label-teal-bgColor-hover",
+    hex: "#073036",
+    rgb: "rgb(7, 48, 54)"
+  },
+  {
+    name: "label-teal-bgColor-rest",
+    hex: "#041f25",
+    rgb: "rgb(4, 31, 37)"
+  },
+  {
+    name: "label-teal-fgColor-active",
+    hex: "#24d6c4",
+    rgb: "rgb(36, 214, 196)"
+  },
+  {
+    name: "label-teal-fgColor-hover",
+    hex: "#1fbdb2",
+    rgb: "rgb(31, 189, 178)"
+  },
+  {
+    name: "label-teal-fgColor-rest",
+    hex: "#1cb0ab",
+    rgb: "rgb(28, 176, 171)"
+  },
+  {
+    name: "label-yellow-bgColor-active",
+    hex: "#5a3702",
+    rgb: "rgb(90, 55, 2)"
+  },
+  {
+    name: "label-yellow-bgColor-hover",
+    hex: "#3d2401",
+    rgb: "rgb(61, 36, 1)"
+  },
+  {
+    name: "label-yellow-bgColor-rest",
+    hex: "#2e1a00",
+    rgb: "rgb(46, 26, 0)"
+  },
+  {
+    name: "label-yellow-fgColor-active",
+    hex: "#edb431",
+    rgb: "rgb(237, 180, 49)"
+  },
+  {
+    name: "label-yellow-fgColor-hover",
+    hex: "#df9e11",
+    rgb: "rgb(223, 158, 17)"
+  },
+  {
+    name: "label-yellow-fgColor-rest",
+    hex: "#d3910d",
+    rgb: "rgb(211, 145, 13)"
+  },
+  {
+    name: "menu-bgColor-active",
+    hex: "#151b23",
+    rgb: "rgb(21, 27, 35)"
+  },
+  {
+    name: "overlay-backdrop-bgColor",
+    hex: "#262c3666",
+    rgb: "rgb(38, 44, 54)"
+  },
+  {
+    name: "overlay-bgColor",
+    hex: "#2a313c",
+    rgb: "rgb(42, 49, 60)"
+  },
+  {
+    name: "overlay-borderColor",
+    hex: "#3d444db3",
+    rgb: "rgb(61, 68, 77)"
+  },
+  {
+    name: "reactionButton-selected-bgColor-rest",
+    hex: "#4184e433",
+    rgb: "rgb(65, 132, 228)"
+  },
+  {
+    name: "reactionButton-selected-fgColor-hover",
+    hex: "#6cb6ff",
+    rgb: "rgb(108, 182, 255)"
+  },
+  {
+    name: "selectMenu-bgColor-active",
+    hex: "#143d79",
+    rgb: "rgb(20, 61, 121)"
+  },
+  {
+    name: "sideNav-bgColor-selected",
+    hex: "#212830",
+    rgb: "rgb(33, 40, 48)"
+  },
+  {
+    name: "skeletonLoader-bgColor",
+    hex: "#656c7633",
+    rgb: "rgb(101, 108, 118)"
+  },
+  {
+    name: "timelineBadge-bgColor",
+    hex: "#262c36",
+    rgb: "rgb(38, 44, 54)"
+  },
+  {
+    name: "topicTag-borderColor",
+    hex: "#00000000",
+    rgb: "rgb(0, 0, 0)"
+  },
+  {
+    name: "underlineNav-borderColor-active",
+    hex: "#ec775c",
+    rgb: "rgb(236, 119, 92)"
+  },
+  {
+    name: "avatar-bgColor",
+    hex: "#cdd9e51a",
+    rgb: "rgb(205, 217, 229)"
+  },
+  {
+    name: "bgColor-black",
+    hex: "#1c2128",
+    rgb: "rgb(28, 33, 40)",
+  },
+    
+    
+    { name: "Red", hex: "#FF0000", rgb: "rgb(255, 0, 0)" },
+    { name: "Coral", hex: "#FF7F50", rgb: "rgb(255, 127, 80)" },
+    { name: "Orange", hex: "#FFA500", rgb: "rgb(255, 165, 0)" },
+    { name: "Gold", hex: "#FFD700", rgb: "rgb(255, 215, 0)" },
+    { name: "Yellow", hex: "#FFFF00", rgb: "rgb(255, 255, 0)" },
+    { name: "Chartreuse", hex: "#7FFF00", rgb: "rgb(127, 255, 0)" },
+    { name: "Lime", hex: "#00FF00", rgb: "rgb(0, 255, 0)" },
+    { name: "Spring Green", hex: "#00FF7F", rgb: "rgb(0, 255, 127)" },
+    { name: "Cyan", hex: "#00FFFF", rgb: "rgb(0, 255, 255)" },
+    { name: "Deep Sky Blue", hex: "#00BFFF", rgb: "rgb(0, 191, 255)" },
+    { name: "Blue", hex: "#0000FF", rgb: "rgb(0, 0, 255)" },
+    { name: "Indigo", hex: "#4B0082", rgb: "rgb(75, 0, 130)" },
+    { name: "Violet", hex: "#EE82EE", rgb: "rgb(238, 130, 238)" },
+    { name: "Magenta", hex: "#FF00FF", rgb: "rgb(255, 0, 255)" },
+    { name: "Deep Pink", hex: "#FF1493", rgb: "rgb(255, 20, 147)" },
+    { name: "White", hex: "#FFFFFF", rgb: "rgb(255, 255, 255)" },
+    { name: "Black", hex: "#000000", rgb: "rgb(0, 0, 0)" },
+    { name: "Navy", hex: "#000080", rgb: "rgb(0, 0, 128)" },
+    { name: "Teal", hex: "#008080", rgb: "rgb(0, 128, 128)" },
+    { name: "Purple", hex: "#800080", rgb: "rgb(128, 0, 128)" },
+    { name: "Brown", hex: "#A52A2A", rgb: "rgb(165, 42, 42)" },
+    { name: "Slate Gray", hex: "#708090", rgb: "rgb(112, 128, 144)" },
+    { name: "Crimson", hex: "#DC143C", rgb: "rgb(220, 20, 60)" },
+    { name: "Forest Green", hex: "#228B22", rgb: "rgb(34, 139, 34)" },
+
+    { name: "Material Red", hex: "#F44336", rgb: "rgb(244, 67, 54)" },
+    { name: "Material Pink", hex: "#E91E63", rgb: "rgb(233, 30, 99)" },
+    { name: "Material Purple", hex: "#9C27B0", rgb: "rgb(156, 39, 176)" },
+    { name: "Material Deep Purple", hex: "#673AB7", rgb: "rgb(103, 58, 183)" },
+    { name: "Material Indigo", hex: "#3F51B5", rgb: "rgb(63, 81, 181)" },
+    { name: "Material Blue", hex: "#2196F3", rgb: "rgb(33, 150, 243)" },
+    { name: "Material Light Blue", hex: "#03A9F4", rgb: "rgb(3, 169, 244)" },
+    { name: "Material Cyan", hex: "#00BCD4", rgb: "rgb(0, 188, 212)" },
+    { name: "Material Teal", hex: "#009688", rgb: "rgb(0, 150, 136)" },
+    { name: "Material Green", hex: "#4CAF50", rgb: "rgb(76, 175, 80)" },
+    { name: "Material Light Green", hex: "#8BC34A", rgb: "rgb(139, 195, 74)" },
+    { name: "Material Lime", hex: "#CDDC39", rgb: "rgb(205, 220, 57)" },
+    { name: "Material Yellow", hex: "#FFEB3B", rgb: "rgb(255, 235, 59)" },
+    { name: "Material Amber", hex: "#FFC107", rgb: "rgb(255, 193, 7)" },
+    { name: "Material Orange", hex: "#FF9800", rgb: "rgb(255, 152, 0)" },
+    { name: "Material Deep Orange", hex: "#FF5722", rgb: "rgb(255, 87, 34)" },
+    { name: "Material Brown", hex: "#795548", rgb: "rgb(121, 85, 72)" },
+    { name: "Material Grey", hex: "#9E9E9E", rgb: "rgb(158, 158, 158)" },
+    { name: "Material Blue Grey", hex: "#607D8B", rgb: "rgb(96, 125, 139)" }
+  ];
+
+  // State Management
+  const state = {
+    colors: [...defaultColors],
+    customColors: [],
+    favoriteColors: [],
+    showOnlyFavorites: false,
+    colorScheme: {
+      primary: "#3498db",
+      secondary: "#2ecc71",
+      accent: "#e74c3c",
+      background: "#f5f5f5",
+      text: "#333333"
+    }
+  };
+
+  // Utility Functions
+  const utils = {
+    hexToRgb: (hex) => {
+      hex = hex.replace("#", "");
+      const r = parseInt(hex.substring(0, 2), 16);
+      const g = parseInt(hex.substring(2, 4), 16);
+      const b = parseInt(hex.substring(4, 6), 16);
+      return `rgb(${r}, ${g}, ${b})`;
+    },
+
+    showNotification: (message, duration = 3000) => {
+      const $toast = $("#notification-toast");
+      $("#notification-message").text(message);
+      $toast.removeClass("hidden").addClass("toast-enter");
+
+      setTimeout(() => {
+        $toast.addClass("toast-exit");
+        setTimeout(() => {
+          $toast.addClass("hidden").removeClass("toast-enter toast-exit");
+        }, 300);
+      }, duration);
+    },
+
+    copyToClipboard: async (text) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        utils.showNotification("Copied to clipboard!");
+      } catch (err) {
+        utils.showNotification("Failed to copy to clipboard");
+      }
+    },
+
+    downloadFile: (content, filename, type = "text/css") => {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    },
+
+    generateColorCard: (color, isFavorite = false) => {
+      return `
+                <div class="color-card bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="color-preview w-full" style="background-color: ${
+                      color.hex
+                    }"></div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="text-lg font-semibold">${color.name}</h3>
+                            <button class="favorite-btn p-1 rounded-full ${
+                              isFavorite ? "text-red-500" : "text-gray-400"
+                            }" 
+                                    data-hex="${color.hex}">
+                                <svg class="w-5 h-5" fill="${
+                                  isFavorite ? "currentColor" : "none"
+                                }" 
+                                     stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <div class="flex items-center mb-1">
+                                    <span class="text-xs text-gray-500 mr-1">HEX</span>
+                                    <button class="copy-btn p-1 text-gray-400 hover:text-blue-500" 
+                                            data-value="${color.hex}">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <code class="text-sm font-mono block p-1 bg-gray-100 rounded">${
+                                  color.hex
+                                }</code>
+                            </div>
+                            <div>
+                                <div class="flex items-center mb-1">
+                                    <span class="text-xs text-gray-500 mr-1">RGB</span>
+                                    <button class="copy-btn p-1 text-gray-400 hover:text-blue-500" 
+                                            data-value="${color.rgb}">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <code class="text-sm font-mono block p-1 bg-gray-100 rounded truncate">${
+                                  color.rgb
+                                }</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+  };
+
+  // Event Handlers
+  const handlers = {
+    initializeTabs: () => {
+      const tabButtons = $('[role="tab"]');
+      const tabPanels = $('[role="tabpanel"]');
+
+      tabButtons.on("click", function () {
+        const target = $(this).data("tabs-target");
+
+        // Update button states
+        tabButtons
+          .removeClass("active border-blue-500 text-blue-500")
+          .addClass("border-transparent");
+        $(this).addClass("active border-blue-500 text-blue-500");
+
+        // Update panel visibility
+        tabPanels.addClass("hidden");
+        $(target).removeClass("hidden");
+      });
+
+      // Initialize first tab
+      $("#browse-tab").click();
+    },
+
+    handleSearch: () => {
+      $("#color-search").on("input", function () {
+        const searchTerm = $(this).val().toLowerCase();
+        const filteredColors = state.colors.filter(
+          (color) =>
+            color.name.toLowerCase().includes(searchTerm) ||
+            color.hex.toLowerCase().includes(searchTerm) ||
+            color.rgb.toLowerCase().includes(searchTerm)
+        );
+        handlers.renderColorGrid(filteredColors);
+      });
+    },
+
+    handleFavoriteToggle: () => {
+      $("#toggle-favorites").on("click", function () {
+        state.showOnlyFavorites = !state.showOnlyFavorites;
+        $(this).toggleClass("bg-red-100 text-red-600");
+        handlers.renderColorGrid(state.colors);
+      });
+    },
+
+    handleColorFavorite: () => {
+      $(document).on("click", ".favorite-btn", function () {
+        const hex = $(this).data("hex");
+        if (state.favoriteColors.includes(hex)) {
+          state.favoriteColors = state.favoriteColors.filter((h) => h !== hex);
+        } else {
+          state.favoriteColors.push(hex);
+        }
+        handlers.renderColorGrid(state.colors);
+      });
+    },
+
+    handleCopyValue: () => {
+      $(document).on("click", ".copy-btn", function () {
+        const value = $(this).data("value");
+        utils.copyToClipboard(value);
+      });
+    },
+
+    handleCustomColorAdd: () => {
+      $("#custom-color-form").on("submit", function (e) {
+        e.preventDefault();
+
+        const name = $("#color-name").val();
+        const hex = $("#color-value").val();
+        const rgb = utils.hexToRgb(hex);
+
+        const newColor = { name, hex, rgb };
+        state.customColors.push(newColor);
+        state.colors.push(newColor);
+
+        utils.showNotification("Custom color added successfully!");
+        $("#custom-colors-section").removeClass("hidden");
+        handlers.renderCustomColors();
+
+        // Reset form
+        this.reset();
+        $("#color-picker").val("#000000");
+      });
+    },
+
+    handleColorPicker: () => {
+      $("#color-picker").on("input", function () {
+        $("#color-value").val($(this).val());
+      });
+    },
+
+    handleSchemeControls: () => {
+      Object.entries(state.colorScheme).forEach(([key, value]) => {
+        $(`#scheme-${key}`).on("input", function () {
+          state.colorScheme[key] = $(this).val();
+          handlers.updateSchemePreview();
+        });
+      });
+    },
+
+    handleGenerateCss: () => {
+      $("#generate-css-btn").on("click", function () {
+        handlers.generateCssVariables();
+        $("#css-tab").click();
+      });
+    },
+
+    handleCopyDownloadCss: () => {
+      $("#copy-css").on("click", function () {
+        const css = $("#css-output").text();
+        utils.copyToClipboard(css);
+      });
+
+      $("#download-css").on("click", function () {
+        const css = $("#css-output").text();
+        utils.downloadFile(css, "color-variables.css");
+      });
+    },
+
+    renderColorGrid: (colors) => {
+      const $grid = $("#color-grid");
+      $grid.empty();
+
+      const displayColors = state.showOnlyFavorites
+        ? colors.filter((c) => state.favoriteColors.includes(c.hex))
+        : colors;
+
+      displayColors.forEach((color) => {
+        const isFavorite = state.favoriteColors.includes(color.hex);
+        $grid.append(utils.generateColorCard(color, isFavorite));
+      });
+    },
+
+    renderCustomColors: () => {
+      const $grid = $("#custom-colors-grid");
+      $grid.empty();
+
+      state.customColors.forEach((color) => {
+        const isFavorite = state.favoriteColors.includes(color.hex);
+        $grid.append(utils.generateColorCard(color, isFavorite));
+      });
+    },
+
+    updateSchemePreview: () => {
+      const $preview = $("#scheme-preview");
+      $preview.html(`
+                <div class="p-6" style="background-color: ${state.colorScheme.background}">
+                    <h3 class="text-xl font-bold mb-4" style="color: ${state.colorScheme.text}">
+                        Color Scheme Preview
+                    </h3>
+                    
+                    <div class="flex flex-wrap gap-4 mb-6">
+                        <button class="scheme-button px-4 py-2 rounded-md text-white"
+                                style="background-color: ${state.colorScheme.primary}">
+                            Primary Button
+                        </button>
+                        
+                        <button class="scheme-button px-4 py-2 rounded-md text-white"
+                                style="background-color: ${state.colorScheme.secondary}">
+                            Secondary Button
+                        </button>
+                        
+                        <button class="scheme-button px-4 py-2 rounded-md text-white"
+                                style="background-color: ${state.colorScheme.accent}">
+                            Accent Button
+                        </button>
+                    </div>
+                    
+                    <div class="border p-4 rounded-md mb-4"
+                         style="border-color: ${state.colorScheme.accent}; background-color: rgba(255,255,255,0.9)">
+                        <p class="font-medium" style="color: ${state.colorScheme.accent}">
+                            This is an accent colored notification box.
+                        </p>
+                    </div>
+                    
+                    <p style="color: ${state.colorScheme.text}">
+                        This is how your text would look with the selected color scheme. 
+                        The background and text colors work together to create the perfect contrast for readability.
+                    </p>
+                </div>
+            `);
+    },
+
+    generateCssVariables: () => {
+      let css = ":root {\n";
+
+      // Add color scheme variables
+      Object.entries(state.colorScheme).forEach(([key, value]) => {
+        css += `  --color-${key}: ${value};\n`;
+      });
+
+      // Add favorite colors
+      state.favoriteColors.forEach((hex) => {
+        const color = state.colors.find((c) => c.hex === hex);
+        if (color) {
+          const safeName = color.name.toLowerCase().replace(/\s+/g, "-");
+          css += `  --color-${safeName}: ${color.hex};\n`;
+        }
+      });
+
+      // Add custom colors
+      state.customColors.forEach((color) => {
+        const safeName = color.name.toLowerCase().replace(/\s+/g, "-");
+        css += `  --color-${safeName}: ${color.hex};\n`;
+      });
+
+      css += "}";
+
+      $("#css-output").text(css);
+    }
+  };
+
+  // Initialize the application
+  const init = () => {
+    handlers.initializeTabs();
+    handlers.handleSearch();
+    handlers.handleFavoriteToggle();
+    handlers.handleColorFavorite();
+    handlers.handleCopyValue();
+    handlers.handleCustomColorAdd();
+    handlers.handleColorPicker();
+    handlers.handleSchemeControls();
+    handlers.handleGenerateCss();
+    handlers.handleCopyDownloadCss();
+
+    // Initial renders
+    handlers.renderColorGrid(state.colors);
+    handlers.updateSchemePreview();
+  };
+
+  // Start the application
+  init();
+});  
+  </script>
+
+</body>
+</html>
