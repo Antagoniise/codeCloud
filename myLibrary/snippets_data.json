@@ -1,0 +1,17 @@
+{
+    "snippets": [
+        {
+            "id": "snippet-1746439835803",
+            "title": "hey",
+            "languages": [
+                {
+                    "id": "javascript",
+                    "name": "JavaScript",
+                    "code": "function hey{   /** logic **/}"
+                }
+            ],
+            "createdAt": "2025-05-05T10:10:58.840Z",
+            "updatedAt": "2025-05-05T06:10:59-04:00"
+        }
+    ]
+}

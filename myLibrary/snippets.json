@@ -1,0 +1,14 @@
+[
+    {
+        "id": "snippet-1746164806767",
+        "title": "hey",
+        "languages": [
+            {
+                "id": "javascript",
+                "name": "JavaScript",
+                "code": "function hey(){   /** logic **/}"
+            }
+        ],
+        "createdAt": "2025-05-02T05:47:18.716Z"
+    }
+]
