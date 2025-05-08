@@ -1,0 +1,40 @@
+{
+  "snippets": [
+    {
+      "id": "60f1234567890-1a2b3c4d5e6f7g8h",
+      "title": "Hello World in JavaScript",
+      "language": "javascript",
+      "code": "function helloWorld() {\n  console.log(\"Hello, world!\");\n}\n\nhelloWorld();",
+      "minified_code": "function helloWorld(){console.log(\"Hello, world!\")}helloWorld();",
+      "created_at": "2025-05-05 10:30:00",
+      "updated_at": "2025-05-05 10:30:00"
+    },
+    {
+      "id": "60f1234567891-2b3c4d5e6f7g8h9i",
+      "title": "Simple HTML Template",
+      "language": "html",
+      "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a simple HTML template.</p>\n</body>\n</html>",
+      "minified_code": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>My Page</title></head><body><h1>Welcome</h1><p>This is a simple HTML template.</p></body></html>",
+      "created_at": "2025-05-05 10:25:00",
+      "updated_at": "2025-05-05 10:25:00"
+    },
+    {
+      "id": "60f1234567892-3c4d5e6f7g8h9i0j",
+      "title": "Basic CSS Styles",
+      "language": "css",
+      "code": "body {\n  font-family: Arial, sans-serif;\n  margin: 0;\n  padding: 20px;\n  background-color: #f5f5f5;\n}\n\nh1 {\n  color: #333;\n  text-align: center;\n}",
+      "minified_code": "body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5}h1{color:#333;text-align:center}",
+      "created_at": "2025-05-05 10:20:00",
+      "updated_at": "2025-05-05 10:20:00"
+    },
+    {
+      "id": "60f1234567893-4d5e6f7g8h9i0j1k",
+      "title": "PHP Hello World",
+      "language": "php",
+      "code": "<?php\n// A simple PHP hello world script\nfunction sayHello($name) {\n  return \"Hello, \" . $name . \"!\";\n}\n\n$greeting = sayHello(\"World\");\necho $greeting;\n?>",
+      "minified_code": "<?php function sayHello($name){return\"Hello, \".$name.\"!\";}$greeting=sayHello(\"World\");echo$greeting;?>",
+      "created_at": "2025-05-05 10:15:00",
+      "updated_at": "2025-05-05 10:15:00"
+    }
+  ]
+}
