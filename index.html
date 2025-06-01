@@ -79,7 +79,7 @@
 
     <!-- Main Content -->
     <div class="main-content" id="main-content">
-      <iframe id="dynamiciFrame" src="https://dev.wuaze.com/404.html" style="border: 0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
+      <iframe id="dynamiciFrame" src="https://dev.wuaze.com/siteManifest/404.html" style="border: 0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
     </div>
 
     <!-- Overlay -->
@@ -183,7 +183,7 @@
       if (currentPage === page) return;
       
       previousPage = currentPage;
-      currentPage = page;
+//      currentPage = page;
       sessionStorage.setItem("previousPage", previousPage);
       
       startLoading();
@@ -204,12 +204,12 @@
     function loadInitialPage() {
       const path = window.location.pathname.replace(/^\//, '');
       const page = path || 'home';
-      navigateTo(page);
+//      navigateTo(page);
     }
 
     function handlePopState(event) {
       const page = event.state?.page || 'home';
-      navigateTo(page);
+//      navigateTo(page);
     }
 
     // Loading indicator functions
