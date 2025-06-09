@@ -1,0 +1,67 @@
+{
+    "snippets": [
+        {
+            "id": "68198924733a0-798d8d6c",
+            "title": "testing testing",
+            "language": "html",
+            "code": "<p>123<\/p>\n",
+            "minified_code": "123",
+            "created_at": "2025-05-05 23:59:32",
+            "updated_at": "2025-05-05 23:59:32"
+        },
+        {
+            "id": "6818cbf0b8388-d1544529",
+            "title": "Hide Scrollbars",
+            "language": "css",
+            "code": "*  {\n   scrollbar-width: none;\n   -ms-overflow-style: none;\n}\n *::-webkit-scrollbar  {\n   display: none;\n}\n html, body  {\n   overflow: auto;\n   scrollbar-width: none;\n   -ms-overflow-style: none;\n}\n html::-webkit-scrollbar, body::-webkit-scrollbar  {\n   display: none;\n}\n \/* Firefox *\/ \/* Internet Explorer 10+ *\/ \/* Chrome, Safari, Opera *\/",
+            "minified_code": "*{scrollbar-width:none;-ms-overflow-style:none}*::-webkit-scrollbar{display:none}html,body{overflow:auto;scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}",
+            "created_at": "2025-05-05 10:32:16",
+            "updated_at": "2025-05-05 10:45:11"
+        },
+        {
+            "id": "6818856ca77d4-18a04941",
+            "title": "TailWindCSS",
+            "language": "html",
+            "code": "<script src=\"https:\/\/cdn.tailwindcss.com\">\n<!-- TailWind CSS Dependency -->\n<\/script>\n",
+            "minified_code": "<script src=\"https:\/\/cdn.tailwindcss.com\"><\/script>",
+            "created_at": "2025-05-05 05:31:24",
+            "updated_at": "2025-05-05 10:40:48"
+        },
+        {
+            "id": "60f1234567890-1a2b3c4d5e6f7g8h",
+            "title": "Hello World in JavaScript",
+            "language": "javascript",
+            "code": "function helloWorld() {\n  console.log(\"Hello, world!\");\n}\n\nhelloWorld();\n",
+            "minified_code": "function helloWorld(){console.log(\"Hello,world!\");}helloWorld();",
+            "created_at": "2025-05-05 10:30:00",
+            "updated_at": "2025-05-05 07:32:27"
+        },
+        {
+            "id": "60f1234567891-2b3c4d5e6f7g8h9i",
+            "title": "Simple HTML Template",
+            "language": "html",
+            "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My Page<\/title>\n<\/head>\n<body>\n  <h1>Welcome<\/h1>\n  <p>This is a simple HTML template.<\/p>\n<\/body>\n<\/html>",
+            "minified_code": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>My Page<\/title><\/head><body><h1>Welcome<\/h1><p>This is a simple HTML template.<\/p><\/body><\/html>",
+            "created_at": "2025-05-05 10:25:00",
+            "updated_at": "2025-05-05 10:25:00"
+        },
+        {
+            "id": "60f1234567892-3c4d5e6f7g8h9i0j",
+            "title": "Basic CSS Styles",
+            "language": "css",
+            "code": "body {\n  font-family: Arial, sans-serif;\n  margin: 0;\n  padding: 20px;\n  background-color: #f5f5f5;\n}\n\nh1 {\n  color: #333;\n  text-align: center;\n}",
+            "minified_code": "body{font-family:Arial,sans-serif;margin:0;padding:20px;background-color:#f5f5f5}h1{color:#333;text-align:center}",
+            "created_at": "2025-05-05 10:20:00",
+            "updated_at": "2025-05-05 10:20:00"
+        },
+        {
+            "id": "60f1234567893-4d5e6f7g8h9i0j1k",
+            "title": "PHP Hello World",
+            "language": "php",
+            "code": "<?php\n\/\/ A simple PHP hello world script\nfunction sayHello($name) {\n  return \"Hello, \" . $name . \"!\";\n}\n\n$greeting = sayHello(\"World\");\necho $greeting;\n?>\n\n\/\/ Comment\n",
+            "minified_code": "<?phpfunction sayHello($name){return \"Hello,\" . $name . \"!\";}$greeting=sayHello(\"World\");echo $greeting;?>",
+            "created_at": "2025-05-05 10:15:00",
+            "updated_at": "2025-05-15 05:31:54"
+        }
+    ]
+}
