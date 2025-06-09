@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const iframe = document.getElementById("dynamiciFrame");
+
+        let pageToLoad = "/home/";
+
+        const hashPath = window.location.hash;
+        if (hashPath && hashPath.startsWith("#/")) {
+          pageToLoad = hashPath.substring(2);
+        }
+
+        iframe.src = pageToLoad;
+      });
+    </script>
+<script>
+(async function injectHeadFromTemplate() {
+  const response = await fetch('https://dev.wuaze.com/layout/head/');
+  if (!response.ok) {
+    console.error('Failed to load head template:', response.status);
+    return;
+  }
+
+  const htmlText = await response.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlText, 'text/html');
+  const template = doc.getElementById('head');
+
+  if (!template) {
+    console.error('No <template id="head"> found in loaded document.');
+    return;
+  }
+
+  const content = template.content.cloneNode(true);
+
+  // Insert each child into <head>
+  for (const node of content.children) {
+    document.head.appendChild(node.cloneNode(true));
+  }
+
+  console.log('✅ Head template content successfully injected.');
+})();
+</script>
+
+ <link rel="stylesheet" href="https://dev.wuaze.com/core.css" />
+   
+    <link href="https://dev.wuaze.com/styleSheets/dev.css" rel="stylesheet" />
+
+
+  </head>
+
+  <body>
+    <div class="app-container">
+
+ 
+<div class="contentWrapper">
+<div id="searchOverlay" class="search-overlay">    
+<div class="searchOverlayCon">
+    <div class="conTainer command-palette">
+        <div class="searchBar search-container">
+            <input type="text" id="expandedSearchInput" class="inputGlobal" placeholder="Q Search or type a command" autofocus>
+        </div>
+        <div class="results-header">Results (7)</div>
+   <div id="searchResults" class="max-h-96 overflow-y-auto">
+            <!-- Search results will be populated here -->
+          </div>   
+          
+        
+        <div class="footer">
+            <span>
+                <span>to select</span>
+                <span class="keyboard-shortcut">↵</span>
+            </span>
+            <span>
+                <span>to navigate</span>
+                <span class="keyboard-shortcut">↑↓</span>
+            </span>
+            <span>
+                <span>to close</span>
+                <span class="keyboard-shortcut">esc</span>
+            </span>
+        </div>
+    </div>
+    
+<svg id="closeSearch" class="global medium lightGray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+  <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+  <path
+    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+  />
+</svg>
+    
+    
+    
+</div>    
+</div>    
+</div>    
+    
+
+   
+      <!----------------------------  Header  ----------------------------->
+      <!------ L E F T -------->
+      <header class="header" id="header">
+        <div class="header-left">
+          <!-- Left SideBar Toggle -->
+          <svg id="menu-toggle" class="global medium darkGray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <defs>
+              <style>
+                .fa-secondary {
+                  opacity: 0.4;
+                }
+              </style>
+            </defs>
+            <path
+              class="fa-secondary"
+              d="M32 96l0 320c0 17.7 14.3 32 32 32l320 0c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L64 64C46.3 64 32 78.3 32 96zm148.7 36.7c6.2-6.2 16.4-6.2 22.6 0l112 112c6.2 6.2 6.2 16.4 0 22.6l-112 112c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L281.4 256 180.7 155.3c-6.2-6.2-6.2-16.4 0-22.6z"
+            />
+            <path
+              class="fa-primary"
+              d="M416 96c0-17.7-14.3-32-32-32L64 64C46.3 64 32 78.3 32 96l0 320c0 17.7 14.3 32 32 32l320 0c17.7 0 32-14.3 32-32l0-320zM384 32c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96C0 60.7 28.7 32 64 32l320 0zM315.3 267.3l-112 112c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L281.4 256 180.7 155.3c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l112 112c6.2 6.2 6.2 16.4 0 22.6z"
+            />
+          </svg>
+
+          <!-- GitHub Logo -->
+          <div class="logo">
+            <svg height="32" viewBox="0 0 16 16" width="32" fill="white">
+              <path
+                fill-rule="evenodd"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="search-container">
+            <input type="text" id="primarySearch" class="inputGlobal" placeholder="Search GitHub" />
+          </div>
+        </div>
+
+        <!------ R I G H T -------->
+        <div class="header-right">
+          <!-- Right SideBar Toggle -->
+          <svg id="profile-toggle" class="global medium darkGray" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <defs>
+              <style>
+                .fa-secondary {
+                  opacity: 0.4;
+                }
+              </style>
+            </defs>
+            <path
+              class="fa-secondary"
+              d="M32 96l0 320c0 17.7 14.3 32 32 32l320 0c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L64 64C46.3 64 32 78.3 32 96zM132.7 244.7l112-112c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L166.6 256 267.3 356.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-112-112c-6.2-6.2-6.2-16.4 0-22.6z"
+            />
+            <path
+              class="fa-primary"
+              d="M32 416c0 17.7 14.3 32 32 32l320 0c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L64 64C46.3 64 32 78.3 32 96l0 320zm32 64c-35.3 0-64-28.7-64-64L0 96C0 60.7 28.7 32 64 32l320 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480zm68.7-235.3l112-112c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L166.6 256 267.3 356.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-112-112c-6.2-6.2-6.2-16.4 0-22.6z"
+            />
+          </svg>
+        </div>
+      </header>
+
+
+      <!-- Left Sidebar --
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-content" id="sidebar-content">
+          <div class="nav-section">
+            <div class="nav-section-title">Tools</div>
+            <a class="nav-item" href="/snippets/" data-page="snippets" data-url="snippets">
+              <span class="nav-item-icon">
+                 <svg class="icon global small">
+                  <use href="#notes"></use>
+                  </svg>
+              </span>
+               <span class="nav-item-text">Snippets</span>
+            </a>
+
+            <a class="nav-item" href="/colours/" data-page="colours" data-url="colours">
+              <span class="nav-item-icon">
+                 <svg class="icon global small">
+                  <use href="#palette"></use>
+                  </svg>
+              </span>
+              <span class="nav-item-text">Colours</span>
+            </a>
+
+            <a class="nav-item" href="/tutorials/" data-page="tutorials" data-url="tutorials">
+              <span class="nav-item-icon">
+                 <svg class="icon global small">
+                  <use href="#memo-circle-info"></use>
+                  </svg>
+              </span>
+              <span class="nav-item-text">Tutorials</span>
+            </a>
+
+            <a class="nav-item" href="/pwa/" data-page="pwa" data-url="pwa" data-guide="pwa" data-transition="slide">
+              <span class="nav-item-icon">
+                 <svg class="icon global small">
+                  <use href="#mobile-notch"></use>
+                  </svg>
+              </span>
+              <span class="nav-item-text">Progressive Web Apps</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+   -->   
+    <!-- SVG Icons -->
+    <svg style="display: none;">
+        <defs>
+            <symbol id="notes" viewBox="0 0 24 24">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+            </symbol>
+            <symbol id="palette" viewBox="0 0 24 24">
+                <path d="M12 3c-4.97 0-9 4.03-9 9 0 4.97 4.03 9 9 9 .83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-5.52-4.48-10-10-10zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </symbol>
+            <symbol id="memo-circle-info" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </symbol>
+            <symbol id="mobile-notch" viewBox="0 0 24 24">
+                <path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm-5 20c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm5.5-4H6.5V4h11v13z"/>
+            </symbol>
+        </defs>
+    </svg>
+
+        <!-- Left Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-content" id="sidebar-content">
+                <div class="nav-section">
+                    <div class="nav-section-title">Development Tools</div>
+                    
+                    <a class="nav-item active" href="/snippets/" data-page="snippets" data-url="snippets">
+                        <span class="nav-item-icon">
+                            <svg class="icon">
+                                <use href="#notes"></use>
+                            </svg>
+                        </span>
+                        <span class="nav-item-text">Code Snippets</span>
+                    </a>
+
+                    <a class="nav-item" href="/colours/" data-page="colours" data-url="colours">
+                        <span class="nav-item-icon">
+                            <svg class="icon">
+                                <use href="#palette"></use>
+                            </svg>
+                        </span>
+                        <span class="nav-item-text">Color Palette</span>
+                    </a>
+
+                    <a class="nav-item" href="/tutorials/" data-page="tutorials" data-url="tutorials">
+                        <span class="nav-item-icon">
+                            <svg class="icon">
+                                <use href="#memo-circle-info"></use>
+                            </svg>
+                        </span>
+                        <span class="nav-item-text">Tutorials & Guides</span>
+                    </a>
+
+                    <a class="nav-item" href="/pwa/" data-page="pwa" data-url="pwa" data-guide="pwa" data-transition="slide">
+                        <span class="nav-item-icon">
+                            <svg class="icon">
+                                <use href="#mobile-notch"></use>
+                            </svg>
+                        </span>
+                        <span class="nav-item-text">Progressive Web Apps</span>
+                    </a>
+                </div>
+
+                <!-- Additional section for demo -->
+                <div class="nav-section">
+                    <div class="nav-section-title">Resources</div>
+                    
+                    <a class="nav-item" href="/docs/">
+                        <span class="nav-item-icon">
+                            <svg class="icon">
+                                <use href="#memo-circle-info"></use>
+                            </svg>
+                        </span>
+                        <span class="nav-item-text">Documentation</span>
+                    </a>
+
+                    <a class="nav-item" href="/examples/">
+                        <span class="nav-item-icon">
+                            <svg class="icon">
+                                <use href="#notes"></use>
+                            </svg>
+                        </span>
+                        <span class="nav-item-text">Code Examples</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+      
+
+      <!-- Right Sidebar -->
+      <div class="right-sidebar" id="right-sidebar">
+        <div class="sidebar-content" id="right-sidebar-content">
+    <div class="nav-section">
+     <div class="nav-section-title font-bold text-xl">Progressive Web Apps</div>
+     
+      <div class="search-box">
+      <div class="search-wrapper">
+        <input type="text" placeholder="Search guide..." class="search-input" id="guide-search">
+        <i class="ph ph-magnifying-glass search-icon"></i>
+      </div>
+    </div>
+
+    </div>
+    
+    
+<div id="pwaNav">
+  <div id="pwa-guide-nav" class="guide-container hidden">
+   
+    <div class="progress-box">
+      <div class="progress-labels">
+        <span class="progress-text">Guide Progress
+        
+        <svg class="icon global medium lightGray">
+  <use href="#truck"></use> <!-- Just reference the ID -->
+</svg>
+        </span>
+        <span class="progress-percent" id="progress-percent">0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="guide-section">
+      <h3 class="guide-section-title">PWA Fundamentals</h3>
+      <div class="guide-links">
+        <a href="/pwa/docs/introduction/" data-url="/pwa/docs/introduction/" class="nav-item guide-link" data-progress="5">
+          <span class="link-text">Introduction to PWAs</span>
+        </a>
+        <a href="/pwa/docs/manifest/" data-url="/pwa/docs/manifest/" class="nav-item guide-link" data-progress="15">
+          <span class="link-text">Web App Manifest</span>
+        </a>
+        <a href="/pwa/docs/service-workers/" data-url="/pwa/docs/service-workers/" class="nav-item guide-link" data-progress="25">
+          <span class="link-text">Service Workers</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="guide-section">
+      <h3 class="guide-section-title">Advanced Topics</h3>
+      <div class="guide-links">
+        <a href="/pwa/docs/caching/" class="guide-link" data-progress="40">
+          <span class="link-text">Caching Strategies</span>
+        </a>
+        <a href="/pwa/docs/offline/" class="guide-link" data-progress="55">
+          <span class="link-text">Offline Experience</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+        </div>
+      </div>
+
+      <div class="otherNavBar-Wrapper" id="scroll-nav">
+        <div class="otherNavBar" data-hs-scroll-nav>
+          <nav class="otherNavScroll" id="breadcrumbs-container">
+            <!-- Breadcrumbs will be dynamically inserted here -->
+          </nav>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content" id="main-content">
+        <iframe id="dynamiciFrame" src="https://dev.wuaze.com/home/" style="border: 0px #ffffff none;" name="myiFrame" scrolling="yes" frameborder="0" marginheight="0px" marginwidth="0px" allowfullscreen></iframe>
+      </div>
+
+      <!-- Overlay -->
+      <div class="overlay" id="overlay"></div>
+
+      <!-- Loading Overlay -->
+      <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading content...</div>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div id="loadingWrapper">
+        <div id="loadingStrip"></div>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="theme-toggle" id="theme-toggle" style="position: fixed; bottom: 1rem; right: 1rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preline@latest/dist/preline.min.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="./snippetLibrary/snippet-library.js"></script>
+    <script src="/pwa-install.js" defer></script>
+
+
+
+<!---
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Initialize PWA guide when main link is clicked
+  document.querySelector('[data-guide="pwa"]')?.addEventListener("click", function(e) {
+    e.preventDefault();
+    document.getElementById('dynamiciFrame').src = this.href;
+    showPwaGuideNavigation();
+    if (typeof toggleSidebar === "function") toggleSidebar();
+  });
+
+  // Show PWA guide navigation
+  function showPwaGuideNavigation() {
+    const guideNav = document.getElementById('pwa-guide-nav');
+    if (!guideNav) return;
+    
+    guideNav.classList.remove('hidden');
+    document.getElementById('pwaNav').innerHTML = '';
+    document.getElementById('pwaNav').appendChild(guideNav);
+    
+    // Load progress from localStorage
+    updateProgressDisplay();
+    
+    // Setup guide link handlers
+    setupGuideLinks();
+    
+    // Setup search
+    setupGuideSearch();
+  }
+
+  // Handle guide link clicks
+  function setupGuideLinks() {
+    document.querySelectorAll('.guide-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('dynamiciFrame').src = this.href;
+        
+        // Update active state
+        document.querySelectorAll('.guide-link').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  }
+
+  // Search functionality
+  function setupGuideSearch() {
+    const searchInput = document.getElementById('guide-search');
+    if (!searchInput) return;
+    
+    searchInput.addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll('.guide-link').forEach(link => {
+        const text = link.textContent.toLowerCase();
+        link.style.display = text.includes(term) ? 'flex' : 'none';
+      });
+    });
+  }
+
+  // Update progress display from localStorage
+  function updateProgressDisplay() {
+    const progress = localStorage.getItem('pwaGuideProgress') || 0;
+    const bar = document.getElementById('progress-bar');
+    const label = document.getElementById('progress-percent');
+    if (bar && label) {
+      bar.style.width = `${progress}%`;
+      label.textContent = `${progress}%`;
+    }
+  }
+});
+
+// This should be in each PWA child page (e.g., /pwa/docs/introduction/)
+function setupProgressButton() {
+  const currentPageProgress = 5; // Set this per page (5, 15, 25, etc.)
+  const button = document.createElement('button');
+  button.className = 'progress-button';
+  button.textContent = 'Finished?';
+  
+  button.addEventListener('click', function() {
+    // Get current progress
+    let currentProgress = parseInt(localStorage.getItem('pwaGuideProgress')) || 0;
+    
+    // Update if this page's progress is higher
+    if (currentPageProgress > currentProgress) {
+      localStorage.setItem('pwaGuideProgress', currentPageProgress);
+    }
+    
+    // Disable button
+    button.disabled = true;
+    button.textContent = 'Finished';
+  });
+  
+  // Check if already completed
+  const savedProgress = parseInt(localStorage.getItem('pwaGuideProgress')) || 0;
+  if (savedProgress >= currentPageProgress) {
+    button.disabled = true;
+    button.textContent = 'Finished';
+  }
+  
+  document.body.appendChild(button);
+}
+</script>
+--->
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const triggerInput = document.getElementById("primarySearch");
+  const overlay = document.getElementById("searchOverlay");
+  const closeBtn = document.getElementById("closeSearch");
+  const expandedInput = document.getElementById("expandedSearchInput");
+  const searchResults = document.getElementById("searchResults");
+
+  // Show overlay when clicking the header search input
+  if (triggerInput) {
+    triggerInput.addEventListener("click", function () {
+      overlay.classList.remove("hidden");
+      overlay.classList.add("show");
+      expandedInput.focus();
+    });
+  }
+
+  // Hide overlay when clicking close
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function () {
+      overlay.classList.remove("show");
+      overlay.classList.add("hidden");
+      expandedInput.value = "";
+      searchResults.innerHTML = "";
+    });
+  }
+
+  // Hide overlay when pressing Escape
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      overlay.classList.remove("show");
+      overlay.classList.add("hidden");
+      expandedInput.value = "";
+      searchResults.innerHTML = "";
+    }
+  });
+
+  // Run search on input
+  expandedInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase().trim();
+    if (query.length > 2) {
+      performSearch(query, extractSearchableContent()); // You already defined these
+    } else {
+      searchResults.innerHTML = "";
+    }
+  });
+});
+
+function extractSearchableContent() {
+  const content = [];
+  $("h1, h2, h3, h4, h5, h6, p, li").each(function () {
+    const $this = $(this);
+    const text = $this.text().trim();
+    const id = $this.attr("id") || $this.closest("[id]").attr("id");
+
+    if (text && text.length > 10) {
+      content.push({
+        text: text,
+        element: this,
+        id: id,
+        type: this.tagName.toLowerCase()
+      });
+    }
+  });
+  return content;
+}
+
+function performSearch(query, content) {
+  const results = content
+    .filter((item) => item.text.toLowerCase().includes(query))
+    .slice(0, 10);
+
+  const resultsHtml = results
+    .map((result) => {
+      const highlightedText = highlightSearchTerm(result.text, query);
+      const typeIcon = getTypeIcon(result.type);
+
+      return `
+                    <div class="search-result-item p-3 border-b border-gray-200 dark:border-gray-600 cursor-pointer" 
+                         onclick="scrollToElement('${result.id}')">
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 mt-1">
+                                ${typeIcon}
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm text-gray-900 dark:text-white">${highlightedText}</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${result.type.toUpperCase()}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+    })
+    .join("");
+
+  $("#searchResults").html(
+    results.length > 0
+      ? resultsHtml
+      : '<div class="p-4 text-center text-gray-500 dark:text-gray-400">No results found</div>'
+  );
+}
+
+function highlightSearchTerm(text, query) {
+  const regex = new RegExp(`(${query})`, "gi");
+  return text.replace(
+    regex,
+    '<mark class="bg-yellow-200 dark:bg-yellow-600">$1</mark>'
+  );
+}
+
+function getTypeIcon(type) {
+  const icons = {
+    h1:
+      '<svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>',
+    h2:
+      '<svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>',
+    h3:
+      '<svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>',
+    p:
+      '<svg class="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z"></path></svg>',
+    li:
+      '<svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z"></path></svg>'
+  };
+  return icons[type] || icons["p"];
+}
+ </script>
+ <script>
+ 
+ 
+ 
+ 
+ 
+ 
+document.addEventListener("DOMContentLoaded", function () {
+  const elements = {
+    sidebar: document.getElementById("sidebar"),
+    rightSidebar: document.getElementById("right-sidebar"),
+    overlay: document.getElementById("overlay"),
+    menuToggle: document.getElementById("menu-toggle"),
+    profileToggle: document.getElementById("profile-toggle"),
+    mainContent: document.getElementById("main-content"),
+    iframe: document.getElementById("dynamiciFrame"),
+    loadingOverlay: document.getElementById("loading-overlay"),
+    loadingStrip: document.getElementById("loadingStrip"),
+    loadingWrapper: document.getElementById("loadingWrapper"),
+    themeToggle: document.getElementById("theme-toggle"),
+    breadcrumbsContainer: document.getElementById("breadcrumbs-container"),
+    navLinks: document.querySelectorAll(".nav-item[data-url]"),
+    pwaGuideLink: document.querySelector('[data-guide="pwa"]'),
+    pwaNav: document.getElementById("pwaNav"),
+    pwaGuideNav: document.getElementById("pwa-guide-nav"),
+  };
+
+  let currentPage = "home";
+  let previousPage = sessionStorage.getItem("previousPage") || "";
+  const baseUrl = window.location.origin;
+
+  init();
+
+  function init() {
+    setupEventListeners();
+    updateBreadcrumbs();
+    loadInitialPage();
+    initPWAProgressSystem();
+    initializeSearch();
+  }
+
+
+
+///////////////  P R O G R E S S I V E  //////////////////////
+//////////////////////  W E B  A P P S  //////////////////////
+  function initPWAProgressSystem() {
+    elements.pwaGuideLink?.addEventListener("click", function (e) {
+      e.preventDefault();
+      loadPageInIframe(this.href);
+      showPwaGuideNavigation();
+     setTimeout(toggleRightSidebar, 350);     
+    });
+    
+  let shouldBlockNavigation = false;
+  let nextNavigationUrl = null;
+
+  // Intercept all link clicks
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href]');
+    if (link && !link.classList.contains('guide-link') && 
+        window.location.pathname.includes('/pwa/') && 
+        !localStorage.getItem('pwaProgressSaved')) {
+      e.preventDefault();
+      nextNavigationUrl = link.href;
+      shouldBlockNavigation = true;
+      showProgressModal();
+    }
+  });
+
+  // Handle browser back/forward
+  window.addEventListener('popstate', function(e) {
+    if (window.location.pathname.includes('/pwa/') && 
+        !localStorage.getItem('pwaProgressSaved')) {
+      history.pushState(null, '', window.location.href);
+      shouldBlockNavigation = true;
+      showProgressModal();
+    } else {
+      handlePopState(e);
+    }
+  });
+
+  // Handle form submissions
+  document.addEventListener('submit', function(e) {
+    if (window.location.pathname.includes('/pwa/') && 
+        !localStorage.getItem('pwaProgressSaved')) {
+      e.preventDefault();
+      shouldBlockNavigation = true;
+      showProgressModal();
+    }
+  });
+
+  // Override window.location changes
+  const originalLocation = window.location;
+  Object.defineProperty(window, 'location', {
+    get: function() {
+      return originalLocation;
+    },
+    set: function(value) {
+      if (window.location.pathname.includes('/pwa/') && 
+          !localStorage.getItem('pwaProgressSaved')) {
+        nextNavigationUrl = value;
+        shouldBlockNavigation = true;
+        showProgressModal();
+      } else {
+        originalLocation.href = value;
+      }
+    }
+  });
+  }
+
+
+  
+  
+  
+  
+  
+  /**
+  function setupGuideLinks() {
+    document.querySelectorAll(".guide-link").forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        loadPageInIframe(this.href);
+        setActiveGuideLink(this);
+      });
+    });
+  }
+  function setActiveGuideLink(activeLink) {
+    document.querySelectorAll(".guide-link").forEach((link) => {
+      link.classList.remove("active");
+    });
+    activeLink.classList.add("active");
+  }
+  **/
+  function setupGuideSearch() {
+    const searchInput = document.getElementById("guide-search");
+    if (!searchInput) return;
+
+    searchInput.addEventListener("input", function () {
+      const term = this.value.toLowerCase();
+      document.querySelectorAll(".guide-link").forEach((link) => {
+        const text = link.textContent.toLowerCase();
+        link.style.display = text.includes(term) ? "flex" : "none";
+      });
+    });
+  }
+  function updateProgressDisplay() {
+    const progress = localStorage.getItem("pwaGuideProgress") || 0;
+    const bar = document.getElementById("progress-bar");
+    const label = document.getElementById("progress-percent");
+    if (bar && label) {
+      bar.style.width = `${progress}%`;
+      label.textContent = `${progress}%`;
+    }
+  }
+  function showProgressModal() {
+  const modal = document.createElement('div');
+  modal.className = 'progress-modal';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h3 class="modal-title">Save Your Progress?</h3>
+      <p>You'll lose your current progress if you don't save before leaving.</p>
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-save">Save Progress</button>
+        <button class="modal-btn modal-btn-discard">Discard</button>
+        <button class="modal-btn modal-btn-cancel">Cancel</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  setTimeout(() => modal.classList.add('active'), 10);
+  
+  modal.querySelector('.modal-btn-save').addEventListener('click', function() {
+    localStorage.setItem('pwaProgressSaved', 'true');
+    hideModal(modal);
+    if (nextNavigationUrl) {
+      window.location.href = nextNavigationUrl;
+    }
+  });
+  
+  modal.querySelector('.modal-btn-discard').addEventListener('click', function() {
+    localStorage.removeItem('pwaProgressSaved');
+    localStorage.removeItem('pwaGuideProgress');
+    hideModal(modal);
+    hidePwaGuideNavigation();
+    if (nextNavigationUrl) {
+      window.location.href = nextNavigationUrl;
+    }
+  });
+
+  modal.querySelector('.modal-btn-cancel').addEventListener('click', function() {
+    hideModal(modal);
+    shouldBlockNavigation = false;
+    nextNavigationUrl = null;
+  });
+}  
+  function hideModal(modal) {
+    modal.classList.remove("active");
+    setTimeout(() => modal.remove(), 300);
+  }
+  function showPwaGuideNavigation() {
+    if (!elements.pwaGuideNav || !elements.pwaNav) return;
+
+    elements.pwaGuideNav.classList.remove("hidden");
+    elements.pwaNav.innerHTML = "";
+    elements.pwaNav.appendChild(elements.pwaGuideNav);
+
+    setupGuideLinks();
+    setupGuideSearch();
+  }
+  function hidePwaGuideNavigation() {
+    const pwaNav = document.getElementById("pwa-guide-nav");
+    if (pwaNav) {
+      pwaNav.classList.add("hidden");
+    }
+  }
+
+
+
+///////////////  N A V I G A T I O N   ///////////////////////
+//////////////////////  U I  C H A N G E S  //////////////////
+  function loadInitialPage() {
+    const path = window.location.pathname.replace(/^\//, "");
+    const page = path || "home";
+    navigateTo(page);
+  }
+  function handlePopState(event) {
+    const page = event.state?.page || "home";
+    navigateTo(page);
+  }
+  function navigateTo(page) {
+    if (currentPage === page) return;
+
+    previousPage = currentPage;
+    currentPage = page;
+    sessionStorage.setItem("previousPage", previousPage);
+
+    closeAllSidebars();
+    startLoading();
+
+    setTimeout(() => {
+      const newUrl = `${baseUrl}/${page === "home" ? "" : page}`;
+      const iframeSrc = `${baseUrl}/${page === "home" ? "/home/" : `${page}/`}`;
+
+      loadPageInIframe(iframeSrc);
+
+      history.pushState({ page }, `GitCodr - ${page}`, newUrl);
+
+      setActiveLink(page);
+    }, 200);
+  }
+  function loadPageInIframe(url) {
+    if (elements.iframe) {
+      elements.iframe.src = url;
+    }
+  }
+  function handleIframeLoad() {
+    completeLoading();
+    updateBreadcrumbs();
+  }
+  function handleIframeError() {
+    if (elements.loadingStrip) {
+      elements.loadingStrip.style.backgroundColor = "red";
+      completeLoading();
+      setTimeout(() => {
+        elements.loadingStrip.style.backgroundColor = "";
+      }, 1000);
+    }
+  }
+
+  function startLoading() {
+    if (!elements.loadingWrapper || !elements.loadingStrip) return;
+    elements.loadingWrapper.style.visibility = "visible";
+    elements.loadingStrip.style.width = "0%";
+
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 10;
+      elements.loadingStrip.style.width = `${progress}%`;
+      if (progress >= 70) clearInterval(interval);
+    }, 50);
+  }
+  function completeLoading() {
+    if (!elements.loadingWrapper || !elements.loadingStrip) return;
+    elements.loadingStrip.style.width = "100%";
+    setTimeout(() => {
+      elements.loadingWrapper.style.visibility = "hidden";
+      elements.loadingStrip.style.width = "0%";
+    }, 300);
+  }
+
+  function setActiveLink(page) {
+    elements.navLinks?.forEach((link) => {
+      link.classList.toggle("active", link.dataset.url === page);
+    });
+  }
+  function updateBreadcrumbs() {
+    if (!elements.breadcrumbsContainer) return;
+    elements.breadcrumbsContainer.innerHTML = "";
+
+    const path = window.location.pathname.replace(/^\//, "");
+    const segments = path ? path.split("/") : [];
+
+    addBreadcrumb("Home", "/");
+
+    let accumulatedPath = "";
+    segments.forEach((segment, index) => {
+      accumulatedPath += `/${segment}`;
+      addBreadcrumb(formatName(segment), accumulatedPath, index === segments.length - 1);
+    });
+
+    addCategoriesToggle();
+  }
+  function addBreadcrumb(text, href, isCurrent = false) {
+    if (elements.breadcrumbsContainer.children.length > 0) {
+      elements.breadcrumbsContainer.appendChild(createSeparator());
+    }
+
+    const link = document.createElement("a");
+    link.href = href;
+    link.textContent = text;
+    link.className = `snap-start inline-flex flex-nowrap text-sm whitespace-nowrap ${isCurrent ? "currentPage" : "text-gray-700 dark:text-neutral-500 hover:text-gray-700 dark:hover:text-gray-300"}`;
+
+    if (!isCurrent) {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        navigateTo(href.replace(/^\//, "") || "home");
+      });
+    }
+
+    elements.breadcrumbsContainer.appendChild(link);
+  }
+  function createSeparator() {
+    const separator = document.createElement("span");
+    separator.className = "text-gray-400 dark:text-neutral-600";
+    separator.innerHTML = `<svg class="mx-2 size-4 text-gray-200 dark:text-neutral-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg>`;
+    return separator;
+  }
+  function addCategoriesToggle() {
+    const categories = [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "jQuery",
+      "PHP",
+      "TailWind CSS",
+      "Python",
+      "React",
+      "Cue",
+      "TypeScript",
+      "CoffeeScript",
+      "Kotlin",
+      "OpenAi",
+      "GitHub",
+      "CodePen",
+      "UIVerse",
+      "W3Schools",
+      "ChatGPT",
+      "CoPilot",
+      "DeepSeek",
+    ];
+
+    const toggle = document.createElement("button");
+    toggle.textContent = "Categories";
+    toggle.className = "categoriesToggle ml-auto inline-flex items-center px-2 py-1 text-sm font-medium text-gray-400 hover:text-gray-700 transition";
+    toggle.addEventListener("click", () => showCategories(categories));
+    elements.breadcrumbsContainer.appendChild(toggle);
+  }
+  function showCategories(categories) {
+    const links = elements.breadcrumbsContainer.querySelectorAll("a, span, button:not(.categoriesToggle)");
+    links.forEach((link) => link.classList.add("opacity-0", "transition-opacity", "duration-500"));
+
+    setTimeout(() => {
+      elements.breadcrumbsContainer.innerHTML = "";
+
+      const backBtn = document.createElement("button");
+      backBtn.textContent = "Back";
+      backBtn.className = "snap-start inline-flex flex-nowrap items-center text-sm whitespace-nowrap font-medium text-gray-700 dark:text-neutral-500 hover:text-gray-700 dark:hover:text-gray-300 opacity-0 transition-opacity duration-500";
+      backBtn.addEventListener("click", updateBreadcrumbs);
+      elements.breadcrumbsContainer.appendChild(backBtn);
+
+      categories.forEach((cat, i) => {
+        const catLink = document.createElement("a");
+        catLink.href = "#";
+        catLink.textContent = cat;
+        catLink.className = "snap-start inline-flex flex-nowrap items-center text-sm whitespace-nowrap font-medium text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 opacity-0 transition-opacity duration-500";
+        catLink.style.transitionDelay = `${i * 50}ms`;
+        elements.breadcrumbsContainer.appendChild(catLink);
+      });
+
+      setTimeout(() => {
+        elements.breadcrumbsContainer.querySelectorAll("a, button").forEach((el) => {
+          el.classList.remove("opacity-0");
+        });
+      }, 50);
+    }, 500);
+  }
+
+
+
+/////////////////////////  H E L P E R  //////////////////////
+//////////////////////  F U N C T I O N S  ///////////////////
+  function setupEventListeners() {
+    elements.menuToggle?.addEventListener("click", toggleSidebar);
+    elements.profileToggle?.addEventListener("click", toggleRightSidebar);
+    elements.overlay?.addEventListener("click", closeAllSidebars);
+    elements.themeToggle?.addEventListener("click", toggleTheme);
+
+    elements.navLinks?.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        navigateTo(this.dataset.url);
+      });
+    });
+
+    window.addEventListener("popstate", handlePopState);
+    window.addEventListener("scroll", handleScroll);
+    elements.iframe?.addEventListener("load", handleIframeLoad);
+    elements.iframe?.addEventListener("error", handleIframeError);
+  }
+  function formatName(str) {
+    return str
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase())
+      .replace(/\.html$/, "");
+  }
+  function handleScroll() {
+    if (window.scrollY > 10) {
+      document.getElementById("header")?.classList.add("scrolled");
+    } else {
+      document.getElementById("header")?.classList.remove("scrolled");
+    }
+  }
+  function toggleSidebar() {
+    elements.rightSidebar?.classList.remove("open");
+    elements.sidebar?.classList.toggle("open");
+    elements.overlay?.classList.toggle("active");
+  }
+  function toggleRightSidebar() {
+    elements.sidebar?.classList.remove("open");
+    elements.rightSidebar?.classList.toggle("open");
+    elements.overlay?.classList.toggle("active");
+  }
+  function closeAllSidebars() {
+    elements.sidebar?.classList.remove("open");
+    elements.rightSidebar?.classList.remove("open");
+    elements.overlay?.classList.remove("active");
+  }
+  function toggleTheme() {
+    document.body.classList.toggle("light-theme");
+    const isLight = document.body.classList.contains("light-theme");
+    elements.themeToggle.innerHTML = isLight
+      ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
+      : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+  }
+});
+
+</script>
+
+    <!-- Progressive Web App -->
+    <script>
+      /////////////////////////////////  Registration  /////////////////
+      //////////////////////////////////////////////////////////////////
+      document.addEventListener("DOMContentLoaded", () => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker
+            .register("https://dev.wuaze.com/siteManifest/serviceWorker.js")
+            .then((registration) => {
+              console.log("[script.js] Service Worker registered successfully with scope:", registration.scope);
+              navigator.serviceWorker.addEventListener("controllerchange", () => {
+                console.log("[script.js] New Service Worker has taken control. You might want to reload.");
+              });
+            })
+            .catch((error) => {
+              console.error("[script.js] Service Worker registration failed:", error);
+            });
+        } else {
+          console.warn("[script.js] Service Worker not supported in this browser.");
+        }
+
+        //////////////////////////////  Install Banner  //////////////////
+        //////////////////////////////////////////////////////////////////
+        /**
+    let deferredPrompt;
+    const installBannerContainer = document.getElementById('pwa-install-banner-container');
+    const installBanner = document.createElement('div');
+    installBanner.id = 'pwa-install-banner';
+
+    const androidSVG = `
+        <svg class="android-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#3DDC84" width="28px" height="28px">
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M18.5 4.5c-.83 0-1.5.67-1.5 1.5v1c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-1c0-.83-.67-1.5-1.5-1.5zm-13 0c-.83 0-1.5.67-1.5 1.5v1c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-1c0-.83-.67-1.5-1.5-1.5zM19 10h-2V9c0-1.1-.9-2-2-2h-6c-1.1 0-2 .9-2 2v1H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7c0-1.1-.9-2-2-2zm-7 9c-.83 0-1.5-.67-1.5-1.5S11.17 16 12 16s1.5.67 1.5 1.5S12.83 19 12 19zm-4-4c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm8 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
+        </svg>`;
+
+    function setupInstallBanner() {
+      if (!installBannerContainer) {
+        console.error('[script.js] PWA install banner container not found.');
+        return;
+      }
+      installBannerContainer.innerHTML = '';
+      const svgWrapperLeft = document.createElement('div');
+      svgWrapperLeft.classList.add('android-svg-wrapper', 'left');
+      svgWrapperLeft.innerHTML = androidSVG;
+      const svgWrapperRight = document.createElement('div');
+      svgWrapperRight.classList.add('android-svg-wrapper', 'right');
+      svgWrapperRight.innerHTML = androidSVG;
+      installBanner.textContent = 'Install APP!';
+      installBannerContainer.appendChild(svgWrapperLeft);
+      installBannerContainer.appendChild(installBanner);
+      installBannerContainer.appendChild(svgWrapperRight);
+      installBanner.addEventListener('click', () => {
+        if (deferredPrompt) {
+          installBannerContainer.classList.remove('visible');
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('[script.js] User accepted the PWA installation');
+            } else {
+              console.log('[script.js] User dismissed the PWA installation');
+            }
+            deferredPrompt = null;
+          });
+        }
+      });
+    }
+    setupInstallBanner();
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      console.log('[script.js] beforeinstallprompt event fired');
+      event.preventDefault();
+      deferredPrompt = event;
+      if (installBannerContainer) {
+        installBannerContainer.classList.add('visible');
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      console.log('[script.js] PWA was installed');
+      if (installBannerContainer) {
+        installBannerContainer.classList.remove('visible');
+      }
+      deferredPrompt = null;
+    });
+
+    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+      console.log('[script.js] PWA is running in standalone mode. Hiding install banner.');
+      if (installBannerContainer) {
+        installBannerContainer.classList.remove('visible');
+      }
+    } else {
+      console.log('[script.js] PWA is not in standalone mode. Install banner may be shown if criteria met.');
+    }
+    **/
+      });
+    </script>
+    
+    
+<script>
+  // Fetch and inject the SVG sprite sheet
+  fetch('https://dev.wuaze.com/icons/duoLight.svg')
+    .then(response => response.text())
+    .then(svg => {
+      const div = document.createElement('div');
+      div.style.display = 'none';
+      div.innerHTML = svg;
+      document.body.appendChild(div);
+    });
+</script>    
+  </body>
+</html>
