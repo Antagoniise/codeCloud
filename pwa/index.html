@@ -1,0 +1,369 @@
+
+
+<style>
+/* Custom scrollbar for guide navigation */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Link hover effects */
+.nav-link {
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background: rgba(113, 128, 150, 0.1);
+}
+
+.nav-link.active {
+  background: rgba(124, 58, 237, 0.1) !important;
+  border-left-color: #8b5cf6;
+}
+
+/* Accordion animations */
+.accordion-content {
+  display: none;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Glow effect for active sections */
+.glow-effect {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .accordion-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 1rem;
+  }
+} 
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progressive Web Apps Guide | GitCodr</title>
+  <meta name="description" content="Comprehensive guide to building Progressive Web Applications">
+  
+  <!-- Styles -->
+  <link href="https://dev.wuaze.com/core.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/phosphor.css">
+  <style>
+    /* Your existing styles here */
+    .guide-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .section {
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 0.5rem;
+    }
+    
+    .section h2 {
+      color: #8b5cf6;
+      margin-bottom: 1rem;
+    }
+    
+    .code-block {
+      background: #1e1e2e;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+  </style>  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+  <!-- Your existing styles -->
+  <style>
+    /* Add the CSS styles I provided earlier here */
+  </style>
+
+</head>
+<body>
+  <div class="guide-content">
+    <section id="introduction" class="section">
+      <h2>Introduction to PWAs</h2>
+      <p>Progressive Web Apps (PWAs) are web applications that use modern web capabilities to deliver an app-like experience to users.</p>
+      <!-- More content -->
+    </section>
+    
+    <section id="manifest" class="section">
+      <h2>Web App Manifest</h2>
+      <p>The web app manifest is a JSON file that tells the browser about your web application.</p>
+      <div class="code-block">
+        <pre><code>{
+  "name": "My PWA",
+  "short_name": "PWA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1C222B",
+  "theme_color": "#8b5cf6"
+}</code></pre>
+      </div>
+    </section>
+    
+    <!-- More sections -->
+  </div>
+  
+  <script>
+    // Highlight current section in navigation
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get current page URL and match with guide navigation
+      const path = window.location.pathname.split('/').pop();
+      const currentSection = path.replace('.html', '');
+      
+      // Update iframe parent navigation if we're in an iframe
+      if (window.self !== window.top) {
+        const navLinks = window.parent.document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+          if (link.getAttribute('data-section') === currentSection) {
+            link.classList.add('active');
+            link.querySelector('.link-dot').style.backgroundColor = '#9b59b6';
+            
+            // Update progress
+            const progress = link.getAttribute('data-progress');
+            window.parent.postMessage({
+              type: 'updateProgress',
+              progress: progress
+            }, '*');
+          }
+        });
+      }
+    });
+    
+    // Handle messages from parent window
+    window.addEventListener('message', function(e) {
+      if (e.data.type === 'scrollToSection') {
+        const section = document.getElementById(e.data.section);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  </script>
+
+<script>
+$(document).ready(function() {
+  // Check if jQuery is loaded
+  if (typeof jQuery == 'undefined') {
+    console.error('jQuery not loaded! Loading it now...');
+    loadjQuery();
+    return; // Exit and wait for jQuery to load
+  }
+
+  // Initialize the PWA guide functionality
+  initPWAGuide();
+});
+
+function loadjQuery() {
+  const script = document.createElement('script');
+  script.src = 'https://code.jquery.com/jquery-3.6.4.min.js';
+  script.integrity = 'sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=';
+  script.crossOrigin = 'anonymous';
+  script.onload = initPWAGuide;
+  document.head.appendChild(script);
+}
+
+function initPWAGuide() {
+  // Use self-executing function to ensure $ alias
+  (function($) {
+    // Main guide initialization
+    setupGuideNavigation();
+    setupAccordions();
+    setupNavLinks();
+    setupSearch();
+    setupFAB();
+    setupSmoothScrolling();
+
+    function setupGuideNavigation() {
+      $('[data-guide="pwa"]').on('click', function(e) {
+        e.preventDefault();
+        const $leftSidebar = $('#left-sidebar');
+        
+        // Load and animate the guide navigation
+        $leftSidebar.html($('#pwa-guide-nav').show());
+        
+        // Animate entrance
+        $leftSidebar.find('.accordion-group, #guide-search, .progress-container')
+          .css({opacity: 0, transform: 'translateX(-20px)'})
+          .each(function(i) {
+            $(this).delay(100 * i).animate({
+              opacity: 1,
+              transform: 'translateX(0)'
+            }, 300);
+          });
+        
+        // Open first accordion by default
+        $('.accordion-group:first-child .accordion-header').trigger('click');
+        
+        // Load initial content
+        loadGuideContent($(this).attr('href'));
+        
+        // Open sidebar
+        if (typeof toggleLeftSidebar === 'function') {
+          toggleLeftSidebar();
+        }
+      });
+    }
+
+    function setupAccordions() {
+      $(document).on('click', '.accordion-header', function() {
+        const $group = $(this).closest('.accordion-group');
+        const $content = $group.find('.accordion-content');
+        const $icon = $(this).find('i.fa-chevron-down');
+        
+        $icon.toggleClass('rotate-180');
+        $content.slideToggle(250);
+        
+        // Close other groups if this one is opening
+        if ($content.is(':hidden')) {
+          $('.accordion-content').not($content).slideUp(250);
+          $('.accordion-header i.fa-chevron-down').not($icon).removeClass('rotate-180');
+        }
+      });
+    }
+
+    function setupNavLinks() {
+      $(document).on('click', '.nav-link', function(e) {
+        e.preventDefault();
+        const $link = $(this);
+        
+        // Update active state
+        $('.nav-link').removeClass('active bg-gray-700/30 border-l-purple-500');
+        $link.addClass('active bg-gray-700/30 border-l-purple-500');
+        
+        // Update dot indicator
+        $('.link-dot').removeClass('bg-purple-400');
+        $link.find('.link-dot').addClass('bg-purple-400');
+        
+        // Load content
+        loadGuideContent($link.attr('href'));
+        
+        // Update progress
+        updateProgress($link.data('progress'));
+      });
+    }
+
+    function setupSearch() {
+      $('#guide-search').on('input', function() {
+        const searchTerm = $(this).val().toLowerCase();
+        
+        if (searchTerm.length > 0) {
+          $('.nav-link').each(function() {
+            const $link = $(this);
+            const text = $link.find('.link-text').text().toLowerCase();
+            
+            if (text.includes(searchTerm)) {
+              $link.show();
+              $link.closest('.accordion-content').show();
+              $link.closest('.accordion-group').find('.accordion-header i').removeClass('rotate-180');
+            } else {
+              $link.hide();
+            }
+          });
+        } else {
+          $('.nav-link').show();
+        }
+      });
+    }
+
+    function setupFAB() {
+      $('#guide-fab').on('click', function() {
+        $(this).toggleClass('from-blue-600 to-purple-600 from-green-500 to-teal-400');
+        $(this).find('i').toggleClass('fa-question fa-lightbulb');
+        
+        // Show help tooltip
+        const $tooltip = $('<div class="absolute bottom-full right-0 mb-2 w-64 p-3 bg-gray-800 rounded-lg shadow-xl text-sm text-gray-200 border border-gray-700 transform transition-all duration-200 opacity-0 scale-95">Need help with this guide? Click on any section to learn more about converting your site to a PWA.</div>');
+        $(this).after($tooltip);
+        
+        $tooltip.animate({opacity: 1, scale: 1}, 200);
+        setTimeout(() => {
+          $tooltip.animate({opacity: 0, scale: 0.95}, 200, function() {
+            $(this).remove();
+          });
+        }, 3000);
+      });
+    }
+
+    function setupSmoothScrolling() {
+      $(document).on('click', 'a[href^="#"]', function(e) {
+        e.preventDefault();
+        $('html, body').animate({
+          scrollTop: $($(this).attr('href')).offset().top - 20
+        }, 500);
+      });
+    }
+
+    function loadGuideContent(url) {
+      const $iframe = $('iframe');
+      if ($iframe.length === 0) {
+        console.error('Target iframe not found!');
+        return;
+      }
+      
+      $iframe.attr('src', url);
+      
+      const $iframeContainer = $iframe.parent();
+      $iframeContainer.addClass('relative');
+      
+      // Remove any existing loader
+      $iframeContainer.find('.iframe-loader').remove();
+      
+      // Add new loader
+      $iframeContainer.append(
+        '<div class="iframe-loader absolute inset-0 bg-gray-800/80 flex items-center justify-center z-10">' +
+        '<div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>' +
+        '</div>'
+      );
+      
+      $iframe.on('load error', function() {
+        $iframeContainer.find('.iframe-loader').remove();
+      });
+    }
+
+    function updateProgress(percent) {
+      $('#progress-bar').animate({width: percent + '%'}, 500);
+      $('#progress-percent').text(percent + '%');
+      
+      // Pulse animation when reaching milestones
+      if (percent % 25 === 0) {
+        $('#progress-bar').addClass('animate-pulse-slow');
+        setTimeout(() => {
+          $('#progress-bar').removeClass('animate-pulse-slow');
+        }, 2000);
+      }
+    }
+  })(jQuery);
+}
+</script></body>
+</html>
