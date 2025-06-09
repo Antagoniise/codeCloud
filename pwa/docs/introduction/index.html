@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introduction to PWAs | GitCodr</title>
+  <link rel="stylesheet" href="https://dev.wuaze.com/core.css">
+  <style>
+    .guide-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: rgba(28, 34, 43, 0.8);
+      border-radius: 8px;
+    }
+    .section-header {
+      color: #8b5cf6;
+      border-bottom: 2px solid #30363d;
+      padding-bottom: 0.5rem;
+    }
+    .code-block {
+      background: #1e1e2e;
+      border-left: 4px solid #8b5cf6;
+      padding: 1rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    
+    
+/* Modal Styles */
+.progress-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(28, 34, 43, 0.9);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.progress-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: #1f2937;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.progress-modal.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #f3f4f6;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-btn-save {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+
+.modal-btn-save:hover {
+  background: #1d4ed8;
+}
+
+.modal-btn-discard {
+  background: transparent;
+  color: #9ca3af;
+  border: 1px solid #4b5563;
+}
+
+.modal-btn-discard:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f3f4f6;
+}    
+
+.modal-btn-cancel {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #374151;
+  color: white;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.modal-btn-cancel:hover {
+  background: #4b5563;
+}
+  </style>
+</head>
+<body>
+  <main class="guide-section">
+    <h1 class="section-header">Introduction to Progressive Web Apps</h1>
+    
+    <p>PWAs combine the best of web and mobile apps:</p>
+    
+    <ul>
+      <li><strong>Installable</strong>: Add to home screen like native apps</li>
+      <li><strong>Offline Capable</strong>: Work without internet connection</li>
+      <li><strong>Fast</strong>: Service workers enable instant loading</li>
+    </ul>
+
+    <div class="code-block">
+      <pre><code>// Example: Checking PWA support
+if ('serviceWorker' in navigator && 'caches' in window) {
+  console.log('PWA features supported!');
+}</code></pre>
+    </div>
+
+    <h2>Key Technologies</h2>
+    <div class="pwa-features">
+      <div class="feature">
+        <h3>Web App Manifest</h3>
+        <p>Defines how your app appears and launches</p>
+      </div>
+      <div class="feature">
+        <h3>Service Workers</h3>
+        <p>Enable offline functionality and caching</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+
+
+
+// Progress button setup with modal integration
+function setupProgressButton() {
+  // Only run in iframe
+  if (window.self === window.top) return;
+
+  const currentPageProgress = 5; // Set per page (5, 15, 25, etc.)
+  
+  const button = document.createElement('button');
+  button.className = 'progress-button';
+  button.textContent = 'Finished?';
+  
+  // Check existing progress
+  const savedProgress = parseInt(localStorage.getItem('pwaGuideProgress')) || 0;
+  if (savedProgress >= currentPageProgress) {
+    button.disabled = true;
+    button.textContent = 'Finished';
+  }
+  
+  button.addEventListener('click', function() {
+    const currentProgress = parseInt(localStorage.getItem('pwaGuideProgress')) || 0;
+    
+    if (currentPageProgress > currentProgress) {
+      localStorage.setItem('pwaGuideProgress', currentPageProgress);
+      localStorage.setItem('pwaProgressSaved', 'true');
+      window.parent.postMessage({
+        type: 'pwaProgressUpdate',
+        progress: currentPageProgress
+      }, '*');
+    }
+    
+    button.disabled = true;
+    button.textContent = 'Finished';
+  });
+  
+  document.body.appendChild(button);
+
+// Custom navigation guard for child pages
+  let shouldBlockChildNavigation = false;
+  let nextChildNavigationUrl = null;
+
+  // Intercept link clicks
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href]');
+    if (link && !button.disabled && !localStorage.getItem('pwaProgressSaved')) {
+      e.preventDefault();
+      nextChildNavigationUrl = link.href;
+      shouldBlockChildNavigation = true;
+      showChildProgressModal(currentPageProgress);
+    }
+  });
+
+  // Handle form submissions
+  document.addEventListener('submit', function(e) {
+    if (!button.disabled && !localStorage.getItem('pwaProgressSaved')) {
+      e.preventDefault();
+      shouldBlockChildNavigation = true;
+      showChildProgressModal(currentPageProgress);
+    }
+  });
+}
+
+function showChildProgressModal(progress) {
+  const modal = document.createElement('div');
+  modal.className = 'progress-modal';
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h3 class="modal-title">Save Before Leaving?</h3>
+      <p>You haven't marked this section as completed. Save your progress?</p>
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-save">Save</button>
+        <button class="modal-btn modal-btn-discard">Don't Save</button>
+        <button class="modal-btn modal-btn-cancel">Cancel</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  setTimeout(() => modal.classList.add('active'), 10);
+  
+  modal.querySelector('.modal-btn-save').addEventListener('click', function() {
+    localStorage.setItem('pwaGuideProgress', progress);
+    localStorage.setItem('pwaProgressSaved', 'true');
+    window.parent.postMessage({
+      type: 'pwaProgressUpdate',
+      progress: progress
+    }, '*');
+    hideModal(modal);
+    if (nextChildNavigationUrl) {
+      window.location.href = nextChildNavigationUrl;
+    }
+  });
+  
+  modal.querySelector('.modal-btn-discard').addEventListener('click', function() {
+    localStorage.removeItem('pwaProgressSaved');
+    hideModal(modal);
+    window.parent.postMessage({ type: 'pwaHideNavigation' }, '*');
+    if (nextChildNavigationUrl) {
+      window.location.href = nextChildNavigationUrl;
+    }
+  });
+
+  modal.querySelector('.modal-btn-cancel').addEventListener('click', function() {
+    hideModal(modal);
+    shouldBlockChildNavigation = false;
+    nextChildNavigationUrl = null;
+  });
+}
+
+function hideModal(modal) {
+  modal.classList.remove('active');
+  setTimeout(() => modal.remove(), 300);
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  setupProgressButton();
+});
+  </script>
+</body>
+</html>
