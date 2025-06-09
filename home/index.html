@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+
+ <script>
+  (function () {
+   const isInsideIframe = window !== window.top;
+
+   if (!isInsideIframe) {
+    const currentPath = window.location.pathname;
+
+    const redirectURL = `https://dev.wuaze.com/#${currentPath}`;
+    window.location.replace(redirectURL);
+   }
+  })();
+ </script>
+
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Code Resource Cards</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+ <script>
+  tailwind.config = {
+   theme: {
+    extend: {
+     colors: {
+      bgMain: '#2a313c',
+      bgBody: '#666D77',
+      bgSections: '#fffff',
+
+      borderOther: '#2a313c',
+      borderMain: '#191A2C',
+      headerBg: '#222830',
+      borderPrimary: '#434a55',
+      borderSecondary: '#30363d',
+      textPrimary: '#c9d1d9',
+      textSecondary: '#8b949e',
+      link: '#58a6ff',
+      btnPrimaryBg: '#238636',
+      btnPrimaryHover: '#2ea043',
+      btnPrimaryText: '#ffffff',
+      repoBg: '#161b22',
+      navItemActive: '#ffffff',
+      navItem: '#8b949e',
+      tagBg: 'rgba(56, 139, 253, 0.15)',
+      tagText: '#58a6ff',
+      red: '#f85149',
+      blue: '#58a6ff',
+      green: '#56d364',
+      purple: '#bc8cff',
+      yellow: '#e3b341',
+      success: '#3fb950',
+      warning: '#d29922',
+      error: '#f85149',
+      info: '#58a6ff',
+     },
+     spacing: {
+      xs: '4px',
+      sm: '8px',
+      md: '16px',
+      lg: '24px',
+      xl: '32px',
+     },
+     borderRadius: {
+      sm: '4px',
+      md: '6px',
+      lg: '12px',
+      full: '50%',
+     },
+     boxShadow: {
+      sm: '0 2px 10px rgba(1, 4, 9, 0.15)',
+      md: '0 5px 15px rgba(1, 4, 9, 0.25)',
+      lg: '0 10px 30px rgba(1, 4, 9, 0.45)',
+     },
+     transitionDuration: {
+      fast: '200ms',
+      normal: '300ms',
+      slow: '400ms',
+     },
+    }
+   }
+  }
+ </script>
+
+
+
+
+ <style>
+  svg.global {
+   background-color: transparent;
+   display: block;
+  }
+
+  svg.small {
+   width: 0.975rem !important;
+   height: 0.975rem !important;
+  }
+  svg.medium {
+   width: 1.5625rem !important;
+   height: 1.5625rem !important;
+  }
+  svg.large {
+   width: 2.25rem !important;
+   height: 2.25rem !important;
+  }
+  svg.xlarge {
+   width: 3.5rem !important;
+   height: 3.5rem !important;
+  }
+
+  svg.opaqueSM {
+   opacity: 0.9;
+  }
+  svg.opaqueMD {
+   opacity: 0.65;
+  }
+  svg.opaqueLG {
+   opacity: 0.25;
+  }
+
+  svg.darkGray path {
+   fill: #30363d;
+  }
+  svg.lightGray path {
+   fill: #C8C8C8;
+  }
+  svg.blue path {
+   fill: #58A6FF
+  }
+  svg.red path {
+   fill: #F85149;
+  }
+  svg.white path {
+   fill: #F8F8F8;
+  }
+  svg.gray path {
+   fill: #30363d;
+  }
+  svg.redSoft path {
+   fill: #FF5959;
+  }
+  svg.redSoft:hover {
+   fill: #E63244;
+  }
+
+  svg.trashCan path {
+   fill: #8b949e;
+  }
+  svg.trashCan:hover {
+   fill: #FF5959
+  }
+
+
+  .icon-beat-fade {
+   animation: beatFade var(--beat-fade-duration, 1.5s) ease-in-out infinite;
+   transform-origin: center;
+   display: inline-block;
+  }
+  @keyframes beatFade {
+   0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+   }
+   50% {
+    transform: scale(var(--beat-fade-scale, 1.075));
+    opacity: var(--beat-fade-opacity, 0.67);
+   }
+  }
+ </style>
+
+
+
+
+ <link rel="stylesheet" href="https://dev.wuaze.com/home/styles.css">
+</head>
+
+<body class="min-h-screen bg-bgBody text-textPrimary p-6">
+ <div class="pageWrapper max-w-7xl mx-auto">
+
+
+<style>
+/* Toast enhancements for swipe */
+.toast {
+  touch-action: pan-y;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.toast-swipe-out {
+  animation: toastSwipeOut 0.3s forwards;
+}
+
+@keyframes toastSwipeOut {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(150%); opacity: 0; }
+}
+
+/* Contact Widget */
+.contact-widget {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  z-index: 9998;
+  transition: all 0.3s ease;
+}
+
+.contact-trigger {
+  width: 60px;
+  height: 60px;
+  background-color: #4f46e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.contact-trigger:hover {
+  transform: scale(1.1);
+  background-color: #4338ca;
+}
+
+.contact-trigger i {
+  color: white;
+  font-size: 24px;
+}
+
+.contact-form {
+  width: 350px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transform: scale(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-form.active {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.contact-form h3 {
+  color: #f0f0f0;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  color: #a0a0a0;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background-color: #2d2d2d;
+  color: #f0f0f0;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.contact-submit {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.contact-submit:hover {
+  background-color: #4338ca;
+}
+
+.messenger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.messenger-btn i {
+  font-size: 24px;
+  color: #a0a0a0;
+  transition: color 0.2s;
+}
+
+.messenger-btn:hover i {
+  color: #0084ff;
+}
+
+.messenger-btn:hover {
+  transform: scale(1.1);
+}
+
+.toast-success {
+  border-left-color: #10b981;
+}
+
+.toast-success .toast-icon {
+  color: #10b981;
+}
+</style>
+
+<div class="contact-widget">
+  <div class="contact-trigger" id="contactTrigger">
+    <i class="fas fa-envelope"></i>
+  </div>
+  <div class="contact-form" id="contactForm">
+    <h3>Contact Me</h3>
+    <form id="contactFormElement">
+      <div class="form-group">
+        <label for="contactName">Name</label>
+        <input type="text" id="contactName" required>
+      </div>
+      <div class="form-group">
+        <label for="contactEmail">Email</label>
+        <input type="email" id="contactEmail" required>
+      </div>
+      <div class="form-group">
+        <label for="contactPhone">Phone (optional)</label>
+        <input type="tel" id="contactPhone">
+      </div>
+      <div class="form-group">
+        <label for="contactMessage">Message</label>
+        <textarea id="contactMessage" required></textarea>
+      </div>
+      <div class="contact-actions">
+        <button type="button" class="messenger-btn" id="messengerBtn" title="Message me on Facebook">
+          <i class="fab fa-facebook-messenger"></i>
+        </button>
+        <button type="submit" class="contact-submit">Send Message</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+  <div class="toast-container" id="toastContainer"></div>
+  <button class="dark-mode-toggle" id="darkModeToggle"><i class="fas fa-moon"></i></button>
+
+  <h1 class="text-3xl font-bold mb-8 text-center">Developer Resources</h1>
+
+
+<!------------- C A R D S -------------------------------->
+  <div class="card-grid mb-8" id="cardsContainer">
+   <!-- Cards will be inserted here by JavaScript -->
+  </div>
+
+
+<!---------- Minimized Cards ----------------------------->
+  <div class="minimized-cards-container bg-bgSections p-4 rounded-lg shadow-lg border border-borderPrimary mt-8 hidden" id="minimizedCardsContainer">
+   <h2 class="text-xl font-semibold mb-4 flex items-center">
+    <i class="fas fa-archive mr-2 text-textSecondary"></i>
+    Minimized Cards
+   </h2>
+   <div class="grid grid-cols-1 gap-3" id="minimizedCardsGrid">
+    <!-- Minimized cards will be inserted here -->
+   </div>
+  </div>
+
+
+
+
+
+ </div>
+
+ <script src="https://dev.wuaze.com/home/script.js">
+
+ </script>
+</body>
+</html>
