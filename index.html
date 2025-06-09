@@ -1090,7 +1090,105 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     </script>
     
+<script>
+class IframeHandler {
+    constructor() {
+        this.iframe = document.getElementById('dynamiciFrame');
+        this.loadingOverlay = document.getElementById('loading-overlay');
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        // Handle iframe load events
+        this.iframe.addEventListener('load', () => this.handleIframeLoad());
+        
+        // Handle iframe errors
+        this.iframe.addEventListener('error', () => this.handleIframeError());
+    }
+
+    handleIframeLoad() {
+        this.loadingOverlay.classList.remove('active');
+        
+        try {
+            // Try to update the active state based on current URL
+            const currentPath = this.iframe.contentWindow.location.pathname;
+            this.updateActiveNavItem(currentPath);
+        } catch (e) {
+            console.warn('Could not access iframe location:', e);
+        }
+    }
+
+    handleIframeError() {
+        this.loadingOverlay.classList.remove('active');
+        this.iframe.srcdoc = `
+            <div style="text-align: center; padding: 2rem;">
+                <h3>Error Loading Content</h3>
+                <p>The requested content could not be loaded. Please try again.</p>
+            </div>
+        `;
+    }
+
+    updateActiveNavItem(path) {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            const itemPath = item.getAttribute('data-url') || item.getAttribute('href');
+            if (itemPath && path.includes(itemPath)) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+}
+
+// Initialize the handler
+document.addEventListener('DOMContentLoaded', () => {
+    new IframeHandler();
+});
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all navigation items
+    const navItems = document.querySelectorAll('.nav-item');
+    const iframe = document.getElementById('dynamiciFrame');
     
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Get the href value
+            const href = this.getAttribute('href');
+            const dataUrl = this.getAttribute('data-url');
+            const url = dataUrl || href;
+            
+            // Update iframe src
+            if (iframe && url) {
+                // Show loading state
+                document.getElementById('loading-overlay').classList.add('active');
+                
+                // Update iframe source
+                iframe.src = url;
+                
+                // Update active state
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update URL without page reload
+                const newUrl = `${window.location.origin}${url}`;
+                window.history.pushState({ path: newUrl }, '', newUrl);
+            }
+        });
+    });
+    
+    // Handle iframe load event
+    iframe.addEventListener('load', function() {
+        document.getElementById('loading-overlay').classList.remove('active');
+    });
+});    
+</script>    
 <script>
   // Fetch and inject the SVG sprite sheet
   fetch('https://antagoniise.github.io/codeCloud/icons/duoLight.svg')
