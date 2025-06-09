@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - My Awesome PWA</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .offline-container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+        h1 {
+            color: #3367D6;
+            font-size: 2rem;
+            margin-bottom: 0.5em;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5em;
+        }
+        a.retry-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3367D6;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        a.retry-link:hover {
+            background-color: #2851A8;
+        }
+        .icon {
+            font-size: 4rem; /* Placeholder for an icon, e.g., a cloud with a slash */
+            margin-bottom: 20px;
+            color: #757575;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="icon">⚠️</div> <h1>You're Offline</h1>
+        <p>It seems you've lost your internet connection. Please check it and try again.</p>
+        <p><a href="/gitHub/" class="retry-link">Try to Reload Homepage</a></p>
+    </div>
+</body>
+</html>

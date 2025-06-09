@@ -1,0 +1,95 @@
+/* styles.css */
+/* This file is intentionally set to be fetched fresh on every load by the Service Worker. */
+/* Changes made here should reflect immediately after a page refresh. */
+
+body {
+    /* Example: Change this background color to test the no-cache rule */
+    /* background-color: #E0F7FA;  */ /* Light cyan */
+    /* background-color: #FFF9C4; */ /* Light yellow */
+    background-color: #f0f0f0; /* Default light gray */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for visual feedback */
+}
+
+header {
+    /* background: #004D40; */ /* Dark Teal - for testing changes */
+    background: #3F51B5; /* Indigo - default */
+}
+
+.container {
+    /* border: 2px solid red; */ /* For testing changes */
+}
+
+/* Styles for the PWA Install Banner (can also be defined here or inline via JS) */
+#pwa-install-banner-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000; /* Ensure it's on top */
+    display: flex; /* Using flex to align items if SVGs were part of this container directly */
+    align-items: center;
+    visibility: hidden; /* Initially hidden, shown by JS */
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+}
+
+#pwa-install-banner-container.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* The main clickable banner part */
+#pwa-install-banner {
+    background-color: #ffffff;
+    color: #333;
+    padding: 12px 25px; /* Increased padding */
+    border-radius: 10px; /* More rounded */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    position: relative; /* For positioning SVGs relative to this */
+}
+
+#pwa-install-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+
+/* Wrapper for SVGs to position them outside the banner's border-radius */
+.android-svg-wrapper {
+    position: absolute; /* Positioned relative to #pwa-install-banner */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px; /* SVG size */
+    height: 32px; /* SVG size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.android-svg-wrapper.left {
+    left: -20px; /* Adjust to position outside, considering SVG width */
+}
+
+.android-svg-wrapper.right {
+    right: -20px; /* Adjust to position outside, considering SVG width */
+}
+
+.android-icon {
+    width: 28px; /* Slightly smaller than wrapper if needed for spacing */
+    height: 28px;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3)); /* Shadow for the SVG icon itself */
+}
+
+/* Example of a class that could be added by script.js for visual testing */
+.js-style-change {
+    border: 3px dashed #FF00FF; /* Magenta dashed border */
+    padding: 15px;
+}

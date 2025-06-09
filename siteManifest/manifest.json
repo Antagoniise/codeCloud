@@ -1,0 +1,89 @@
+{
+  "name": "GitCodr",
+  "short_name": "GitCodr",
+  "description": "Share code related content for free",
+  "start_url": "https://dev.wuaze.com/",
+  "display": "standalone",
+  "background_color": "#1c222b",
+  "theme_color": "#1c222b",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/siteManifest/icons/android/android-launchericon-192-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/siteManifest/icons/android/android-launchericon-192-192-maskable.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/siteManifest/icons/android/android-launchericon-512-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/siteManifest/icons/android/android-launchericon-512-512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/siteManifest/icons/ios/180.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
+    },
+    {
+      "src": "/siteManifest/icons/ios/180-maskable.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/siteManifest/icons/ios/32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/siteManifest/icons/ios/16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/siteManifest/screenshots/001.png",
+      "sizes": "1080x2293",
+      "type": "image/png",
+      "platform": "wide"
+    }
+  ],
+  "prefer_related_applications": false,
+  "categories": ["lifestyle", "personalization", "productivity", "utilities"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "handle_links": "preferred",
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "file_handlers": [
+    {
+      "action": "/open-file",
+      "accept": {
+        "text/markdown": [".md"],
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "scope": "https://dev.wuaze.com/",
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "id": "91648294",
+  "display_override": ["standalone", "window-controls-overlay"]
+}
