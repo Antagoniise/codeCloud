@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+   
+<script>
+  (function () {
+    const isInsideIframe = window !== window.top;
+
+    if (!isInsideIframe) {
+      const currentPath = window.location.pathname;
+
+      const redirectURL = `https://dev.wuaze.com/#${currentPath}`;
+      window.location.replace(redirectURL);
+    }
+  })();
+</script>   
+   
+   
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Tutorials</title>
+    
+    <link rel="manifest" href="/manifest.json" />
+    
+    <meta name="theme-color" content="#1db954" />
+
+    <!-- A N I M A T I O N S -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Preline CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@preline/ui@1.0.0/dist/preline.min.css" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Tippy.js for tooltips -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body class="text-gray-100 min-h-screen">
+    <div class="container mx-auto px-8">
+      <header class="mb-8 border-b border-slate-800 py-10">
+        <h1 class="text-3xl font-bold text-white">
+          Code Library
+        </h1>
+        <p class="text-slate-200 text-sm opacity-80">
+          DEV Notes with in-depth info. and code blocks.
+        </p>
+        <p class="text-slate-200 text-xs opacity-30">
+          W O R K · I N · P R O G R E S S
+        </p>
+      </header>
+
+      <div id="tutorials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tutorial cards will be loaded here -->
+      </div>
+
+      <div id="loading-indicator" class="text-center py-8">
+        <div class="inline-flex items-center">
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span>Loading tutorials...</span>
+        </div>
+      </div>
+
+      <div id="load-more-container" class="text-center mt-8 hidden">
+        <button
+          id="load-more-btn"
+          class="py-3 px-6 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all"
+        >
+          Load More Tutorials
+        </button>
+      </div>
+    </div>
+
+    <div id="offCanvasOverlay" class="offcanvas-overlay"></div>
+
+
+    <!-- Tutorial Viewer Offcanvas -->
+<div id="tutorial-viewer" class="hide inset-x-0 hs-offcanvas" tabindex="-1">
+      <div class="offcanvas-handleWrap">
+        <div id="offcanvas-handle" class="offcanvas-handle"></div>
+      </div>
+
+
+
+   <div class="tutorialHeader flex justify-between items-center py-3 px-4 border-b">
+        <h3 id="tutorial-title" class="text-lg text-white"></h3>
+
+        <!-- OffCanvas Close button -->
+        <button type="button" class="hs-offcanvas-close p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+   </div><!-- Header -->
+
+
+
+    <div class="TcontentWrap">
+        <div id="tutorial-content" class="tutorial-content">
+        <!-- Steps via dynamic loading -->
+        </div>
+
+        <div class="arrow-container">
+          <button id="prev-step" class="step-arrow disabled" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button id="next-step" class="step-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      <div class="stepDotsContainer">
+        <div class="step-dots">
+        <!-- Step indicator dots -->
+        </div>
+      </div>
+    </div><!-- TcontentWrap-->
+      
+      
+</div><!-- OffCanvas -->
+
+
+
+    
+    <!-- Footer -->
+    <footer>
+        <p>© 2023 Wuaze GitHub PWA | Version <span id="app-version">1.2.3</span></p>
+        <p>Service Worker: <span id="sw-version">loading...</span></p>
+    </footer>
+
+    <!-- P R I M A R Y · S C R I P T -->
+    <script type="module" src="./script.js" defer>
+      /**
+       *   Do not delete
+       */
+    </script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/serviceWorker.js')
+    .then(reg => console.log('✅ SW registered:', reg))
+    .catch(err => console.error('❌ SW registration failed:', err));
+}
+</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const installBanner = document.getElementById('pwa-install-banner');
+            const deferredPrompt = null;
+            
+            if (window.matchMedia('(display-mode: standalone)').matches || 
+                window.navigator.standalone ||
+                document.referrer.includes('android-app://')) {
+                document.body.classList.add('pwa-installed');
+            }
+            
+            if (!document.body.classList.contains('pwa-installed')) {
+                setTimeout(() => {
+                    installBanner.classList.add('show');
+                }, 3000);
+            }
+            
+            installBanner.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    
+                    const { outcome } = await deferredPrompt.userChoice;
+                    
+                    if (outcome === 'accepted') {
+                        installBanner.classList.add('installing');
+                        
+                        const progressBar = installBanner.querySelector('.install-progress');
+                        let progress = 0;
+                        const interval = setInterval(() => {
+                            progress += 5;
+                            progressBar.style.width = `${progress}%`;
+                            
+                            if (progress >= 100) {
+                                clearInterval(interval);
+                                installBanner.classList.remove('installing');
+                                installBanner.classList.add('installed');
+                                document.body.classList.add('pwa-installed');
+                                
+                                setTimeout(() => {
+                                    installBanner.classList.remove('show');
+                                }, 2000);
+                            }
+                        }, 100);
+                    }
+                    
+                    deferredPrompt = null;
+                }
+            });
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                
+                installBanner.classList.add('show');
+            });
+            
+            window.addEventListener('appinstalled', () => {
+                installBanner.classList.remove('installing');
+                installBanner.classList.add('installed');
+                document.body.classList.add('pwa-installed');
+                
+                setTimeout(() => {
+                    installBanner.classList.remove('show');
+                }, 2000);
+            });
+            
+            if ('serviceWorker' in navigator) {
+                const swStatus = document.getElementById('sw-status');
+                const swStatusText = document.getElementById('sw-status-text');
+                
+                navigator.serviceWorker.register('./serviceWorker.js')
+                    .then(registration => {
+                        swStatusText.textContent = 'Service Worker Registered';
+                        swStatus.classList.add('success', 'show');
+                        
+                        document.getElementById('sw-version').textContent = registration.active?.scriptURL || 'active';
+                        
+                        registration.addEventListener('updatefound', () => {
+                            swStatusText.textContent = 'Updating Service Worker...';
+                            swStatus.classList.remove('success');
+                            swStatus.classList.add('warning');
+                            
+                            const newWorker = registration.installing;
+                            
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'activated') {
+                                    swStatusText.textContent = 'Service Worker Updated!';
+                                    swStatus.classList.remove('warning');
+                                    swStatus.classList.add('success');
+                                    
+                                    setTimeout(() => {
+                                        swStatusText.textContent = 'New version available. Refresh to update.';
+                                        swStatus.classList.add('refresh-prompt');
+                                        swStatus.addEventListener('click', () => {
+                                            window.location.reload();
+                                        });
+                                    }, 2000);
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        swStatusText.textContent = 'Service Worker Registration Failed';
+                        swStatus.classList.add('error', 'show');
+                        console.error('Service Worker registration failed:', error);
+                    });
+                
+                navigator.serviceWorker.addEventListener('message', event => {
+                    const { data } = event;
+                    
+                    switch (data.type) {
+                        case 'SW_ACTIVATED':
+                            console.log('Service Worker activated:', data.version);
+                            break;
+                            
+                        case 'CACHE_HIT':
+                            console.log(`Cache hit for ${data.url} from ${data.source}`);
+                            break;
+                            
+                        case 'CACHE_MISS':
+                            console.log(`Cache miss for ${data.url}: ${data.reason}`);
+                            break;
+                            
+                        case 'STORAGE_STATUS':
+                            updateStorageDisplay(data);
+                            break;
+                            
+                        case 'PAGE_UPDATED':
+                            showUpdateNotification();
+                            break;
+                    }
+                });
+            }
+            
+            function updateStorageDisplay(data) {
+                const percentage = data.percentage;
+                const storageBar = document.getElementById('storage-bar');
+                const storageText = document.getElementById('storage-text');
+                
+                storageBar.style.width = `${percentage}%`;
+                storageText.textContent = `${percentage}% used (${Math.round(data.used / 1024 / 1024)}MB / ${Math.round(data.quota / 1024 / 1024)}MB)`;
+            }
+            
+            function showUpdateNotification() {
+                const notification = document.createElement('div');
+                notification.className = 'update-notification';
+                notification.innerHTML = `
+                    <p>A new version is available!</p>
+                    <button id="refresh-btn">Refresh Now</button>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                document.getElementById('refresh-btn').addEventListener('click', () => {
+                    window.location.reload();
+                });
+                
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                }, 100);
+            }
+            
+            document.getElementById('check-update').addEventListener('click', () => {
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'UPDATE_CHECK'
+                    });
+                    document.getElementById('update-status-text').textContent = 'Checking for updates...';
+                }
+            });
+            
+            document.getElementById('clear-cache').addEventListener('click', () => {
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'CLEAR_CACHE'
+                    });
+                    document.getElementById('cache-status-text').textContent = 'Clearing cache...';
+                }
+            });
+            
+            document.getElementById('offline-mode').addEventListener('click', () => {
+                const offlineStatus = document.getElementById('offline-status-text');
+                if (offlineStatus.textContent === 'Online') {
+                    offlineStatus.textContent = 'Offline (demo)';
+                    document.body.classList.add('offline-mode');
+                } else {
+                    offlineStatus.textContent = 'Online';
+                    document.body.classList.remove('offline-mode');
+                }
+            });
+            
+            document.getElementById('storage-status').addEventListener('click', () => {
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'CACHE_STATUS_REQUEST'
+                    });
+                }
+            });
+            
+            document.getElementById('view-cache').addEventListener('click', () => {
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'CACHE_STATUS_REQUEST'
+                    });
+                }
+            });
+            
+            document.getElementById('refresh-cache').addEventListener('click', () => {
+                if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({
+                        type: 'FORCE_UPDATE'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
