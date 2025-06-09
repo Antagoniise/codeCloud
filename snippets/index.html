@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+ <head>
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code Snippet Manager</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Highlight.js from CDN -->
+  <link
+   rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark-dimmed.min.css"
+   integrity="sha512-zcatBMvxa7rT7dDklfjauWsfiSFParF+hRfCdf4Zr40/MmA1gkFcBRbop0zMpvYF3FmznYFgcL8wlcuO/GwHoA=="
+   crossorigin="anonymous"
+   referrerpolicy="no-referrer"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+  <!-- Phosphor Icons -->
+  <link href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" rel="stylesheet" type="text/css" />
+
+  <!-----
+
+  <link href="https://dev.wuaze.com/styleSheets/mobile.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://dev.wuaze.com/gitHub/global.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://dev.wuaze.com/gitHub/modal.css" rel="stylesheet" type="text/css" />
+
+--->
+
+
+<link href="https://dev.wuaze.com/gitHub/fineTuning.css" rel="stylesheet" type="text/css" />
+
+
+ </head>
+ <body class="dark">
+  <button class="theme-toggle" aria-label="Toggle theme">
+   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1-8.313-12.454z" />
+   </svg>
+  </button>
+
+  <div class="container">
+   <button id="openModalBtn">Create</button>
+
+<style>
+#createModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modalOverlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--zModal);
+  pointer-events: none;
+  opacity: 0;
+  backdrop-filter: blur(3px);
+  transition: opacity var(--transitionNormal) ease-in-out;
+}
+#createModal.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+#createModal.show .modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.modal-content {
+  background-color: var(--modalBg);
+  border-radius: var(--radiusLG);
+  padding: 24px;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px var(--shadowColor);
+  transform: translateY(10px) scale(0.95);
+  transition: transform var(--transitionNormal) cubic-bezier(0.19, 1, 0.22, 1);
+  outline: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-title {
+  font-size: var(--text2XL);
+  font-weight: var(--weightSemibold);
+  color: var(--textA);
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: var(--text2XL);
+  cursor: pointer;
+  color: var(--textB);
+  transition: all var(--transitionFast);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radiusSM);
+}
+.close-btn:hover {
+  color: var(--textA);
+  background-color: var(--hoverBg);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: var(--textSM);
+  color: var(--textB);
+  font-weight: var(--weightMedium);
+}
+
+.form-group input,
+.form-group textarea {
+  background-color: var(--bgB);
+  border: none;
+  border-radius: var(--radiusMD);
+  padding: 12px 16px;
+  font-size: var(--textBase);
+  color: var(--textA);
+  transition: all var(--transitionFast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--blue);
+}
+
+.form-group textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.btn-primary {
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: var(--radiusMD);
+  padding: 12px 24px;
+  font-size: var(--textBase);
+  font-weight: var(--weightSemibold);
+  cursor: pointer;
+  transition: all var(--transitionFast);
+  margin-top: 8px;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Radio buttons */
+.radio-inputs {
+  display: flex;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+}
+
+.radio-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 8px;
+  border-radius: var(--radiusMD);
+  border: 2px solid var(--borderA);
+  background-color: var(--bgB);
+  transition: all var(--transitionFast);
+  cursor: pointer;
+}
+
+.radio-label {
+  color: var(--textB);
+  transition: all var(--transitionNormal);
+  text-align: center;
+  font-size: var(--textSM);
+  font-weight: var(--weightMedium);
+  margin-top: 6px;
+}
+
+.radio-input:checked + .radio-tile {
+  border-color: var(--blue);
+  background-color: rgba(88, 166, 255, 0.1);
+}
+
+.radio-input:checked + .radio-tile .radio-label {
+  color: var(--blue);
+  font-weight: var(--weightSemibold);
+}
+
+.radio-tile:hover {
+  border-color: var(--blue);
+}
+
+
+.container {
+ padding-top: 100px;
+}
+</style>
+
+<div id="createModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-content" tabindex="0">
+     <div class="modal-header">
+      <h2 class="modal-title">Add New Snippet</h2>
+      <button class="close-btn" aria-label="Close modal">&times;</button>
+     </div>
+     <form id="snippetForm" class="form">
+       
+      <div class="form-group">
+       <div class="radio-inputs">
+        <label>
+         <input class="radio-input" type="radio" name="language" value="html" id="language-html" required />
+         <span class="radio-tile">
+          <span class="radio-icon">
+<i class="ph-fill ph-file-html"></i>
+           </span>
+         </span>
+        </label>
+
+        <label>
+         <input class="radio-input" type="radio" name="language" value="css" id="language-css" />
+         <span class="radio-tile">
+          <span class="radio-icon">
+<i class="ph-fill ph-file-css"></i>          </span>
+          
+         </span>
+        </label>
+
+        <label>
+         <input class="radio-input" type="radio" name="language" value="javascript" id="language-javascript" />
+         <span class="radio-tile">
+          <span class="radio-icon">
+<i class="ph-fill ph-file-js"></i>          </span>
+          
+         </span>
+        </label>
+
+        <label>
+         <input class="radio-input" type="radio" name="language" value="php" id="language-php" />
+         <span class="radio-tile">
+          <span class="radio-icon">
+<i class="ph-fill ph-file-py"></i>          </span>
+         </span>
+        </label>
+       </div>
+      </div>
+      <div class="input-group">
+       <input type="text" placeholder="" id="title" name="title" required autocomplete="off" />
+        <label for="title" class="user-label">Title</label>
+
+      </div>
+      <div class="input-group">
+             <textarea id="code" name="code" required spellcheck="false"></textarea>
+         <label for="code" class="user-label">Code</label>
+
+      </div>
+      <div class="formActions">
+       <button type="submit" class="btn btn-primary">Save</button>
+
+       <button type="button" class="btn btn-primary cancel">Cancel</button>
+      </div>
+     </form>
+    </div>
+   </div>   <!-- Success/Error Messages -->
+   <div id="messageContainer">
+    <div id="successMessage" class="message success">
+     <span class="message-text"></span>
+    </div>
+    <div id="errorMessage" class="message error">
+     <span class="message-text"></span>
+    </div>
+   </div>
+
+   <!-- Snippets container -->
+   <div id="snippetsContainer" class="snippets-container">
+    <div class="loading-message" id="noSnippetsMessage">
+     Loading snippets...
+    </div>
+   </div>
+
+<template id="snippetTemplate">
+  <div class="snippet-card">
+    <div class="snippet-header">
+      <h3 class="snippet-title"></h3>
+      <span class="snippet-language"></span>
+    </div>
+    
+    <div class="snippet-code-container">
+      <pre><code class="snippet-code"></code></pre>
+      
+      <!-- Floating Action Menu -->
+      <div class="floating-actions">
+        <button class="action-btn edit-btn" aria-label="Edit snippet">
+          <i class="ph-fill ph-pencil-simple-line"></i>
+        </button>
+        <button class="action-btn delete-btn" aria-label="Delete snippet">
+          <i class="ph-fill ph-trash"></i>
+        </button>
+        <button class="action-btn share-btn" aria-label="Share snippet">
+          <i class="ph-fill ph-share-network"></i>
+        </button>
+        <button class="action-btn download-btn" aria-label="Download snippet">
+          <i class="ph-fill ph-download-simple"></i>
+        </button>
+      </div>
+    </div>
+    
+
+   <div id="infoIcon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-info-icon lucide-badge-info"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
+   </div>
+      <div class="snippet-footer">   
+      <span class="snippet-date"></span>
+      <div class="snippet-actions">
+
+      </div>
+    </div>
+    
+    <!-- Edit Modal (hidden by default) -->
+    <div class="edit-modal-overlay">
+      <div class="edit-modal">
+        <div class="modal-header">
+          <h3>Edit Snippet</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-content">
+          <!-- Form content would go here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+  </div>
+
+
+  <script>
+   document.addEventListener("click", function (e) {
+    const clickedButton = e.target.closest(".dropdown-button");
+    const clickedMenu = e.target.closest(".dropdown-menu");
+
+    if (clickedButton) {
+     const container = clickedButton.closest(".dropdown-container");
+     const menu = container.querySelector(".dropdown-menu");
+
+     // Close others
+     document.querySelectorAll(".dropdown-menu.show").forEach((m) => {
+      if (m !== menu) m.classList.remove("show");
+     });
+
+     // Toggle current
+     menu.classList.toggle("show");
+    } else if (!clickedMenu) {
+     // Clicked outside any menu/button — close all
+     document.querySelectorAll(".dropdown-menu.show").forEach((m) => m.classList.remove("show"));
+    }
+   });
+  </script>
+  <script>
+   // Theme toggle functionality
+   const themeToggle = document.querySelector(".theme-toggle");
+   themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    document.body.classList.toggle("dark");
+   });
+
+   // Simulate loading snippets
+   setTimeout(() => {
+    document.getElementById("noSnippetsMessage").textContent = "No snippets found.";
+   }, 1500);
+  </script>
+
+  <script>
+   $(document).ready(function () {
+    // DOM Elements
+    const $modal = $("#createModal");
+    const $modalContent = $modal.find(".modal-content");
+    const $openModalBtn = $("#openModalBtn");
+    const $closeModalBtn = $(".close-btn");
+    const $snippetForm = $("#snippetForm");
+    const $snippetsContainer = $("#snippetsContainer");
+    const $messageContainer = $("#messageContainer");
+    const $successMessage = $("#successMessage");
+    const $errorMessage = $("#errorMessage");
+    const $noSnippetsMessage = $("#noSnippetsMessage");
+    const $titleInput = $("#title");
+    const $codeTextarea = $("#code");
+    const snippetTemplate = $("#snippetTemplate").html();
+
+    // Initialize syntax highlighting
+    hljs.highlightAll();
+
+    // Load snippets on page load
+    loadSnippets();
+
+    // Advanced modal focus management
+    function openModal() {
+     $modal.addClass("show");
+     $("body").css("overflow", "hidden");
+
+     // Set focus to modal content (not directly to input)
+     $modalContent.focus();
+
+     // Remove any previous focus traps
+     $modal.off("keydown.focusTrap");
+
+     // Set up focus trap for accessibility
+     setupFocusTrap();
+
+    }
+
+    function setupFocusTrap() {
+     // Get all focusable elements in modal
+     const focusableElements = $modalContent.find('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+     const firstElement = focusableElements.first();
+     const lastElement = focusableElements.last();
+
+     // Trap focus within modal when tabbing
+     $modal.on("keydown.focusTrap", function (e) {
+      if (e.key === "Tab") {
+       if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement[0]) {
+         e.preventDefault();
+         lastElement.focus();
+        }
+       } else {
+        // Tab
+        if (document.activeElement === lastElement[0]) {
+         e.preventDefault();
+         firstElement.focus();
+        }
+       }
+      }
+     });
+    }
+
+    function closeModal() {
+     $modal.removeClass("show");
+     $("body").css("overflow", "auto");
+     $modal.off("keydown.focusTrap");
+     $openModalBtn.focus();
+    }
+
+    // Event Handlers
+    $openModalBtn.on("click", function () {
+     resetForm();
+     openModal();
+    });
+
+    $closeModalBtn.on("click", closeModal);
+
+    $(document).on("click", function (e) {
+     if ($(e.target).is($modal)) {
+      closeModal();
+     }
+    });
+
+    $(document).on("keydown", function (e) {
+     if (e.key === "Escape" && $modal.hasClass("show")) {
+      closeModal();
+     }
+    });
+
+    // Form Submission
+    $snippetForm.on("submit", function (e) {
+     e.preventDefault();
+
+     const title = $titleInput.val().trim();
+     const language = $('input[name="language"]:checked').val();
+     const code = $codeTextarea.val().trim();
+     const editingId = $(this).data("editing-id");
+
+     if (!title || !code) {
+      showMessage("error", "Please fill in all required fields");
+      return;
+     }
+
+     const $submitBtn = $(this).find('button[type="submit"]');
+     const originalText = $submitBtn.text();
+     $submitBtn.prop("disabled", true).text(editingId ? "Updating..." : "Saving...");
+
+     if (editingId) {
+      updateSnippet(editingId, title, language, code, function () {
+       closeModal();
+       $submitBtn.prop("disabled", false).text(originalText);
+      });
+     } else {
+      saveSnippet(title, language, code, function () {
+       closeModal();
+       $submitBtn.prop("disabled", false).text(originalText);
+      });
+     }
+    });
+
+    // Snippet Actions
+    $(document).on("click", ".delete-btn", function () {
+     const $snippetCard = $(this).closest(".snippet-card");
+     const snippetId = $snippetCard.data("id");
+
+     if (confirm("Are you sure you want to delete this snippet?")) {
+      deleteSnippet(snippetId, $snippetCard);
+     }
+    });
+
+    $(document).on("click", ".edit-btn", function () {
+     const $snippetCard = $(this).closest(".snippet-card");
+     const snippetId = $snippetCard.data("id");
+
+     $.ajax({
+      url: "./snippets.php",
+      type: "GET",
+      data: { action: "get", id: snippetId },
+      dataType: "json",
+      success: function (response) {
+       if (response.success) {
+        $titleInput.val(response.snippet.title);
+        $(`input[name="language"][value="${response.snippet.language}"]`).prop("checked", true);
+        $codeTextarea.val(response.snippet.code);
+        $snippetForm.data("editing-id", snippetId).find('button[type="submit"]').text("Update Snippet");
+        openModal();
+        showMessage("success", "Now editing snippet");
+       } else {
+        showMessage("error", response.message || "Failed to load snippet");
+       }
+      },
+      error: function () {
+       showMessage("error", "Server error while loading snippet");
+      },
+     });
+    });
+
+    // Dropdown menu actions
+    $(document).on("click", '[data-action="edit"]', function (e) {
+     e.preventDefault();
+     const $snippetCard = $(this).closest(".snippet-card");
+     const snippetId = $snippetCard.data("id");
+
+     $.ajax({
+      url: "./snippets.php",
+      type: "GET",
+      data: { action: "get", id: snippetId },
+      dataType: "json",
+      success: function (response) {
+       if (response.success) {
+        $titleInput.val(response.snippet.title);
+        $(`input[name="language"][value="${response.snippet.language}"]`).prop("checked", true);
+        $codeTextarea.val(response.snippet.code);
+        $snippetForm.data("editing-id", snippetId).find('button[type="submit"]').text("Update Snippet");
+        openModal();
+        showMessage("success", "Now editing snippet");
+       } else {
+        showMessage("error", response.message || "Failed to load snippet");
+       }
+      },
+      error: function () {
+       showMessage("error", "Server error while loading snippet");
+      },
+     });
+    });
+
+    $(document).on("click", '[data-action="delete"]', function (e) {
+     e.preventDefault();
+     const $snippetCard = $(this).closest(".snippet-card");
+     const snippetId = $snippetCard.data("id");
+
+     if (confirm("Are you sure you want to delete this snippet?")) {
+      deleteSnippet(snippetId, $snippetCard);
+     }
+    });
+
+    $(document).on("click", '[data-action="rename"]', function (e) {
+     e.preventDefault();
+     const $snippetCard = $(this).closest(".snippet-card");
+     const snippetId = $snippetCard.data("id");
+     const currentTitle = $snippetCard.find(".snippet-title").text();
+
+     const newTitle = prompt("Enter new title:", currentTitle);
+     if (newTitle && newTitle !== currentTitle) {
+      $.ajax({
+       url: "./snippets.php",
+       type: "POST",
+       data: {
+        action: "update",
+        id: snippetId,
+        title: newTitle,
+        // Keep other fields the same
+        language: $snippetCard.find('input[name="language"]:checked').val(),
+        code: $snippetCard.find(".snippet-code").text(),
+       },
+       dataType: "json",
+       success: function (response) {
+        if (response.success) {
+         $snippetCard.find(".snippet-title").text(newTitle);
+         showMessage("success", "Snippet renamed successfully");
+        } else {
+         showMessage("error", response.message || "Failed to rename snippet");
+        }
+       },
+       error: function () {
+        showMessage("error", "Server error while renaming snippet");
+       },
+      });
+     }
+    });
+
+    $(document).on("click", '[data-action="share"]', function (e) {
+     e.preventDefault();
+     const $snippetCard = $(this).closest(".snippet-card");
+     const snippetId = $snippetCard.data("id");
+
+     // In a real app, this would generate a shareable link
+     // For now, we'll just copy the snippet ID to clipboard
+     navigator.clipboard
+      .writeText(snippetId)
+      .then(() => {
+       showMessage("success", "Snippet ID copied to clipboard");
+      })
+      .catch(() => {
+       showMessage("error", "Failed to copy snippet ID");
+      });
+    });
+
+    $(document).on("click", '[data-action="download"]', function (e) {
+     e.preventDefault();
+     const $snippetCard = $(this).closest(".snippet-card");
+     const title = $snippetCard.find(".snippet-title").text();
+     // Get the value of the checked radio button (returns 'html', 'css', etc.)
+     const language = $snippetCard.find('input[name="language"]:checked').val();
+
+     // If you need the display text (like "HTML", "CSS"):
+     const languageText = $snippetCard.find('input[name="language"]:checked').closest("label").find(".radio-label").text().trim();
+     const code = $snippetCard.find(".snippet-code").text();
+
+     // Create a download link
+     const blob = new Blob([code], { type: "text/plain" });
+     const url = URL.createObjectURL(blob);
+     const a = document.createElement("a");
+     a.href = url;
+     a.download = `${title}.${language}`;
+     document.body.appendChild(a);
+     a.click();
+     document.body.removeChild(a);
+     URL.revokeObjectURL(url);
+
+     showMessage("success", "Snippet downloaded");
+    });
+
+    // CRUD Functions
+    function loadSnippets() {
+     $.ajax({
+      url: "./snippets.php",
+      type: "GET",
+      data: { action: "list" },
+      dataType: "json",
+      success: function (response) {
+       $snippetsContainer.empty();
+
+       if (response.success && response.snippets.length > 0) {
+        response.snippets.forEach((snippet) => {
+         addSnippetToDOM(snippet);
+        });
+       } else {
+        showNoSnippetsMessage(response.message || "No snippets found");
+       }
+      },
+      error: function () {
+       showMessage("error", "Failed to load snippets");
+       showNoSnippetsMessage("Error loading snippets");
+      },
+     });
+    }
+
+    function saveSnippet(title, language, code, callback) {
+     $.ajax({
+      url: "./snippets.php",
+      type: "POST",
+      data: {
+       action: "create",
+       title: title,
+       language: language,
+       code: code,
+      },
+      dataType: "json",
+      success: function (response) {
+       if (response.success) {
+        addSnippetToDOM(response.snippet);
+        resetForm();
+        showMessage("success", "Snippet created successfully");
+        if (typeof callback === "function") callback();
+       } else {
+        showMessage("error", response.message || "Failed to create snippet");
+       }
+      },
+      error: function () {
+       showMessage("error", "Server error while creating snippet");
+      },
+     });
+    }
+
+    function updateSnippet(id, title, language, code, callback) {
+     $.ajax({
+      url: "./snippets.php",
+      type: "POST",
+      data: {
+       action: "update",
+       id: id,
+       title: title,
+       language: language,
+       code: code,
+      },
+      dataType: "json",
+      success: function (response) {
+       if (response.success) {
+        loadSnippets();
+        resetForm();
+        showMessage("success", "Snippet updated successfully");
+        if (typeof callback === "function") callback();
+       } else {
+        showMessage("error", response.message || "Failed to update snippet");
+       }
+      },
+      error: function () {
+       showMessage("error", "Server error while updating snippet");
+      },
+     });
+    }
+
+    function deleteSnippet(id, $snippetCard) {
+     $.ajax({
+      url: "./snippets.php",
+      type: "POST",
+      data: { action: "delete", id: id },
+      dataType: "json",
+      success: function (response) {
+       if (response.success) {
+        $snippetCard.fadeOut(400, function () {
+         $(this).remove();
+         if ($snippetsContainer.children().length === 0) {
+          showNoSnippetsMessage();
+         }
+        });
+        showMessage("success", "Snippet deleted successfully");
+       } else {
+        showMessage("error", response.message || "Failed to delete snippet");
+       }
+      },
+      error: function () {
+       showMessage("error", "Server error while deleting snippet");
+      },
+     });
+    }
+
+    // Helper Functions
+    function addSnippetToDOM(snippet) {
+     const $snippet = $(snippetTemplate);
+     $snippet.attr("data-id", snippet.id);
+     $snippet.find(".snippet-title").text(snippet.title);
+     $snippet.find(".snippet-language").text(snippet.language);
+     $snippet.find(".snippet-date").text(formatDate(snippet.created_at));
+
+     const $code = $snippet.find(".snippet-code");
+     $code.text(snippet.code).addClass(snippet.language);
+     hljs.highlightElement($code[0]);
+
+     $snippetsContainer.prepend($snippet.hide().fadeIn(400));
+     $noSnippetsMessage.hide();
+    }
+
+    function resetForm() {
+     $snippetForm.trigger("reset").removeData("editing-id").find('button[type="submit"]').text("Save Snippet");
+    }
+
+    function showMessage(type, text) {
+     $messageContainer.show();
+     if (type === "success") {
+      $successMessage.find(".message-text").text(text).end().show();
+      $errorMessage.hide();
+     } else {
+      $errorMessage.find(".message-text").text(text).end().show();
+      $successMessage.hide();
+     }
+     setTimeout(() => $messageContainer.fadeOut(1000), 5000);
+    }
+
+    function showNoSnippetsMessage(message = "No snippets yet. Create one!") {
+     $noSnippetsMessage.text(message).show();
+    }
+
+    function formatDate(dateString) {
+     const date = new Date(dateString);
+     return date.toLocaleDateString() + " " + date.toLocaleTimeString();
+    }
+   });
+  </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // This would be in your main JS file to handle the interactions
+  
+  // Handle floating action buttons
+  document.querySelectorAll('.snippet-card').forEach(card => {
+    const floatingActions = card.querySelector('.floating-actions');
+    const editBtn = card.querySelector('.edit-btn');
+    const deleteBtn = card.querySelector('.delete-btn');
+    const shareBtn = card.querySelector('.share-btn');
+    const downloadBtn = card.querySelector('.download-btn');
+    const modalOverlay = card.querySelector('.edit-modal-overlay');
+    const closeModal = card.querySelector('.close-modal');
+    
+    // Show floating actions on card hover/focus
+    card.addEventListener('mouseenter', () => {
+      floatingActions.style.opacity = '1';
+      floatingActions.style.transform = 'translateY(0)';
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      floatingActions.style.opacity = '0';
+      floatingActions.style.transform = 'translateY(10px)';
+    });
+    
+    // Edit button click
+    editBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      modalOverlay.classList.add('active');
+      modalOverlay.querySelector('.edit-modal').classList.add('jello');
+      
+      // Remove animation class after animation completes
+      setTimeout(() => {
+        modalOverlay.querySelector('.edit-modal').classList.remove('jello');
+      }, 600);
+    });
+    
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      modalOverlay.querySelector('.edit-modal').classList.add('jello');
+      
+      setTimeout(() => {
+        modalOverlay.classList.remove('active');
+        modalOverlay.querySelector('.edit-modal').classList.remove('jello');
+      }, 300);
+    });
+    
+    // Other button actions would go here
+    deleteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Delete functionality
+    });
+    
+    shareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Share functionality
+    });
+    
+    downloadBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Download functionality
+    });
+  });
+});
+   
+  </script>
+  
+    
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const codeContainers = document.querySelectorAll('.snippet-actions');
+    
+    codeContainers.forEach(container => {
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      container.prepend(copyBtn);
+      
+      copyBtn.addEventListener('click', function() {
+        const codeElement = container.querySelector('code');
+        const textToCopy = codeElement ? codeElement.textContent : container.textContent;
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          copyBtn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyBtn.classList.remove('copied');
+          }, 4000);
+        }).catch(err => {
+          console.error('Failed to copy text: ', err);
+          copyBtn.textContent = "Error";
+          setTimeout(() => {
+            copyBtn.textContent = "Copy";
+          }, 2000);
+        });
+      });
+    });
+  });
+</script>
+
+ </body>
+</html>
