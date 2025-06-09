@@ -681,7 +681,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cacheElements() {
             this.elements = {
                 header: document.getElementById('header'),
-                leftSidebar: document.getElementById('left-sidebar'),
+                leftSidebar: document.getElementById('sidebar'),
                 rightSidebar: document.getElementById('right-sidebar'),
                 overlay: document.getElementById('overlay'),
                 menuToggle: document.getElementById('menu-toggle'),
@@ -689,12 +689,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 navTrigger: document.getElementById('nav-trigger'),
                 dynamicNavContainer: document.getElementById('dynamic-nav-container'),
                 dynamicNav: document.getElementById('dynamic-nav'),
-                contentIframe: document.getElementById('content-iframe'),
-                loadingBar: document.getElementById('loading-bar'),
-                loadingProgress: document.getElementById('loading-progress'),
+                contentIframe: document.getElementById('dynamiciFrame'),
+                loadingBar: document.getElementById('loadingWrapper'),
+                loadingProgress: document.getElementById('loadingStrip'),
                 loadingOverlay: document.getElementById('loading-overlay'),
                 fab: document.getElementById('fab'),
-                searchInput: document.querySelector('.search-input'),
+                searchInput: document.getElementById('primarySearch'),
                 mainContent: document.getElementById('main-content')
             };
         },
