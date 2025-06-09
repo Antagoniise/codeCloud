@@ -2713,6 +2713,19 @@
     setupEventListeners();
    }
    document.addEventListener("DOMContentLoaded", initApp);
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  var iframe = document.getElementById("dynamiciFrame");
+  var loadingOverlay = document.getElementById("loading-overlay");
+
+  if (iframe && loadingOverlay) {
+    iframe.addEventListener("load", function() {
+      loadingOverlay.classList.remove("active");
+      loadingOverlay.style.display = "none";
+    });
+  }
+});   
   </script>
 
 
