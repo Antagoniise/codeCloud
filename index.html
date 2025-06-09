@@ -17,7 +17,7 @@
     </script>
 <script>
 (async function injectHeadFromTemplate() {
-  const response = await fetch('https://dev.wuaze.com/layout/head/');
+  const response = await fetch('https://antagoniise.github.io/codeCloud/layout/head/');
   if (!response.ok) {
     console.error('Failed to load head template:', response.status);
     return;
@@ -44,9 +44,9 @@
 })();
 </script>
 
- <link rel="stylesheet" href="https://dev.wuaze.com/core.css" />
+ <link rel="stylesheet" href="https://antagoniise.github.io/codeCloud/core.css" />
    
-    <link href="https://dev.wuaze.com/styleSheets/dev.css" rel="stylesheet" />
+    <link href="https://antagoniise.github.io/codeCloud/styleSheets/dev.css" rel="stylesheet" />
 
 
   </head>
@@ -1111,7 +1111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.addEventListener("DOMContentLoaded", () => {
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker
-            .register("https://dev.wuaze.com/siteManifest/serviceWorker.js")
+            .register("https://antagoniise.github.io/codeCloud/siteManifest/serviceWorker.js")
             .then((registration) => {
               console.log("[script.js] Service Worker registered successfully with scope:", registration.scope);
               navigator.serviceWorker.addEventListener("controllerchange", () => {
@@ -1204,7 +1204,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
 <script>
   // Fetch and inject the SVG sprite sheet
-  fetch('https://dev.wuaze.com/icons/duoLight.svg')
+  fetch('https://antagoniise.github.io/codeCloud/icons/duoLight.svg')
     .then(response => response.text())
     .then(svg => {
       const div = document.createElement('div');
