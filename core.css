@@ -1107,8 +1107,9 @@ label {
   transition: all var(--transition-normal) ease;
 }
 .loading-overlay.active {
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .spinner {
